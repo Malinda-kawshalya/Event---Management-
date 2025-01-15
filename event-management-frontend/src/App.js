@@ -1,10 +1,11 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import React Router DOM
 import Navbar from './components/Navbar';
 import Banner from './components/Banner';
 import EventCard from './components/EventCard';
 import SectionTitle from './components/SectionTitle';
 import Footer from './components/Footer';
-
+import SignIn from './components/SignIn'; // Make sure this path is correct
 import './App.css';
 
 const App = () => {
@@ -40,17 +41,35 @@ const App = () => {
   ];
 
   return (
-    <div className="App">
-      <Navbar />
-      <Banner />
-      <SectionTitle title="What's happening this month" />
-      <div className="events-grid">
-        {sampleEvents.map((event, index) => (
-          <EventCard key={index} {...event} />
-        ))}
+    <Router> {/* Wrap the entire app with Router */}
+      <div className="App">
+        {/* Define Routes */}
+        <Routes>
+          {/* Route for the Home page */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Banner />
+                <SectionTitle title="What's happening this month" />
+                <div className="events-grid">
+                  {sampleEvents.map((event, index) => (
+                    <EventCard key={index} {...event} />
+                  ))}
+                </div>
+                <Footer />
+                
+
+              </>
+            }
+          />
+          
+          {/* Route for the Sign-In page */}
+          <Route path="/signin" element={<SignIn />} />
+        </Routes>
       </div>
-      <Footer />
-    </div>
+    </Router>
   );
 };
 
