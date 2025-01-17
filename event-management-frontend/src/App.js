@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import EventDetails from './components/EventDetails';
+import MyEvents from './components/MyEvents';
+
 import './App.css';
 
 // Component to handle conditional Navbar rendering
@@ -39,6 +41,7 @@ const AppWrapper = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/event-details" element={<EventDetails />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/MyEvents" element={< MyEvents />} />
       </Routes>
     </div>
   );
