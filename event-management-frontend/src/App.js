@@ -19,7 +19,8 @@ const AppWrapper = () => {
   return (
     <div className="App">
       {/* Render Navbar only on the home page */}
-      {location.pathname === '/' && <Navbar />}
+      {location.pathname !== '/signin' && <Navbar />}
+
       <Routes>
         {/* Route for the Home page */}
         <Route
