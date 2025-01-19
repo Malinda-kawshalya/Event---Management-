@@ -24,19 +24,56 @@ const addUsers = async (req, res, next) => {
 
     let users;
     try {
-        users = new User({ gmail, password, name, age, gender }); // Use `User`, not `user`
+        users = new User({ gmail, password, name, age, gender });
         await users.save();
-    } catch (err) { // Pass `err` as the catch parameter
-        console.error(err); // Log the error for debugging
+    } catch (err) {
+        console.error(err);
         return res.status(500).json({ message: "Server error", error: err.message });
     }
 
-    // If user is not inserted
     if (!users) {
         return res.status(404).json({ message: "Unable to add the user" });
     }
     return res.status(200).json({ users });
 };
 
+// Get by id
+const getById = async (req, res, next) => {
+    const { id } = req.params;
+    let user;
+    try {
+        user = await User.findById(id);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error", error: err.message });
+    }
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(200).json({ user });
+}
+
+// Update user
+const updateUser = async (req, res, next) => {
+    const { id } = req.params;
+    const { gmail, password, name, age } = req.body;
+
+    let user;
+    try {
+        user = await User.findByIdAndUpdate(id, { gmail, password, name, age }, { new: true });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error", error: err.message });
+    }
+
+    if (!user) {
+        return res.status(404).json({ message: "Unable to update the user" });
+    }
+    return res.status(200).json({ user });
+}
+
 module.exports.getAllUsers = getAllUsers;
 module.exports.addUsers = addUsers;
+module.exports.getById = getById;
+module.exports.updateUser = updateUser;
