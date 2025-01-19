@@ -8,7 +8,8 @@ const Banner = () => {
       <p>Discover your favorite entertainment right here</p>
       <div className="search-bar">
         <input type="text" placeholder="Search by Artist, Event, or Venue" />
-        <button>Search</button>
+        <button aria-label="Search Button">Search</button>
+
       </div>
     </div>
   );
