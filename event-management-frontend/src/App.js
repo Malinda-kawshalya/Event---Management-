@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'; // Import your Navbar component
 import HomePage from './components/HomePage'; // Home page component
-import About from './components/About'; // About page component
+import About from './components/AboutUs'; // About page component
 import ContactUs from './components/ContactUs'; // Contact page component
-import Banner from './components/Banner';
+
 import Footer from './components/Footer';
 import EventDetails from './components/EventDetails';
 import AdminDashboard from './components/AdminDashboard';
@@ -16,7 +16,7 @@ const App = () => {
       <div>
         {/* Navbar displayed on all pages */}
         <Navbar />
-        <Banner />
+        
 
         {/* Routing */}
         <Routes>
