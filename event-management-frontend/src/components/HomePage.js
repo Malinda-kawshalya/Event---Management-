@@ -1,79 +1,93 @@
-// React Component: HomePage.jsx
 import React from 'react';
-import './HomePage.css';
+import { Link } from 'react-router-dom';
+import '../css/HomePage.css'; // Ensure this file contains the necessary styles
+import Banner from './Banner'; // Importing the Banner component
 
 const HomePage = () => {
   return (
     <div className="homepage">
-      <header className="header">
-        <div className="container">
-          <h1 className="brand">Eventify</h1>
-          <nav className="navbar">
-            <ul className="nav-links">
-              <li><a href="#features">Features</a></li>
-              <li><a href="#events">Upcoming Events</a></li>
-              <li><a href="#contact">Contact Us</a></li>
-              <li><a href="/login" className="btn-primary">Login</a></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+      {/* Banner Section */}
+      <Banner />
 
-      <section className="hero">
-        <div className="container">
-          <h2>Discover Amazing Events Near You</h2>
-          <p>Plan, host, and enjoy events with ease.</p>
-          <a href="/events" className="btn-secondary">Explore Events</a>
-        </div>
-      </section>
+      {/* Hero Section */}
+      
+          <div className="mt-4">
+          <Link to="/signup" className="btn btn-lg me-3 custom-button">
+  Sign Up
+</Link>
+<Link to="/signin" className="btn btn-lg custom-button">
+  Sign In
+</Link>
 
-      <section id="features" className="features">
-        <div className="container">
-          <h3>Why Choose Eventify?</h3>
-          <div className="feature-list">
-            <div className="feature-item">
-              <h4>Easy Event Management</h4>
-              <p>Organize events effortlessly with our intuitive platform.</p>
-            </div>
-            <div className="feature-item">
-              <h4>Wide Range of Events</h4>
-              <p>Find events that match your interests and preferences.</p>
-            </div>
-            <div className="feature-item">
-              <h4>Real-Time Updates</h4>
-              <p>Stay informed about event changes and updates instantly.</p>
-            </div>
+
           </div>
-        </div>
-      </section>
+        
 
-      <section id="events" className="events">
-        <div className="container">
-          <h3>Upcoming Events</h3>
-          <div className="event-cards">
-            <div className="event-card">
-              <h4>Music Festival</h4>
-              <p>Join us for a night of live music and fun!</p>
+      {/* Featured Events Section */}
+      <div className="container py-5">
+        <h2 className="text-center mb-4">Featured Events</h2>
+        <div className="row">
+          {sampleEvents.map((event, index) => (
+            <div className="col-md-4 mb-4" key={index}>
+              <div className="card h-100 shadow-sm">
+                <img
+                  src={event.image}
+                  className="card-img-top"
+                  alt={event.title}
+                  style={{ height: '200px', objectFit: 'cover' }}
+                />
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title">{event.title}</h5>
+                  <p className="card-text mb-3">
+                    <strong>Date:</strong> {event.date}
+                    <br />
+                    <strong>Location:</strong> {event.location}
+                    <br />
+                    <strong>Price:</strong> ${event.price}
+                  </p>
+                  <Link to="/event-details" className="btn btn-primary mt-auto">
+                    View Details
+                  </Link>
+                </div>
+              </div>
             </div>
-            <div className="event-card">
-              <h4>Tech Conference</h4>
-              <p>Explore the latest in technology and innovation.</p>
-            </div>
-            <div className="event-card">
-              <h4>Art Exhibition</h4>
-              <p>Discover stunning art from local and global artists.</p>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      <footer id="contact" className="footer">
-        <div className="container">
-          <p>&copy; 2025 Eventify. All rights reserved.</p>
-        </div>
+      {/* Footer Section */}
+      <footer className="bg-dark text-white text-center py-3">
+        <p className="mb-0">
+          &copy; {new Date().getFullYear()} <strong>Eventify</strong>. All rights reserved.
+        </p>
       </footer>
     </div>
   );
 };
+
+// Sample events data
+const sampleEvents = [
+  {
+    title: '2019 July Mase Dawsak',
+    date: 'Dec 20, 2024',
+    location: 'ITUM Diyagama',
+    price: 500,
+    image: '/images/event1.jpg',
+  },
+  {
+    title: 'Soduru Shinyakadi Raa',
+    date: 'Dec 22, 2024',
+    location: 'Kelaniya University',
+    price: 3000,
+    image: '/images/event2.jpg',
+  },
+  {
+    title: 'Music Fiesta 2024',
+    date: 'Jan 5, 2025',
+    location: 'Colombo Grounds',
+    price: 1500,
+    image: '/images/event3.jpg',
+  },
+];
 
 export default HomePage;
