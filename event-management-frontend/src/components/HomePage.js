@@ -1,11 +1,11 @@
 // React Component: HomePage.jsx
 import React from 'react';
-import './HomePage.css';
+import '../css/HomePage.css';
 
 const HomePage = () => {
   return (
     <div className="homepage">
-      <header className="header">
+      {/* <header className="header">
         <div className="container">
           <h1 className="brand">Eventify</h1>
           <nav className="navbar">
@@ -17,7 +17,7 @@ const HomePage = () => {
             </ul>
           </nav>
         </div>
-      </header>
+      </header> */}
 
       <section className="hero">
         <div className="container">
@@ -67,11 +67,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <footer id="contact" className="footer">
-        <div className="container">
-          <p>&copy; 2025 Eventify. All rights reserved.</p>
-        </div>
-      </footer>
+      
     </div>
   );
 };
