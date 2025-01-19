@@ -9,6 +9,9 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import EventDetails from './components/EventDetails';
 import MyEvents from './components/MyEvents';
+import HomePage from './components/HomePage';
+
+
 
 import './App.css';
 
@@ -19,24 +22,12 @@ const AppWrapper = () => {
   return (
     <div className="App">
       {/* Render Navbar only on the home page */}
-      {location.pathname === '/' && <Navbar />}
+      {location.pathname !== '/signin' && <Navbar />}
+
       <Routes>
         {/* Route for the Home page */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Banner />
-              <SectionTitle title="What's happening this month" />
-              <div className="events-grid">
-                {sampleEvents.map((event, index) => (
-                  <EventCard key={index} {...event} />
-                ))}
-              </div>
-              <Footer />
-            </>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
+
         
         <Route path="/signin" element={<SignIn />} />
         <Route path="/event-details" element={<EventDetails />} />

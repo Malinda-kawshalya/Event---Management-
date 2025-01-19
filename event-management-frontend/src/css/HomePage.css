@@ -1,0 +1,39 @@
+.hero {
+    background-image: url('D:\MY PROJECTS\event management\Event---Management-\event-management-frontend\public\logo192.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+  
+  .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-light {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  footer {
+    background-color: #222;
+    color: #fff;
+  }
+
+  .custom-button {
+    background-color: #112d4e;
+    color: #fff;
+    border: none;
+  }
+  
+  .custom-button:hover {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #112D4E;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  
