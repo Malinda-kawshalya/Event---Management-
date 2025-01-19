@@ -1,4 +1,6 @@
-const User = require("../Model/userModel");
+// filepath: /C:/Users/PATHAYAA/Desktop/Event Managment/Event---Management-/event-management-backend/controllers/userController.js
+
+const User = require('../Model/userModel');
 
 // User display
 const getAllUsers = async (req, res, next) => {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button, Form, Modal } from 'react-bootstrap';
 import Chart from 'react-apexcharts';
 import '../css/AdminDashboard.css';
+import axios from 'axios';
 
 const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
@@ -12,33 +13,84 @@ const AdminDashboard = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [currentEvent, setCurrentEvent] = useState(null);
     const [eventCoverImage, setEventCoverImage] = useState(null);
+    const [formData, setFormData] = useState({
+        name: '',
+        date: '',
+        coverImage: null,
+    });
 
-    useEffect(() => {
-        // Fetch users, events, and reservations from API
-    }, []);
+    const fetchData = async () => {
+        const usersResponse = await axios.get('http://localhost:5000/api/users');
+        setUsers(usersResponse.data);
 
-    const handleUserSubmit = () => {
-        // Handle add/update user
+        const eventsResponse = await axios.get('http://localhost:5000/api/events');
+        setEvents(eventsResponse.data);
+
+        const reservationsResponse = await axios.get('http://localhost:5000/api/reservations');
+        setReservations(reservationsResponse.data);
     };
 
-    const handleEventSubmit = (e) => {
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleFileChange = (e) => {
+        setEventCoverImage(e.target.files[0]);
+    };
+
+    const handleUserSubmit = async (e) => {
         e.preventDefault();
-        // Handle add/update event, including the cover image
+        const userData = {
+            name: formData.name,
+            email: formData.email,
+        };
+
+        if (currentUser) {
+            // Update user
+            await axios.put(`http://localhost:5000/api/users/${currentUser.id}`, userData);
+        } else {
+            // Add new user
+            await axios.post('http://localhost:5000/api/users', userData);
+        }
+
+        setShowUserModal(false);
+        fetchData(); // Refresh data
+    };
+
+    const handleEventSubmit = async (e) => {
+        e.preventDefault();
         const formData = new FormData();
-        formData.append('name', currentEvent?.name || '');
-        formData.append('date', currentEvent?.date || '');
+        formData.append('name', formData.name);
+        formData.append('date', formData.date);
         if (eventCoverImage) {
             formData.append('coverImage', eventCoverImage);
         }
-        // Submit formData to the API
+
+        if (currentEvent) {
+            // Update event
+            await axios.put(`http://localhost:5000/api/events/${currentEvent.id}`, formData);
+        } else {
+            // Add new event
+            await axios.post('http://localhost:5000/api/events', formData);
+        }
+
+        setShowEventModal(false);
+        fetchData(); // Refresh data
     };
 
-    const handleDeleteUser = (userId) => {
-        // Handle delete user
+    const handleDeleteUser = async (userId) => {
+        await axios.delete(`http://localhost:5000/api/users/${userId}`);
+        fetchData(); // Refresh data
     };
 
-    const handleDeleteEvent = (eventId) => {
-        // Handle delete event
+    const handleDeleteEvent = async (eventId) => {
+        await axios.delete(`http://localhost:5000/api/events/${eventId}`);
+        fetchData(); // Refresh data
     };
 
     const userEngagementData = {
@@ -74,13 +126,13 @@ const AdminDashboard = () => {
                     </thead>
                     <tbody>
                         {users.map(user => (
-                            <tr key={user.id}>
-                                <td>{user.id}</td>
+                            <tr key={user._id}>
+                                <td>{user._id}</td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
                                     <Button onClick={() => { setCurrentUser(user); setShowUserModal(true); }}>Edit</Button>
-                                    <Button onClick={() => handleDeleteUser(user.id)}>Delete</Button>
+                                    <Button onClick={() => handleDeleteUser(user._id)}>Delete</Button>
                                 </td>
                             </tr>
                         ))}
@@ -102,13 +154,13 @@ const AdminDashboard = () => {
                     </thead>
                     <tbody>
                         {events.map(event => (
-                            <tr key={event.id}>
-                                <td>{event.id}</td>
+                            <tr key={event._id}>
+                                <td>{event._id}</td>
                                 <td>{event.name}</td>
                                 <td>{event.date}</td>
                                 <td>
                                     <Button onClick={() => { setCurrentEvent(event); setShowEventModal(true); }}>Edit</Button>
-                                    <Button onClick={() => handleDeleteEvent(event.id)}>Delete</Button>
+                                    <Button onClick={() => handleDeleteEvent(event._id)}>Delete</Button>
                                 </td>
                             </tr>
                         ))}
@@ -134,8 +186,8 @@ const AdminDashboard = () => {
                     </thead>
                     <tbody>
                         {reservations.map(reservation => (
-                            <tr key={reservation.id}>
-                                <td>{reservation.id}</td>
+                            <tr key={reservation._id}>
+                                <td>{reservation._id}</td>
                                 <td>{reservation.eventName}</td>
                                 <td>{reservation.userName}</td>
                                 <td>{reservation.date}</td>
@@ -153,11 +205,23 @@ const AdminDashboard = () => {
                     <Form onSubmit={handleUserSubmit}>
                         <Form.Group controlId="formUserName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter name" defaultValue={currentUser?.name} />
+                            <Form.Control
+                                type="text"
+                                name="name"
+                                placeholder="Enter name"
+                                value={formData.name}
+                                onChange={handleInputChange}
+                            />
                         </Form.Group>
                         <Form.Group controlId="formUserEmail">
                             <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" defaultValue={currentUser?.email} />
+                            <Form.Control
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                            />
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             {currentUser ? 'Update' : 'Add'}
@@ -174,15 +238,30 @@ const AdminDashboard = () => {
                     <Form onSubmit={handleEventSubmit}>
                         <Form.Group controlId="formEventName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter name" defaultValue={currentEvent?.name} />
+                            <Form.Control
+                                type="text"
+                                name="name"
+                                placeholder="Enter name"
+                                value={formData.name}
+                                onChange={handleInputChange}
+                            />
                         </Form.Group>
                         <Form.Group controlId="formEventDate">
                             <Form.Label>Date</Form.Label>
-                            <Form.Control type="date" defaultValue={currentEvent?.date} />
+                            <Form.Control
+                                type="date"
+                                name="date"
+                                value={formData.date}
+                                onChange={handleInputChange}
+                            />
                         </Form.Group>
                         <Form.Group controlId="formEventCoverImage">
                             <Form.Label>Cover Image</Form.Label>
-                            <Form.Control type="file" onChange={(e) => setEventCoverImage(e.target.files[0])} />
+                            <Form.Control
+                                type="file"
+                                name="coverImage"
+                                onChange={handleFileChange}
+                            />
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             {currentEvent ? 'Update' : 'Add'}
