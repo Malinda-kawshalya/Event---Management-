@@ -1,16 +1,16 @@
 import React from 'react';
-<<<<<<< HEAD
+
 import '../css/HomePage.css';
-=======
+
 import { Link } from 'react-router-dom';
 import '../css/HomePage.css'; // Ensure this file contains the necessary styles
 import Banner from './Banner'; // Importing the Banner component
->>>>>>> b93091168a58b1eb236e0b230e74aecd76567a82
+
 
 const HomePage = () => {
   return (
     <div className="homepage">
-<<<<<<< HEAD
+
       {/* <header className="header">
         <div className="container">
           <h1 className="brand">Eventify</h1>
@@ -24,23 +24,17 @@ const HomePage = () => {
           </nav>
         </div>
       </header> */}
-=======
+
       {/* Banner Section */}
-      <Banner />
+      
 
       {/* Hero Section */}
       
-          <div className="mt-4">
-          <Link to="/signup" className="btn btn-lg me-3 custom-button">
-  Sign Up
-</Link>
-<Link to="/signin" className="btn btn-lg custom-button">
-  Sign In
-</Link>
->>>>>>> b93091168a58b1eb236e0b230e74aecd76567a82
+          
 
 
-          </div>
+
+          
         
 
       {/* Featured Events Section */}
@@ -75,16 +69,13 @@ const HomePage = () => {
         </div>
       </div>
 
-<<<<<<< HEAD
-      
-=======
       {/* Footer Section */}
-      <footer className="bg-dark text-white text-center py-3">
+      {/* <footer className="bg-dark text-white text-center py-3">
         <p className="mb-0">
           &copy; {new Date().getFullYear()} <strong>Eventify</strong>. All rights reserved.
         </p>
-      </footer>
->>>>>>> b93091168a58b1eb236e0b230e74aecd76567a82
+      </footer> */}
+
     </div>
   );
 };

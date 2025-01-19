@@ -1,71 +1,42 @@
-.hero {
-    
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-  }
-  
-  .card {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .btn-light {
-    color: #333;
-<<<<<<< HEAD
-    line-height: 1.6;
-    text-align: center;
+ 
+  body {
+    background-color: #f9f9f9;
     text-align: center;
     width: 100%;
     height: 100%;
   }
-  
-  .header {
-    background: #4CAF50;
-    color: #fff;
-    padding: 1rem 0;
+
+  .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
-  .header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .brand {
-    font-size: 1.8rem;
-=======
->>>>>>> b93091168a58b1eb236e0b230e74aecd76567a82
+
+  .btn-light {
+    color: #333;
     font-weight: bold;
   }
-  
+
   footer {
     background-color: #222;
     color: #fff;
+    padding: 1rem 0;
   }
 
   .custom-button {
     background-color: #112d4e;
     color: #fff;
     border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
   }
-  
-<<<<<<< HEAD
+
   .hero {
     background: url('../hero-image.jpeg') no-repeat center center/cover;
     color: #fff;
     text-align: center;
     padding: 4rem 0;
-=======
-  .custom-button:hover {
-    padding: 12px 20px;
-    font-size: 16px;
-    background-color: #112D4E;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
->>>>>>> b93091168a58b1eb236e0b230e74aecd76567a82
   }
-  
-  
+
+  .custom-button:hover {
+    background-color: #0a1e3a;
+    transition: background-color 0.3s ease;
+  }
