@@ -20,23 +20,79 @@ const getAllUsers = async (req, res, next) => {
 
 // Data insert
 const addUsers = async (req, res, next) => {
-    const { gmail, password, name, age, gender } = req.body;
+    const { name, email, password, confirmPassword, age, gender } = req.body;
 
-    let users;
+    let user;
     try {
-        users = new User({ gmail, password, name, age, gender }); // Use `User`, not `user`
-        await users.save();
-    } catch (err) { // Pass `err` as the catch parameter
-        console.error(err); // Log the error for debugging
+        user = new User({ name, email, password, confirmPassword, age, gender });
+        await user.save();
+    } catch (err) {
+        console.error(err);
         return res.status(500).json({ message: "Server error", error: err.message });
     }
 
-    // If user is not inserted
-    if (!users) {
+    if (!user) {
         return res.status(404).json({ message: "Unable to add the user" });
     }
-    return res.status(200).json({ users });
+    return res.status(200).json({ user });
+};
+
+// Get by id
+const getById = async (req, res, next) => {
+    const { id } = req.params;
+    let user;
+    try {
+        user = await User.findById(id);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error", error: err.message });
+    }
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(200).json({ user });
+}
+
+// Update user
+const updateUser = async (req, res, next) => {
+    const { id } = req.params;
+    const { name, email, password, confirmPassword, age, gender } = req.body;
+
+    let user;
+    try {
+        user = await User.findByIdAndUpdate(id, { name, email, password, confirmPassword, age, gender }, { new: true });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error", error: err.message });
+    }
+
+    if (!user) {
+        return res.status(404).json({ message: "Unable to update the user" });
+    }
+    return res.status(200).json({ user });
+};
+
+// Delete user
+const deleteUser = async (req, res, next) => {
+    const { id } = req.params;
+    let user;
+    
+    try { 
+        user = await User.findByIdAndDelete(id);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Server error", error: err.message });
+    }
+
+    if (!user) {
+        return res.status(404).json({ message: "Unable to delete the user" });
+    }
+    return res.status(200).json({ user });
 };
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.addUsers = addUsers;
+module.exports.getById = getById;
+module.exports.updateUser = updateUser;
+module.exports.deleteUser = deleteUser;
