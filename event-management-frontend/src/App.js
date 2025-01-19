@@ -10,7 +10,7 @@ import SignUp from './components/SignUp';
 import EventDetails from './components/EventDetails';
 import MyEvents from './components/MyEvents';
 import HomePage from './components/HomePage';
-
+import AdminDashboard from './components/AdminDashboard';
 
 
 import './App.css';
@@ -33,6 +33,7 @@ const AppWrapper = () => {
         <Route path="/event-details" element={<EventDetails />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/MyEvents" element={< MyEvents />} />
+        <Route path="/AdminDashboard" element={< AdminDashboard />} />
       </Routes>
     </div>
   );
