@@ -44,7 +44,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="btn btn-primary nav-special-btn" to="/register">
+              <Link className="btn btn-primary nav-special-btn" to="/signup">
                 Register
               </Link>
             </li>
