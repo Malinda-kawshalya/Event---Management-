@@ -8,11 +8,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Footer from './components/Footer';
 import EventDetails from './components/EventDetails';
+import EventCreation from './components/EventCreation';
 import AdminDashboard from './components/AdminDashboard';
 import Myevents from './components/MyEvents';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
-
+import ManageEventsPage from './components/ManageEventPage';
 
 const App = () => {
   return (
@@ -29,7 +30,9 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} /> 
-          <Route path="/eventdetails" element={<EventDetails />} />
+          <Route path="/eventdetails" element={<EventDetails />}/>
+          <Route path="/eventcreation" element={<EventCreation />} />
+          <Route path="/manageeventspage" element={<ManageEventsPage />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />  
           <Route path="/myevents" element={<Myevents />} /> 
           <Route path="/signin" element={<SignIn />} />
