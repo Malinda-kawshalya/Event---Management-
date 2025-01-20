@@ -14,8 +14,6 @@ import SignIn from './components/SignIn';
 
 
 import SignUp from './components/SignUp';
-import EventCreation from './components/EventCreation';
-import ManageEventsPage from './components/ManageEventPage';
 
 
 const App = () => {
@@ -35,11 +33,9 @@ const App = () => {
           <Route path="/admindashboard" element={<AdminDashboard />} />  
           <Route path="/myevents" element={<Myevents />} /> 
           <Route path="/signin" element={<SignIn />} />
-
-
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/eventcreation" element={<EventCreation />} />
-          <Route path="/manageevents" element={<ManageEventsPage />} />
+
+  
 
         </Routes>
         <Footer/>

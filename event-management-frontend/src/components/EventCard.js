@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/EventCard.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const EventCard = () => {
   // Dummy events data inside the EventCard component

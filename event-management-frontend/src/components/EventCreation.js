@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import "../css/EventCreation.css"; // Optional CSS file for custom styles
+// Optional CSS file for custom styles
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const EventCreation = () => {
+const EventCreationPage = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -169,4 +170,4 @@ const EventCreation = () => {
   );
 };
 
-export default EventCreation;
+export default EventCreationPage;

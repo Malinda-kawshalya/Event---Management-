@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
-import "../css/ManageEventPage.css"; // Style file
+ // Style file
 
 const ManageEventsPage = () => {
   const [events, setEvents] = useState([]); // State to store events
