@@ -11,13 +11,7 @@ import EventDetails from './components/EventDetails';
 import AdminDashboard from './components/AdminDashboard';
 import Myevents from './components/MyEvents';
 import SignIn from './components/SignIn';
-
 import SignUp from './components/SignUp';
-
-
-
-import SignUp from './components/SignUp';
-
 
 
 const App = () => {
