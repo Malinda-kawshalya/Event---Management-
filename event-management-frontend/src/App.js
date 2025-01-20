@@ -5,19 +5,17 @@ import HomePage from './components/HomePage'; // Home page component
 import About from './components/AboutUs'; // About page component
 import ContactUs from './components/ContactUs'; // Contact page component
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import Footer from './components/Footer';
 import EventDetails from './components/EventDetails';
 import EventCreation from './components/EventCreation';
 import AdminDashboard from './components/AdminDashboard';
 import Myevents from './components/MyEvents';
 import SignIn from './components/SignIn';
-import EventCreation from './components/EventCreation';
 import ManageEventsPage from './components/ManageEventPage';
 import OrgDashboard from './components/OrgDashboard';
 import Analytics from './components/OrgAnalytics';
 import SignUp from './components/SignUp';
-import ManageEventsPage from './components/ManageEventPage';
+
 
 const App = () => {
   return (
