@@ -28,3 +28,28 @@
   background-color: #218838;
   color: white;
 }
+
+/* Style for Dropdown Button */
+.nav-special-btn {
+  border-radius: 5px;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  background-color: #F9F7F7;
+  border-radius: 5px;
+  border: 1px solid #DBE2EF;
+  padding: 0.5rem 0;
+}
+
+/* Dropdown Items */
+.dropdown-item {
+  color: #112D4E;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #DBE2EF;
+  color: #112D4E;
+}

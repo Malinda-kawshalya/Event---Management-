@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          MyApp
+          Event Guru
         </Link>
         <button
           className="navbar-toggler"
@@ -43,10 +43,28 @@ const Navbar = () => {
                 Sign In
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="btn btn-primary nav-special-btn" to="/register">
+            {/* Dropdown Menu for Register */}
+            <li className="nav-item dropdown">
+              <button
+                className="btn btn-primary dropdown-toggle nav-special-btn"
+                id="registerDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 Register
-              </Link>
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="registerDropdown">
+                <li>
+                  <Link className="dropdown-item" to="/signup">
+                    Register as Attendee
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/signup">
+                    Register as Organizer
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
