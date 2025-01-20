@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoute'); 
+const contactRoutes = require('./routes/contactRoutes'); 
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/contacts', contactRoutes);
 
 
 // Error handling middleware (optional)

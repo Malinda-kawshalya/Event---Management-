@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import "./EventCreationPage.css"; // Optional CSS file for custom styles
+// Optional CSS file for custom styles
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const EventCreationPage = () => {
   const [formData, setFormData] = useState({
