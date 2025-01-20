@@ -11,6 +11,10 @@ import EventDetails from './components/EventDetails';
 import AdminDashboard from './components/AdminDashboard';
 import Myevents from './components/MyEvents';
 import SignIn from './components/SignIn';
+import EventCreation from './components/EventCreation';
+import ManageEventsPage from './components/ManageEventPage';
+import OrgDashboard from './components/OrgDashboard';
+import Analytics from './components/OrgAnalytics';
 
 
 import SignUp from './components/SignUp';
@@ -34,6 +38,11 @@ const App = () => {
           <Route path="/myevents" element={<Myevents />} /> 
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/eventcreation" element={<EventCreation />} />
+          <Route path="/manageevents" element={<ManageEventsPage />} />
+          <Route path="/orgdashboard" element={<OrgDashboard />} />
+          <Route path="/organalytics" element={<Analytics />} />
+
 
   
 
