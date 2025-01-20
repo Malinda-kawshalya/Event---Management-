@@ -9,6 +9,8 @@ import Footer from './components/Footer';
 import EventDetails from './components/EventDetails';
 import AdminDashboard from './components/AdminDashboard';
 import Myevents from './components/MyEvents';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
         {/* Routing */}
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} /> 
           <Route path="/eventdetails" element={<EventDetails />} />
