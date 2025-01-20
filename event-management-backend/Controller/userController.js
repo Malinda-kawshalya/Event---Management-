@@ -1,6 +1,8 @@
 // filepath: /C:/Users/PATHAYAA/Desktop/Event Managment/Event---Management-/event-management-backend/controllers/userController.js
 
 const User = require('../Model/userModel');
+const Contact = require('../Model/contactModel');
+
 
 // User display
 const getAllUsers = async (req, res, next) => {

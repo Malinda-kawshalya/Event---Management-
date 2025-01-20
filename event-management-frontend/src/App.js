@@ -4,11 +4,13 @@ import Navbar from './components/Navbar'; // Import your Navbar component
 import HomePage from './components/HomePage'; // Home page component
 import About from './components/AboutUs'; // About page component
 import ContactUs from './components/ContactUs'; // Contact page component
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Footer from './components/Footer';
 import EventDetails from './components/EventDetails';
 import AdminDashboard from './components/AdminDashboard';
 import Myevents from './components/MyEvents';
+import SignIn from './components/SignIn';
 
 const App = () => {
   return (
@@ -26,6 +28,7 @@ const App = () => {
           <Route path="/eventdetails" element={<EventDetails />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />  
           <Route path="/myevents" element={<Myevents />} /> 
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
         <Footer/>
       </div>

@@ -1,5 +1,6 @@
 import React from "react";
-import "../css/SignIn.css";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SignIn = () => {
   return (
