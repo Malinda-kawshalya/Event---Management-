@@ -1,4 +1,4 @@
-/* Base styles for special buttons */
+/* Base styles for special buttons 
 .nav-special-btn {
   font-weight: bold;
   padding: 8px 16px;
@@ -6,7 +6,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Customize "Sign In" button */
+/* Customize "Sign In" button 
 .nav-special-btn.btn-outline-primary {
   border: 2px solid #007bff;
   color: #007bff;
@@ -17,7 +17,7 @@
   color: white;
 }
 
-/* Customize "Register" button */
+/* Customize "Register" button 
 .nav-special-btn.btn-primary {
   background-color: #28a745;
   border: none;
@@ -27,14 +27,14 @@
 .nav-special-btn.btn-primary:hover {
   background-color: #218838;
   color: white;
-}
+}*/
 
-/* Style for Dropdown Button */
+/* Style for Dropdown Button 
 .nav-special-btn {
   border-radius: 5px;
 }
 
-/* Dropdown Menu Styling */
+/* Dropdown Menu Styling 
 .dropdown-menu {
   background-color: #F9F7F7;
   border-radius: 5px;
