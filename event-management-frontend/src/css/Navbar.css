@@ -8,23 +8,48 @@
 
 /* Customize "Sign In" button */
 .nav-special-btn.btn-outline-primary {
-  border: 2px solid #007bff;
-  color: #007bff;
+  border: 2px solid #3F72AF;
+  color: #3F72AF;
 }
 
 .nav-special-btn.btn-outline-primary:hover {
-  background-color: #007bff;
+  background-color: #3F72AF;
   color: white;
 }
 
 /* Customize "Register" button */
 .nav-special-btn.btn-primary {
-  background-color: #28a745;
+  background-color: #112D4E;
   border: none;
   color: white;
 }
 
 .nav-special-btn.btn-primary:hover {
-  background-color: #218838;
+  background-color: #3F72AF;
   color: white;
+}
+
+/* Style for Dropdown Button */
+.nav-special-btn {
+  border-radius: 5px;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  background-color: #F9F7F7;
+  border-radius: 5px;
+  border: 1px solid #DBE2EF;
+  padding: 0.5rem 0;
+}
+
+/* Dropdown Items */
+.dropdown-item {
+  color: #112D4E;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #DBE2EF;
+  color: #112D4E;
 }
