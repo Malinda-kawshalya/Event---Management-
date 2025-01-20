@@ -10,7 +10,7 @@ const AboutUs = () => {
             </p>
             
             <div className="row mt-5">
-                <h2 className="text-center mb-4">Our Web Developers</h2>
+                <h2 className="text-center mb-4">Our Web Developers.</h2>
                 <div className="col-md-4 text-center">
                     <img src="path_to_image1.jpg" className="img-fluid rounded-circle mb-3" alt="Developer 1" />
                     <h5>Developer 1</h5>
