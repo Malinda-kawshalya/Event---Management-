@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 const HomePage = () => {
   return (
     <>
-    <Navbar/>
+    
     <Banner />
       <SpecialShows /> {/* Include the special shows section */}
     </>
