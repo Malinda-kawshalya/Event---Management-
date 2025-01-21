@@ -5,6 +5,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoute'); 
 const contactRoutes = require('./routes/contactRoutes'); 
 const organizerRoutes = require('./routes/organizerRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/organizers', organizerRoutes);
+app.use('/api', authRoutes);
 
 
 // Error handling middleware (optional)
