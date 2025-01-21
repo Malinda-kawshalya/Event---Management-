@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoute'); 
 const contactRoutes = require('./routes/contactRoutes'); 
+const organizerRoutes = require('./routes/organizerRoutes');
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/contacts', contactRoutes);
+app.use('/api/organizers', organizerRoutes);
 
 
 // Error handling middleware (optional)

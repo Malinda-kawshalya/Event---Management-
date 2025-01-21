@@ -1,0 +1,13 @@
+.btn-primary {
+    background-color: #3F72AF;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #112D4E;
+  }
+  
+  h2 {
+    color: #112D4E;
+  }
+  
