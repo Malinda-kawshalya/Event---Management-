@@ -5,7 +5,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'; // Import Bootstrap Icons
 const Banner = () => {
   return (
     <div className="banner text-center p-5 bg-primary text-white">
-      <h1 className="display-4" style={{ fontFamily: 'Suprapower SE'}}>Let's Book Your Ticket</h1>
+      <h1 className="display-4" >Let's Book Your Ticket</h1>
       <p className="lead" style={{ color: 'white' }}>Discover your favorite entertainment right here</p>
       <div className="search-bar input-group mt-4">
 
