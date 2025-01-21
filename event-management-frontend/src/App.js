@@ -16,6 +16,7 @@ import OrgDashboard from './components/OrgDashboard';
 import Analytics from './components/OrgAnalytics';
 import SignUp from './components/SignUp';
 import UserAccount from './components/UserAccount';
+import OrganizerRegister from './components/RegOrganizer';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
 
         {/* Routing */}
         <Routes>
+          
           <Route path="/" element={<HomePage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
@@ -44,9 +46,7 @@ const App = () => {
           <Route path="/orgdashboard" element={<OrgDashboard />} />
           <Route path="/organalytics" element={<Analytics />} />
           <Route path="/useraccount" element={<UserAccount />} />
-
-
-  
+          <Route path="/orgregister" element={<OrganizerRegister />} />
 
         </Routes>
         <Footer/>

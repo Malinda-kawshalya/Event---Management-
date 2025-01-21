@@ -16,7 +16,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
-            <h5 className="text-uppercase">Quick Links</h5>
+            <h5 className="text-uppercase">Helpful Links</h5>
             <ul className="list-unstyled mb-0">
               <li>
                 <a href="/" className="text-white">Home</a>
@@ -45,7 +45,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-center p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
+      <div className="p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
         <a href="https://www.facebook.com" className="text-white me-4">
           <i className="fab fa-facebook-f"></i>
         </a>
@@ -58,7 +58,18 @@ const Footer = () => {
         <a href="https://www.linkedin.com" className="text-white me-4">
           <i className="fab fa-linkedin"></i>
         </a>
-        <p className="d-inline-block mb-0">© 2025 MyTickets. All rights reserved.</p>
+        {/* Flexbox for Left and Right Alignment */}
+        <div className="d-flex justify-content-between align-items-center">
+          {/* Left Side */}
+          <p className="mb-0">
+            Privacy Policy | Cookie Policy | Terms and Conditions
+          </p>
+
+          {/* Right Side */}
+          <p className="mb-0">
+            Copyright 2025 © MyTickets All Rights Reserved
+          </p>
+        </div>
       </div>
     </footer>
   );
