@@ -1,5 +1,3 @@
-// filepath: /C:/Users/PATHAYAA/Desktop/Event Managment/Event---Management-/event-management-backend/models/userModel.js
-
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
