@@ -1,28 +1,30 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/SpecialShows.css';
-
+import image1 from '../images/phantom.jpeg';
+import image2 from '../images/c4.jpg';
+import image3 from '../images/sddefault.jpg';
 
 const specialShowsData = [
   {
     id: 1,
     title: "The Phantom of the Opera",
     date: "January 20, 2025",
-    image: "https://via.placeholder.com/300x200", // Replace with actual image URL
+    image: image1, // Replace with actual image URL
     location: "Broadway Theatre, NYC",
   },
   {
     id: 2,
     title: "Cirque du Soleil - Mystère",
     date: "January 22, 2025",
-    image: "https://via.placeholder.com/300x200", // Replace with actual image URL
+    image: image2, // Replace with actual image URL
     location: "Las Vegas, NV",
   },
   {
     id: 3,
     title: "Taylor Swift - The Eras Tour",
     date: "January 25, 2025",
-    image: "https://via.placeholder.com/300x200", // Replace with actual image URL
+    image: image3, // Replace with actual image URL
     location: "Wembley Stadium, London",
   },
 ];
