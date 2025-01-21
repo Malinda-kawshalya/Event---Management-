@@ -15,7 +15,7 @@ import ManageEventsPage from './components/ManageEventPage';
 import OrgDashboard from './components/OrgDashboard';
 import Analytics from './components/OrgAnalytics';
 import SignUp from './components/SignUp';
-
+import UserAccount from './components/UserAccount';
 
 const App = () => {
   return (
@@ -43,6 +43,7 @@ const App = () => {
           <Route path="/manageevents" element={<ManageEventsPage />} />
           <Route path="/orgdashboard" element={<OrgDashboard />} />
           <Route path="/organalytics" element={<Analytics />} />
+          <Route path="/useraccount" element={<UserAccount />} />
 
 
   

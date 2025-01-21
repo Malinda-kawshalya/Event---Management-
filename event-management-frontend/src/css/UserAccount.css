@@ -1,0 +1,13 @@
+.card {
+    border-radius: 15px;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-dark {
+    background-color: #343a40;
+    color: #fff;
+}
