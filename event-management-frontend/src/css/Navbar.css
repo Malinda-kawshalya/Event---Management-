@@ -53,3 +53,8 @@
   background-color: #DBE2EF;
   color: #112D4E;
 }
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030; /* Ensures it stays above other content */
+}
