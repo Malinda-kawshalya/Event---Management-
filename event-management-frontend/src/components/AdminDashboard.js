@@ -24,10 +24,10 @@ const AdminDashboard = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get('http://localhost:5000/api/users'); 
+            const response = await axios.get('http://localhost:5000/api/users');
             console.log('Fetched users:', response.data); 
-            if (Array.isArray(response.data)) {
-                setUsers(response.data);
+            if (response.data && Array.isArray(response.data.users)) {
+                setUsers(response.data.users); // Access the users array within the response
             } else {
                 setUsers([]);
                 console.error('Invalid data format from API:', response.data);
@@ -39,16 +39,17 @@ const AdminDashboard = () => {
             setLoading(false);
         }
     };
+    
 
     // Fetch contacts from the database
     const fetchContacts = async () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get('http://localhost:5000/api/contacts'); // Update with your backend API URL
-            console.log('Fetched contacts:', response.data); // Debugging log
-            if (Array.isArray(response.data)) {
-                setContacts(response.data);
+            const response = await axios.get('http://localhost:5000/api/contacts');
+            console.log('Fetched contacts:', response.data); 
+            if (response.data && Array.isArray(response.data.contacts)) {
+                setContacts(response.data.contacts); // Access the contacts array within the response
             } else {
                 setContacts([]);
                 console.error('Invalid data format from API:', response.data);
@@ -60,6 +61,7 @@ const AdminDashboard = () => {
             setLoading(false);
         }
     };
+    
 
     useEffect(() => {
         fetchUsers();
