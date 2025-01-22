@@ -1,9 +1,11 @@
 const express = require('express');
-const { registerOrganizer } = require('../Controller/organizerController');
+const { getOrganizers, getOrganizer, createOrganizer } = require('../Controller/organizerController');
+const { route } = require('./userRoute');
 
 const router = express.Router();
 
-// Route to register a new organizer
-router.post('/', registerOrganizer);
+router.get('/', getOrganizers);
+router.get('/:id', getOrganizer);
+router.post('/', createOrganizer);
 
 module.exports = router;

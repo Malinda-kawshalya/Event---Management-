@@ -17,7 +17,7 @@ import Analytics from './components/OrgAnalytics';
 import SignUp from './components/SignUp';
 import UserAccount from './components/UserAccount';
 import OrganizerRegister from './components/RegOrganizer';
-
+import AllEvents from './components/AllEvents';
 const App = () => {
   return (
     <Router>
@@ -47,6 +47,7 @@ const App = () => {
           <Route path="/organalytics" element={<Analytics />} />
           <Route path="/useraccount" element={<UserAccount />} />
           <Route path="/orgregister" element={<OrganizerRegister />} />
+          <Route path="/allevents" element={<AllEvents />} />
 
         </Routes>
         <Footer/>
