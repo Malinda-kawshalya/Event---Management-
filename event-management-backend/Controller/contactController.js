@@ -2,22 +2,15 @@
 const Contact = require('../Model/contactModel');
 
 // Get all contacts
-const getAllContacts = async (req, res, next) => {
-    let contacts;
-
+exports.getAllContacts = async (req, res) => {
     try {
-        contacts = await Contact.find();
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ message: "Server error" });
+        const contacts = await Contact.find();
+        res.status(200).json(contacts); // Return the contacts array directly
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching contacts', error: error.message });
     }
-
-    if (!contacts || contacts.length === 0) {
-        return res.status(404).json({ message: "No contacts found" });
-    }
-
-    return res.status(200).json({ contacts });
 };
+
 
 // Add a contact
 const addContact = async (req, res, next) => {
