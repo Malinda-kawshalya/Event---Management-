@@ -18,7 +18,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/users', userRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/organizers', organizerRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/api', authRoutes);
 app.use('/api/events',eventRoutes);
 
 
