@@ -1,4 +1,6 @@
 
-event-management-backend/node_modules
 
+/event-management-frontend/node_modules/
+/event-management-backend/node_modules/
+event-management-backend/node_modules/.bin/color-support
 /event-management-backend/node_modules
