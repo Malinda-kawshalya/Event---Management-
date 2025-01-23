@@ -9,13 +9,17 @@ const AdminDashboard = () => {
     const [users, setUsers] = useState([]); // Initialize as an array
     const [contacts, setContacts] = useState([]); // Initialize as an array
     const [events, setEvents] = useState([]); // Initialize as an array
+    const [organizers, setOrganizers] = useState([]); // Initialize as an array
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
         confirmPassword: '',
         age: '',
-        gender: ''
+        gender: '',
+        phone: '',
+        companyName: '',
+        companyAddress: ''
     });
     const [editUserId, setEditUserId] = useState(null);
     const [error, setError] = useState(null); // To handle and display errors
@@ -86,6 +90,27 @@ const AdminDashboard = () => {
         }
     };
 
+    // Fetch organizers from the database
+    const fetchOrganizers = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await axios.get('http://localhost:5000/api/organizers');
+            console.log('Fetched organizers:', response.data); 
+            if (response.data && Array.isArray(response.data)) {
+                setOrganizers(response.data); // Access the organizers array within the response
+            } else {
+                setOrganizers([]);
+                console.error('Invalid data format from API:', response.data);
+            }
+        } catch (error) {
+            setError('Failed to fetch organizers.');
+            console.error('Error fetching organizers:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         if (activeTab === 'users') {
             fetchUsers();
@@ -93,6 +118,8 @@ const AdminDashboard = () => {
             fetchContacts();
         } else if (activeTab === 'events') {
             fetchEvents();
+        } else if (activeTab === 'organizers') {
+            fetchOrganizers();
         }
     }, [activeTab]);
 
@@ -101,49 +128,69 @@ const AdminDashboard = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // Handle form submission for add or edit user
+    // Handle form submission for add or edit user/organizer
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             if (editUserId) {
-                // Update user
-                await axios.put(`http://localhost:5000/api/users/${editUserId}`, formData);
+                // Update user/organizer
+                if (activeTab === 'users') {
+                    await axios.put(`http://localhost:5000/api/users/${editUserId}`, formData);
+                } else if (activeTab === 'organizers') {
+                    await axios.put(`http://localhost:5000/api/organizers/${editUserId}`, formData);
+                }
             } else {
-                // Add new user
-                await axios.post('http://localhost:5000/api/users', formData);
+                // Add new user/organizer
+                if (activeTab === 'users') {
+                    await axios.post('http://localhost:5000/api/users', formData);
+                } else if (activeTab === 'organizers') {
+                    await axios.post('http://localhost:5000/api/organizers', formData);
+                }
             }
-            setFormData({ name: '', email: '', password: '', confirmPassword: '', age: '', gender: '' });
+            setFormData({ name: '', email: '', password: '', confirmPassword: '', age: '', gender: '', phone: '', companyName: '', companyAddress: '' });
             setEditUserId(null);
-            fetchUsers(); // Refresh user list
+            if (activeTab === 'users') {
+                fetchUsers(); // Refresh user list
+            } else if (activeTab === 'organizers') {
+                fetchOrganizers(); // Refresh organizer list
+            }
             setShowModal(false); // Close the modal
         } catch (error) {
-            setError('Error saving user.');
-            console.error('Error saving user:', error);
+            setError('Error saving user/organizer.');
+            console.error('Error saving user/organizer:', error);
         }
     };
 
-    // Handle edit action
-    const handleEdit = (user) => {
+    // Handle edit action for user/organizer
+    const handleEdit = (item) => {
         setFormData({
-            name: user.name,
-            email: user.email,
+            name: item.name,
+            email: item.email,
             password: '',
             confirmPassword: '',
-            age: user.age,
-            gender: user.gender
+            age: item.age || '',
+            gender: item.gender || '',
+            phone: item.phone || '',
+            companyName: item.companyName || '',
+            companyAddress: item.companyAddress || ''
         });
-        setEditUserId(user._id);
+        setEditUserId(item._id);
         setShowModal(true); // Open the modal
     };
 
-    // Handle delete action
+    // Handle delete action for user/organizer
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/users/${id}`);
-            fetchUsers(); // Refresh user list
+            if (activeTab === 'users') {
+                await axios.delete(`http://localhost:5000/api/users/${id}`);
+                fetchUsers(); // Refresh user list
+            } else if (activeTab === 'organizers') {
+                await axios.delete(`http://localhost:5000/api/organizers/${id}`);
+                fetchOrganizers(); // Refresh organizer list
+            }
         } catch (error) {
-            setError('Error deleting user.');
-            console.error('Error deleting user:', error);
+            setError('Error deleting user/organizer.');
+            console.error('Error deleting user/organizer:', error);
         }
     };
 
@@ -262,6 +309,46 @@ const AdminDashboard = () => {
                         </table>
                     </>
                 );
+            case 'organizers':
+                return (
+                    <>
+                        <h2 className="text-center mb-4">Organizers</h2>
+                        <Button variant="primary" onClick={() => setShowModal(true)}>Add Organizer</Button>
+                        <table className="table table-striped mt-4">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Company Name</th>
+                                    <th>Company Address</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {organizers.length > 0 ? (
+                                    organizers.map((organizer) => (
+                                        <tr key={organizer._id}>
+                                            <td>{organizer.name}</td>
+                                            <td>{organizer.email}</td>
+                                            <td>{organizer.phone}</td>
+                                            <td>{organizer.companyName}</td>
+                                            <td>{organizer.companyAddress}</td>
+                                            <td>
+                                                <button className="btn btn-warning me-2" onClick={() => handleEdit(organizer)}>Edit</button>
+                                                <button className="btn btn-danger" onClick={() => handleDelete(organizer._id)}>Delete</button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="6">No organizers found.</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </>
+                );
             default:
                 return null;
         }
@@ -286,13 +373,18 @@ const AdminDashboard = () => {
                         Events
                     </button>
                 </li>
+                <li className="nav-item">
+                    <button className={`nav-link ${activeTab === 'organizers' ? 'active' : ''}`} onClick={() => setActiveTab('organizers')}>
+                        Organizers
+                    </button>
+                </li>
             </ul>
             {renderContent()}
 
-            {/* User Form Modal */}
+            {/* User/Organizer Form Modal */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{editUserId ? 'Edit User' : 'Add User'}</Modal.Title>
+                    <Modal.Title>{editUserId ? 'Edit User/Organizer' : 'Add User/Organizer'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={handleSubmit}>
@@ -326,7 +418,7 @@ const AdminDashboard = () => {
                                 placeholder="Password"
                                 value={formData.password}
                                 onChange={handleInputChange}
-                                required={!editUserId} // Only required when adding a new user
+                                required={!editUserId} // Only required when adding a new user/organizer
                             />
                         </div>
                         <div className="mb-3">
@@ -337,34 +429,75 @@ const AdminDashboard = () => {
                                 placeholder="Confirm Password"
                                 value={formData.confirmPassword}
                                 onChange={handleInputChange}
-                                required={!editUserId} // Only required when adding a new user
+                                required={!editUserId} // Only required when adding a new user/organizer
                             />
                         </div>
-                        <div className="mb-3">
-                            <input
-                                type="number"
-                                name="age"
-                                className="form-control"
-                                placeholder="Age"
-                                value={formData.age}
-                                onChange={handleInputChange}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <select
-                                name="gender"
-                                className="form-control"
-                                value={formData.gender}
-                                onChange={handleInputChange}
-                                required
-                            >
-                                <option value="">Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                        <button type="submit" className="btn btn-primary w-100">{editUserId ? 'Update User' : 'Add User'}</button>
+                        {activeTab === 'users' && (
+                            <>
+                                <div className="mb-3">
+                                    <input
+                                        type="number"
+                                        name="age"
+                                        className="form-control"
+                                        placeholder="Age"
+                                        value={formData.age}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <select
+                                        name="gender"
+                                        className="form-control"
+                                        value={formData.gender}
+                                        onChange={handleInputChange}
+                                        required
+                                    >
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </>
+                        )}
+                        {activeTab === 'organizers' && (
+                            <>
+                                <div className="mb-3">
+                                    <input
+                                        type="text"
+                                        name="phone"
+                                        className="form-control"
+                                        placeholder="Phone"
+                                        value={formData.phone}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <input
+                                        type="text"
+                                        name="companyName"
+                                        className="form-control"
+                                        placeholder="Company Name"
+                                        value={formData.companyName}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <input
+                                        type="text"
+                                        name="companyAddress"
+                                        className="form-control"
+                                        placeholder="Company Address"
+                                        value={formData.companyAddress}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
+                                </div>
+                            </>
+                        )}
+                        <button type="submit" className="btn btn-primary w-100">{editUserId ? 'Update' : 'Add'}</button>
                     </form>
                 </Modal.Body>
             </Modal>
