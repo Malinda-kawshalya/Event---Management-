@@ -4,27 +4,32 @@ const bcrypt = require('bcrypt');
 // Get all organizers
 exports.getOrganizers = async (req, res) => {
     try {
-        const organizers = await Organizer.find();
-        res.json(organizers);
+        const organizers = await Organizer.find().select('-password'); // Exclude passwords
+        res.status(200).json(organizers);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 
 // Get a single organizer
 exports.getOrganizer = async (req, res) => {
     try {
-        const organizer = await Organizer.findById(req.params.id);
+        const organizer = await Organizer.findById(req.params.id).select('-password'); // Exclude password
         if (!organizer) return res.status(404).json({ message: 'Organizer not found' });
-        res.json(organizer);
+        res.status(200).json(organizer);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 
 // Create a new organizer
 exports.createOrganizer = async (req, res) => {
     const { name, email, phone, password, companyName, companyAddress } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !phone || !password || !companyName || !companyAddress) {
+        return res.status(400).json({ message: 'All fields are required.' });
+    }
 
     try {
         // Check if the organizer already exists
@@ -49,9 +54,8 @@ exports.createOrganizer = async (req, res) => {
         // Save the organizer to the database
         await organizer.save();
         res.status(201).json({ message: 'Organizer registered successfully', organizer });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Server error', error: err.message });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 
@@ -62,26 +66,25 @@ exports.updateOrganizer = async (req, res) => {
 
     try {
         const organizer = await Organizer.findById(id);
-        if (!organizer) return res.status(404).json({ message: "Organizer not found" });
+        if (!organizer) return res.status(404).json({ message: 'Organizer not found' });
 
-        organizer.name = name || organizer.name;
-        organizer.email = email || organizer.email;
-        organizer.phone = phone || organizer.phone;
+        // Update fields if provided
+        if (name) organizer.name = name;
+        if (email) organizer.email = email;
+        if (phone) organizer.phone = phone;
+        if (companyName) organizer.companyName = companyName;
+        if (companyAddress) organizer.companyAddress = companyAddress;
 
-        // Hash the new password if provided
+        // Hash and update password if provided
         if (password) {
             const salt = await bcrypt.genSalt(10);
             organizer.password = await bcrypt.hash(password, salt);
         }
 
-        organizer.companyName = companyName || organizer.companyName;
-        organizer.companyAddress = companyAddress || organizer.companyAddress;
-
         await organizer.save();
-        res.json({ message: 'Organizer updated successfully', organizer });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server error", error: err.message });
+        res.status(200).json({ message: 'Organizer updated successfully', organizer });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 
@@ -91,10 +94,9 @@ exports.deleteOrganizer = async (req, res) => {
 
     try {
         const organizer = await Organizer.findByIdAndDelete(id);
-        if (!organizer) return res.status(404).json({ message: "Organizer not found" });
-        res.json({ message: 'Organizer deleted successfully' });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server error", error: err.message });
+        if (!organizer) return res.status(404).json({ message: 'Organizer not found' });
+        res.status(200).json({ message: 'Organizer deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };

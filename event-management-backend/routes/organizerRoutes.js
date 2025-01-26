@@ -1,8 +1,6 @@
-const express = require('express');
-const { getOrganizers, getOrganizer, createOrganizer, updateOrganizer, deleteOrganizer } = require('../controllers/organizerController');
-
 const router = express.Router();
 
+// Routes
 router.get('/', getOrganizers);
 router.get('/:id', getOrganizer);
 router.post('/register', createOrganizer);
