@@ -19,6 +19,7 @@ import UserAccount from './components/UserAccount';
 import OrganizerRegister from './components/RegOrganizer';
 import AllEvents from './components/AllEvents';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import FAQSection from './components/FaqSection';
 const App = () => {
   return (
     <Router>
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/orgregister" element={<OrganizerRegister />} />
           <Route path="/allevents" element={<AllEvents />} />
           <Route path="/privacy" element={<PrivacyPolicy/>}/>
+          <Route path="/faq" element={<FAQSection />} />
 
         </Routes>
         <Footer/>
