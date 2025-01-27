@@ -1,10 +1,12 @@
+const express = require('express');
 const router = express.Router();
+const organizerController = require('../Controller/organizerController');
 
 // Routes
-router.get('/', getOrganizers);
-router.get('/:id', getOrganizer);
-router.post('/register', createOrganizer);
-router.put('/:id', updateOrganizer);
-router.delete('/:id', deleteOrganizer);
+router.get('/', organizerController.getOrganizers);
+router.get('/:id', organizerController.getOrganizer);
+router.post('/register', organizerController.createOrganizer);
+router.put('/:id', organizerController.updateOrganizer);
+router.delete('/:id', organizerController.deleteOrganizer);
 
 module.exports = router;

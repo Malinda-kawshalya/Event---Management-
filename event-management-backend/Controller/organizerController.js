@@ -1,5 +1,6 @@
-const Organizer = require('../models/organizerModel');
-const bcrypt = require('bcrypt');
+const Organizer = require('../Model/organizerModel');
+const bcrypt = require('bcryptjs');
+
 
 // Get all organizers
 exports.getOrganizers = async (req, res) => {
