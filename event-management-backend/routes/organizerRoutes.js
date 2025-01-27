@@ -5,7 +5,7 @@ const organizerController = require('../Controller/organizerController');
 // Routes
 router.get('/', organizerController.getOrganizers);
 router.get('/:id', organizerController.getOrganizer);
-router.post('/register', organizerController.createOrganizer);
+router.post('/', organizerController.createOrganizer);
 router.put('/:id', organizerController.updateOrganizer);
 router.delete('/:id', organizerController.deleteOrganizer);
 

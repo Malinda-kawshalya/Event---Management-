@@ -1,15 +1,41 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"; // To get the event ID from the URL
+import { Container, Row, Col, Button, Form, Modal, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/EventDetails.css"; // Optional additional CSS
 
 const EventDetails = () => {
+  const { eventId } = useParams(); // Get the event ID from the route parameter
+  const [event, setEvent] = useState(null);
   const [isRSVP, setIsRSVP] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [reservation, setReservation] = useState({
     tickets: 1,
     contact: "",
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch event data from the backend
+  useEffect(() => {
+    const fetchEventDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/events/${eventId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setEvent(data);
+        } else {
+          throw new Error("Failed to fetch event details");
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEventDetails();
+  }, [eventId]);
 
   const handleRSVP = () => {
     setIsRSVP(!isRSVP);
@@ -31,19 +57,41 @@ const EventDetails = () => {
     alert("Event link copied to clipboard!");
   };
 
+  if (loading) {
+    return (
+      <Container className="text-center my-5">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container className="text-center my-5">
+        <p className="text-danger">{error}</p>
+      </Container>
+    );
+  }
+
   return (
     <Container className="event-details mt-4">
       <Row>
         <Col md={6} className="mb-4">
-          <img src="https://via.placeholder.com/600x400" alt="Event" className="img-fluid rounded" />
+          <img
+            src={event.banner ? `http://localhost:5000/${event.banner}` : "https://via.placeholder.com/600x400"}
+            alt={event.title}
+            className="img-fluid rounded"
+          />
         </Col>
         <Col md={6}>
-          <h1>Event Title</h1>
-          <p><strong>Date:</strong> February 24, 2025</p>
-          <p><strong>Time:</strong> 7:00 PM</p>
-          <p><strong>Location:</strong> 123 Event Street, City, Country</p>
+          <h1>{event.title}</h1>
+          <p><strong>Date:</strong> {event.date}</p>
+          <p><strong>Time:</strong> {event.time}</p>
+          <p><strong>Location:</strong> {event.location}</p>
           <p>
-            <strong>Details:</strong> Join us for an exciting event featuring networking opportunities, fun activities, and more!
+            <strong>Details:</strong> {event.description}
           </p>
           <div className="event-actions">
             <Button
@@ -65,7 +113,7 @@ const EventDetails = () => {
       <Row className="mt-5">
         <Col md={12}>
           <h2>Contact for More Details</h2>
-          <p>Email: info@example.com | Phone: +1-234-567-890</p>
+          <p>Email: {event.contactEmail || "info@example.com"} | Phone: {event.contactPhone || "+1-234-567-890"}</p>
         </Col>
       </Row>
 

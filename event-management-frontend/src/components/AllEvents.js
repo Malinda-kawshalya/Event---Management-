@@ -49,8 +49,8 @@ const AllEvents = () => {
             ) : (
                 <Card.Img
                 variant="top"
-                src={event.banner ? `http://localhost:5000/${event.banner}` : "/default-banner.jpg"}
-                alt={event.title || "Default banner"}
+                src={`http://localhost:5000/${event.banner}`}
+                alt={event.title}
               />
             )}
             <Card.Body>
