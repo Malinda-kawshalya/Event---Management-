@@ -6,6 +6,8 @@ const Organizer = require("../Model/organizerModel");
 const signIn = async (req, res) => {
   // Log the request body for debugging
   console.log(req.body);
+  console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
 
   const { email, password } = req.body;
 

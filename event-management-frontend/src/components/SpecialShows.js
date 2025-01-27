@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/SpecialShows.css";
 
@@ -6,6 +7,7 @@ const SpecialShows = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Fetch events from your backend API
   useEffect(() => {
@@ -65,7 +67,13 @@ const SpecialShows = () => {
                 </p>
               </div>
               <div className="card-footer text-center">
-                <button className="btn btn-primary">Buy Tickets</button>
+                {/* Navigate to EventDetails page */}
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate(`/eventdetails/${event._id}`)} // Pass event ID in the URL
+                >
+                  Buy Tickets
+                </button>
               </div>
             </div>
           </div>

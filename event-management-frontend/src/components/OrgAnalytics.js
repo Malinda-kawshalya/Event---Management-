@@ -18,7 +18,7 @@ const Analytics = () => {
     // Fetch analytics data from backend
     const fetchAnalyticsData = async () => {
       try {
-        const response = await fetch('/api/analytics'); // Replace with your backend endpoint
+        const response = await fetch('http://localhost:5000/api/events'); // Replace with your backend endpoint
         const data = await response.json();
         setAnalyticsData(data);
         setLoading(false);

@@ -24,7 +24,10 @@ const SignIn = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/signin", formData);
+      const response = await axios.post(
+        "http://localhost:5000/api/signin",
+        formData
+      );
 
       if (response.status === 200) {
         const { role, token } = response.data;
@@ -35,7 +38,7 @@ const SignIn = () => {
         // Redirect based on the user's role
         if (role === "organizer") {
           navigate("/orgdashboard");
-        } else if (role === "attendee") {
+        } else if (role === "user") {
           navigate("/");
         }
       }
