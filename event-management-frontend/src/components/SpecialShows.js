@@ -1,49 +1,67 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/SpecialShows.css';
-import image1 from '../images/phantom.jpeg';
-import image2 from '../images/c4.jpg';
-import image3 from '../images/sddefault.jpg';
-
-const specialShowsData = [
-  {
-    id: 1,
-    title: "The Phantom of the Opera",
-    date: "January 20, 2025",
-    image: image1, // Replace with actual image URL
-    location: "Broadway Theatre, NYC",
-  },
-  {
-    id: 2,
-    title: "Cirque du Soleil - Mystère",
-    date: "January 22, 2025",
-    image: image2, // Replace with actual image URL
-    location: "Las Vegas, NV",
-  },
-  {
-    id: 3,
-    title: "Taylor Swift - The Eras Tour",
-    date: "January 25, 2025",
-    image: image3, // Replace with actual image URL
-    location: "Wembley Stadium, London",
-  },
-];
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/SpecialShows.css";
 
 const SpecialShows = () => {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch events from your backend API
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/events"); // Replace with your events endpoint
+        if (!response.ok) {
+          throw new Error("Failed to fetch events");
+        }
+        const data = await response.json();
+        setEvents(data); // Assuming your backend returns an array of events
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  // Handle loading and error states
+  if (loading) {
+    return (
+      <div className="container mt-5 text-center">
+        <p>Loading events...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mt-5 text-center">
+        <p className="text-danger">Error: {error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">This Month's Special Shows</h2>
       <div className="row">
-        {specialShowsData.map((show) => (
-          <div className="col-md-4 mb-4" key={show.id}>
+        {events.map((event) => (
+          <div className="col-md-4 mb-4" key={event._id}>
             <div className="card h-100">
-              <img src={show.image} className="card-img-top" alt={show.title} />
+              <img
+                src={`http://localhost:5000/${event.banner}`} // Assuming your `banner` field contains the file path
+                className="card-img-top"
+                alt={event.title}
+              />
               <div className="card-body">
-                <h5 className="card-title">{show.title}</h5>
+                <h5 className="card-title">{event.title}</h5>
                 <p className="card-text">
-                  <strong>Date:</strong> {show.date}
+                  <strong>Date:</strong> {new Date(event.date).toLocaleDateString()}
                   <br />
-                  <strong>Location:</strong> {show.location}
+                  <strong>Location:</strong> {event.location}
                 </p>
               </div>
               <div className="card-footer text-center">

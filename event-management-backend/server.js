@@ -1,6 +1,14 @@
 // filepath: /C:/Users/PATHAYAA/Desktop/Event Managment/Event---Management-/event-management-backend/server.js
 const mongoose = require('mongoose');
-const app = require('./app'); // Import the app
+const app = require('./app');
+const fs = require('fs');
+const path = require('path');
+
+const uploadDir = path.join(__dirname, 'uploads');
+
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
 
 const PORT = process.env.PORT || 5000;
 

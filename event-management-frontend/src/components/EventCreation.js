@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-// Optional CSS file for custom styles
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const EventCreation = () => {
   const [formData, setFormData] = useState({
@@ -13,21 +12,51 @@ const EventCreation = () => {
     price: "",
     maxAttendees: "",
     category: "",
-    banner: null,
+    banner: null, // File input
   });
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
     setFormData({
       ...formData,
-      [name]: files ? files[0] : value,
+      [name]: files ? files[0] : value, // Handle file inputs separately
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    // Implement form submission logic (API call, etc.)
+
+    // Create a FormData object to handle file and other fields
+    const formDataToSend = new FormData();
+    formDataToSend.append("title", formData.title);
+    formDataToSend.append("description", formData.description);
+    formDataToSend.append("date", formData.date);
+    formDataToSend.append("time", formData.time);
+    formDataToSend.append("location", formData.location);
+    formDataToSend.append("price", formData.price);
+    formDataToSend.append("maxAttendees", formData.maxAttendees);
+    formDataToSend.append("category", formData.category);
+    formDataToSend.append("banner", formData.banner); // Append the file
+
+    try {
+      const response = await fetch("http://localhost:5000/api/events", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("Event created successfully!");
+        console.log("Backend Response:", data);
+      } else {
+        const errorData = await response.json();
+        console.error("Error creating event:", errorData);
+        alert(`Error: ${errorData.message || "Failed to create event."}`);
+      }
+    } catch (err) {
+      console.error("Error during API call:", err);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
