@@ -73,7 +73,7 @@ const CategoryEvents = () => {
                 <Card className="h-100 shadow-sm">
                   <Card.Img
                     variant="top"
-                    src={event.image }
+                    src={`http://localhost:5000/${event.banner}`}
                     alt={event.title}
                   />
                   <Card.Body>

@@ -1,15 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/EventDetails.css"; // Optional additional CSS
+import axios from "axios";
 
 const EventDetails = () => {
+  const { id } = useParams(); // Get the event ID from the URL
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [isRSVP, setIsRSVP] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [reservation, setReservation] = useState({
     tickets: 1,
     contact: "",
   });
+
+  useEffect(() => {
+    // Fetch event details from the backend
+    const fetchEventDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/events/${id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch event details");
+        }
+        const data = await response.json();
+        setEvent(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchEventDetails();
+  }, [id]);
 
   const handleRSVP = () => {
     setIsRSVP(!isRSVP);
@@ -31,19 +57,35 @@ const EventDetails = () => {
     alert("Event link copied to clipboard!");
   };
 
+  if (loading) {
+    return (
+      <Container className="text-center my-5">
+        <p>Loading event details...</p>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container className="text-center my-5">
+        <p className="text-danger">Error: {error}</p>
+      </Container>
+    );
+  }
+
   return (
     <Container className="event-details mt-4">
       <Row>
         <Col md={6} className="mb-4">
-          <img src="https://via.placeholder.com/600x400" alt="Event" className="img-fluid rounded" />
+          <img src={`http://localhost:5000/${event.banner}`}  />
         </Col>
         <Col md={6}>
-          <h1>Event Title</h1>
-          <p><strong>Date:</strong> February 24, 2025</p>
-          <p><strong>Time:</strong> 7:00 PM</p>
-          <p><strong>Location:</strong> 123 Event Street, City, Country</p>
+          <h1>{event.title}</h1>
+          <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
+          <p><strong>Time:</strong> {event.time}</p>
+          <p><strong>Location:</strong> {event.location}</p>
           <p>
-            <strong>Details:</strong> Join us for an exciting event featuring networking opportunities, fun activities, and more!
+            <strong>Details:</strong> {event.description}
           </p>
           <div className="event-actions">
             <Button
@@ -65,7 +107,7 @@ const EventDetails = () => {
       <Row className="mt-5">
         <Col md={12}>
           <h2>Contact for More Details</h2>
-          <p>Email: info@example.com | Phone: +1-234-567-890</p>
+          <p>Email: {event.contactEmail} | Phone: {event.contactPhone}</p>
         </Col>
       </Row>
 
