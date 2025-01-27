@@ -20,6 +20,7 @@ import OrganizerRegister from './components/RegOrganizer';
 import AllEvents from './components/AllEvents';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import FAQSection from './components/FaqSection';
+import CategoryEvents from './components/CategoryEvents';
 const App = () => {
   return (
     <Router>
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/allevents" element={<AllEvents />} />
           <Route path="/privacy" element={<PrivacyPolicy/>}/>
           <Route path="/faq" element={<FAQSection />} />
+          <Route path="/category" element={<CategoryEvents />} />
 
         </Routes>
         <Footer/>

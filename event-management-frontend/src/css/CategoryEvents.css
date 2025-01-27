@@ -1,0 +1,19 @@
+.nav-pills .nav-link {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .nav-pills .nav-link.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .card img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .container h2 {
+    font-size: 2rem;
+    color: #343a40;
+  }
