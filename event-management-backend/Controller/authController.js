@@ -4,11 +4,6 @@ const User = require("../Model/userModel");
 const Organizer = require("../Model/organizerModel");
 
 const signIn = async (req, res) => {
-  // Log the request body for debugging
-  console.log(req.body);
-  console.log("JWT_SECRET:", process.env.JWT_SECRET);
-
-
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -16,10 +11,9 @@ const signIn = async (req, res) => {
   }
 
   try {
-    // Normalize email
     const normalizedEmail = email.trim().toLowerCase();
 
-    // Find user in both collections
+    // Check if the user exists in either User or Organizer model
     let user = await User.findOne({ email: normalizedEmail });
     let role = "user";
 
@@ -32,7 +26,7 @@ const signIn = async (req, res) => {
       return res.status(400).json({ message: "User or Organizer not found." });
     }
 
-    // Compare password
+    // Verify password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials." });
@@ -40,15 +34,24 @@ const signIn = async (req, res) => {
 
     // Generate JWT
     const token = jwt.sign(
-      { userId: user._id, role },
+      { userId: user._id, role, email: user.email, name: user.name },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ token, role });
+    // Send token and user details to the client
+    return res.status(200).json({
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role,
+      },
+    });
   } catch (error) {
     console.error("SignIn Error:", error);
-    res.status(500).json({ message: "Server error." });
+    return res.status(500).json({ message: "Server error." });
   }
 };
 

@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/Navbar.css';
 
 const Navbar = () => {
+  // State for user details
+  const [user, setUser] = useState(null);
+
+  // Simulate fetching user details from localStorage or an API
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('user'); // Replace with your token check
+    if (loggedInUser) {
+      setUser(JSON.parse(loggedInUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    // Clear user data on logout
+    localStorage.removeItem('user');
+    setUser(null);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
       <div className="container">
@@ -43,34 +60,62 @@ const Navbar = () => {
                 All Events
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="btn btn-outline-primary me-2 nav-special-btn" to="/signin">
-                Sign In
-              </Link>
-            </li>
-            {/* Dropdown for Register */}
-            <li className="nav-item dropdown">
-              <button
-                className="btn btn-primary dropdown-toggle nav-special-btn"
-                id="registerDropdown"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Register
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="registerDropdown">
-                <li>
-                  <Link className="dropdown-item" to="/signup">
-                    Register as User
+
+            {/* Conditionally render Sign In/Username */}
+            {!user ? (
+              <>
+                <li className="nav-item">
+                  <Link className="btn btn-outline-primary me-2 nav-special-btn" to="/signin">
+                    Sign In
                   </Link>
                 </li>
-                <li>
-                  <Link className="dropdown-item" to="/orgregister">
-                    Register as Organizer
-                  </Link>
+                <li className="nav-item dropdown">
+                  <button
+                    className="btn btn-primary dropdown-toggle nav-special-btn"
+                    id="registerDropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Register
+                  </button>
+                  <ul className="dropdown-menu" aria-labelledby="registerDropdown">
+                    <li>
+                      <Link className="dropdown-item" to="/signup">
+                        Register as User
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/orgregister">
+                        Register as Organizer
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
-              </ul>
-            </li>
+              </>
+            ) : (
+              <li className="nav-item dropdown">
+                <button
+                  className="btn btn-outline-primary dropdown-toggle nav-special-btn"
+                  id="userDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {user.username || "Account"}
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="userDropdown">
+                  <li>
+                    <Link className="dropdown-item" to="/profile">
+                      My Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            )}
           </ul>
         </div>
       </div>

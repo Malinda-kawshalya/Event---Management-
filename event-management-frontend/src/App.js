@@ -21,6 +21,8 @@ import AllEvents from "./components/AllEvents";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import FAQSection from "./components/FaqSection";
 import CategoryEvents from "./components/CategoryEvents";
+import authService from "./components/authService";
+import ProtectedRoute from "./components/ProtectedRoute";
 const App = () => {
   return (
     <Router>
@@ -49,6 +51,8 @@ const App = () => {
           <Route path="/faq" element={<FAQSection />} />
           <Route path="/category" element={<CategoryEvents />} />
           <Route path="/eventdetails/:eventId" element={<EventDetails />} />
+          <Route path="/authservice" element={<authService />} />
+          <Route path="/protected" element={<ProtectedRoute />} />
           
 
 
