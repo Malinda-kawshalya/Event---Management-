@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { useParams } from "react-router-dom";
-import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 
 import { useParams } from "react-router-dom"; // To get the event ID from the URL
 import { Container, Row, Col, Button, Form, Modal, Spinner } from "react-bootstrap";
@@ -12,13 +10,13 @@ import axios from "axios";
 
 const EventDetails = () => {
 
-  const { id } = useParams(); // Get the event ID from the URL
+  //const { id } = useParams(); // Get the event ID from the URL
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const { eventId } = useParams(); // Get the event ID from the route parameter
-  const [event, setEvent] = useState(null);
+  
 
   const [isRSVP, setIsRSVP] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -26,8 +24,7 @@ const EventDetails = () => {
     tickets: 1,
     contact: "",
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
 
   // Fetch event data from the backend
   useEffect(() => {
@@ -50,7 +47,7 @@ const EventDetails = () => {
     fetchEventDetails();
   }, [eventId]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     // Fetch event details from the backend
     const fetchEventDetails = async () => {
       try {
@@ -68,7 +65,7 @@ const EventDetails = () => {
     };
 
     fetchEventDetails();
-  }, [id]);
+  }, [id]);*/
 
   const handleRSVP = () => {
     setIsRSVP(!isRSVP);
