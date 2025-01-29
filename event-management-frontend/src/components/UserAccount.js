@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/UserAccount.css"; // Optional additional CSS
+import "../css/UserAccount.css";
 
 const UserAccount = () => {
   const [user, setUser] = useState(null);
@@ -9,14 +10,24 @@ const UserAccount = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch user data from the backend
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user"); 
+        // Get JWT token from localStorage
+        const token = localStorage.getItem('jwt');
+        if (!token) {
+          throw new Error('No authentication token found');
+        }
+
+        const response = await axios.get("http://localhost:5000/api/users/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
         setUser(response.data);
         setLoading(false);
       } catch (err) {
-        setError(err.message);
+        setError(err.response?.data?.message || err.message);
         setLoading(false);
       }
     };
@@ -26,57 +37,65 @@ const UserAccount = () => {
 
   if (loading) {
     return (
-      <div className="container mt-5 text-center">
-        <p>Loading user data...</p>
-      </div>
+      <Container className="text-center my-5">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
     );
   }
 
   if (error) {
     return (
-      <div className="container mt-5 text-center">
+      <Container className="text-center my-5">
         <p className="text-danger">Error: {error}</p>
-      </div>
+      </Container>
+    );
+  }
+
+  if (!user) {
+    return (
+      <Container className="text-center my-5">
+        <p>No user data found</p>
+      </Container>
     );
   }
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        {/* User Profile Section */}
-        <div className="col-md-4">
-          <div className="card shadow p-4 mb-4">
-            <h3 className="text-center">User Profile</h3>
-            <hr />
-            <p><strong>Name:</strong> {user.name}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Phone:</strong> {user.phone}</p>
+    <Container className="my-5">
+      <Row>
+        <Col md={4}>
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h3 className="card-title">Profile Information</h3>
+              <p><strong>Name:</strong> {user.name}</p>
+              <p><strong>Email:</strong> {user.email}</p>
+              <p><strong>Role:</strong> {user.role}</p>
+            </div>
           </div>
-        </div>
-
-        {/* Tickets Section */}
-        <div className="col-md-8">
-          <div className="card shadow p-4">
-            <h3 className="text-center">My Tickets</h3>
-            <hr />
-            {user.tickets.length > 0 ? (
-              <ul className="list-group">
-                {user.tickets.map((ticket) => (
-                  <li key={ticket.id} className="list-group-item">
-                    <p><strong>Event:</strong> {ticket.event}</p>
-                    <p><strong>Date:</strong> {new Date(ticket.date).toLocaleDateString()}</p>
-                    <p><strong>Time:</strong> {ticket.time}</p>
-                    <p><strong>Price:</strong> {ticket.price}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No tickets found.</p>
-            )}
+        </Col>
+        <Col md={8}>
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h3 className="card-title">My Bookings</h3>
+              {user.bookings && user.bookings.length > 0 ? (
+                <ul className="list-unstyled">
+                  {user.bookings.map((booking) => (
+                    <li key={booking._id} className="mb-3">
+                      <h5>{booking.eventTitle}</h5>
+                      <p>Date: {new Date(booking.date).toLocaleDateString()}</p>
+                      <p>Tickets: {booking.tickets}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No bookings found</p>
+              )}
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
