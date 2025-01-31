@@ -36,27 +36,15 @@ const AllEvents = () => {
       .map((event) => (
         <Col md={4} className="mb-4" key={event._id}>
           <Card>
-            {event.banner ? (
-              <Card.Img
-                variant="top"
-                src={
-                  typeof event.banner === "string"
-                    ? event.banner // Use URL if available
-                    : URL.createObjectURL(event.banner) // Use createObjectURL for file objects
-                }
-                alt={event.title}
-              />
-            ) : (
-                <Card.Img
-                variant="top"
-                src={`http://localhost:5000/${event.banner}`}
-
-                alt={event.title || "Default banner"}
-
-                alt={event.title}
-
-              />
-            )}
+            <Card.Img
+              variant="top"
+              src={event.banner ? `http://localhost:5000/uploads/${event.banner}` : "/default-banner.jpg"} // Ensure correct path
+              alt={event.title || "Event banner"}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/default-banner.jpg"; // Fallback image
+              }}
+            />
             <Card.Body>
               <Card.Title>{event.title}</Card.Title>
               <Card.Text>{event.description}</Card.Text>

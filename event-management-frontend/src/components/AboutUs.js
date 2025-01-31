@@ -13,17 +13,17 @@ const AboutUs = () => {
                 <h2 className="text-center mb-4">Our Web Developers.</h2>
                 <div className="col-md-4 text-center">
                     <img src="path_to_image1.jpg" className="img-fluid rounded-circle mb-3" alt="Developer 1" />
-                    <h5>Developer 1</h5>
+                    <h5>Malinda Kawshalya</h5>
                     <p>Short description about Developer 1.</p>
                 </div>
                 <div className="col-md-4 text-center">
                     <img src="path_to_image2.jpg" className="img-fluid rounded-circle mb-3" alt="Developer 2" />
-                    <h5>Developer 2</h5>
+                    <h5>Ravindu Pahan</h5>
                     <p>Short description about Developer 2.</p>
                 </div>
                 <div className="col-md-4 text-center">
                     <img src="path_to_image3.jpg" className="img-fluid rounded-circle mb-3" alt="Developer 3" />
-                    <h5>Developer 3</h5>
+                    <h5>Thilina Sandaruwan</h5>
                     <p>Short description about Developer 3.</p>
                 </div>
             </div>

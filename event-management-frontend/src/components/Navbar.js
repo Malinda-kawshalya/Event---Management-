@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/Navbar.css';
 
 const Navbar = () => {
-  // State for user details
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  // Simulate fetching user details from localStorage or an API
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('user'); // Replace with your token check
-    if (loggedInUser) {
-      setUser(JSON.parse(loggedInUser));
+    try {
+      const userString = localStorage.getItem('user');
+      if (userString) {
+        const userData = JSON.parse(userString);
+        setUser(userData);
+      }
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      localStorage.removeItem('user'); // Clear invalid data
     }
   }, []);
 
   const handleLogout = () => {
-    // Clear user data on logout
-    localStorage.removeItem('user');
-    setUser(null);
+    try {
+      localStorage.removeItem('user');
+      localStorage.removeItem('jwt');
+      setUser(null);
+      navigate('/');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
   };
 
   return (
@@ -61,7 +71,6 @@ const Navbar = () => {
               </Link>
             </li>
 
-            {/* Conditionally render Sign In/Username */}
             {!user ? (
               <>
                 <li className="nav-item">
@@ -72,6 +81,7 @@ const Navbar = () => {
                 <li className="nav-item dropdown">
                   <button
                     className="btn btn-primary dropdown-toggle nav-special-btn"
+                    type="button"
                     id="registerDropdown"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -96,11 +106,12 @@ const Navbar = () => {
               <li className="nav-item dropdown">
                 <button
                   className="btn btn-outline-primary dropdown-toggle nav-special-btn"
+                  type="button"
                   id="userDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {user.username || "Account"}
+                  {user.name || user.username || "Account"}
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="userDropdown">
                   <li>
