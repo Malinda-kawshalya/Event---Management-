@@ -13,17 +13,19 @@ const signIn = async (req, res) => {
   try {
     const normalizedEmail = email.trim().toLowerCase();
 
-    // Check if the user exists in either User or Organizer model
+    // First check User collection
     let user = await User.findOne({ email: normalizedEmail });
-    let role = "user";
+    let isOrganizer = false;
 
+    // If not found in User, check Organizer collection
     if (!user) {
       user = await Organizer.findOne({ email: normalizedEmail });
-      role = "organizer";
+      isOrganizer = true;
     }
 
+    // If user not found in either collection
     if (!user) {
-      return res.status(400).json({ message: "User or Organizer not found." });
+      return res.status(400).json({ message: "Invalid credentials." });
     }
 
     // Verify password
@@ -32,26 +34,46 @@ const signIn = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials." });
     }
 
+    // Create token payload
+    const tokenPayload = {
+      userId: user._id,
+      email: user.email,
+      name: user.name,
+      role: isOrganizer ? 'organizer' : 'user',
+      modelType: isOrganizer ? 'Organizer' : 'User'
+    };
+
     // Generate JWT
     const token = jwt.sign(
-      { userId: user._id, role, email: user.email, name: user.name },
+      tokenPayload,
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "24h" }
     );
 
-    // Send token and user details to the client
+    // Prepare user data for response
+    const userData = {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: isOrganizer ? 'organizer' : 'user',
+      ...(isOrganizer && { companyName: user.companyName })
+    };
+
+    // Send response
     return res.status(200).json({
+      success: true,
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role,
-      },
+      user: userData,
+      message: "Login successful"
     });
+
   } catch (error) {
     console.error("SignIn Error:", error);
-    return res.status(500).json({ message: "Server error." });
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred during sign in.",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };
 

@@ -115,9 +115,15 @@ const Navbar = () => {
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="userDropdown">
                   <li>
-                    <Link className="dropdown-item" to="/useraccount">
-                      My Profile
-                    </Link>
+                    {user.role === 'organizer' ? (
+                      <Link className="dropdown-item" to="/orgDashboard">
+                        Organizer Dashboard
+                      </Link>
+                    ) : (
+                      <Link className="dropdown-item" to="/useraccount">
+                        My Profile
+                      </Link>
+                    )}
                   </li>
                   <li>
                     <button className="dropdown-item" onClick={handleLogout}>
