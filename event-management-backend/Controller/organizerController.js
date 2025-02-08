@@ -15,8 +15,11 @@ const getOrganizers = async (req, res) => {
 // Get a single organizer
 const getOrganizer = async (req, res) => {
   try {
-    const organizer = await Organizer.findById(req.params.id).select("-password");
-    if (!organizer) return res.status(404).json({ message: "Organizer not found" });
+    const organizer = await Organizer.findById(req.params.id).select(
+      "-password"
+    );
+    if (!organizer)
+      return res.status(404).json({ message: "Organizer not found" });
     res.status(200).json(organizer);
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
@@ -25,16 +28,26 @@ const getOrganizer = async (req, res) => {
 
 // Create a new organizer
 const createOrganizer = async (req, res) => {
-  const { name, email, phone, password, companyName, companyAddress } = req.body;
+  const { name, email, phone, password, companyName, companyAddress } =
+    req.body;
 
-  if (!name || !email || !phone || !password || !companyName || !companyAddress) {
+  if (
+    !name ||
+    !email ||
+    !phone ||
+    !password ||
+    !companyName ||
+    !companyAddress
+  ) {
     return res.status(400).json({ message: "All fields are required." });
   }
 
   try {
     const existingOrganizer = await Organizer.findOne({ email });
     if (existingOrganizer) {
-      return res.status(400).json({ message: "Organizer already exists with this email." });
+      return res
+        .status(400)
+        .json({ message: "Organizer already exists with this email." });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -48,7 +61,9 @@ const createOrganizer = async (req, res) => {
     });
 
     await organizer.save();
-    res.status(201).json({ message: "Organizer registered successfully", organizer });
+    res
+      .status(201)
+      .json({ message: "Organizer registered successfully", organizer });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
@@ -57,11 +72,13 @@ const createOrganizer = async (req, res) => {
 // Update an organizer
 const updateOrganizer = async (req, res) => {
   const { id } = req.params;
-  const { name, email, phone, password, companyName, companyAddress } = req.body;
+  const { name, email, phone, password, companyName, companyAddress } =
+    req.body;
 
   try {
     const organizer = await Organizer.findById(id);
-    if (!organizer) return res.status(404).json({ message: "Organizer not found" });
+    if (!organizer)
+      return res.status(404).json({ message: "Organizer not found" });
 
     if (name) organizer.name = name;
     if (email) organizer.email = email;
@@ -75,7 +92,9 @@ const updateOrganizer = async (req, res) => {
     }
 
     await organizer.save();
-    res.status(200).json({ message: "Organizer updated successfully", organizer });
+    res
+      .status(200)
+      .json({ message: "Organizer updated successfully", organizer });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
@@ -87,7 +106,8 @@ const deleteOrganizer = async (req, res) => {
 
   try {
     const organizer = await Organizer.findByIdAndDelete(id);
-    if (!organizer) return res.status(404).json({ message: "Organizer not found" });
+    if (!organizer)
+      return res.status(404).json({ message: "Organizer not found" });
     res.status(200).json({ message: "Organizer deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
@@ -114,7 +134,8 @@ const getOrganizerStats = async (req, res) => {
       (acc, event) => ({
         totalEvents: acc.totalEvents + 1,
         ticketsSold: acc.ticketsSold + (event.ticketsSold || 0),
-        totalRevenue: acc.totalRevenue + (event.ticketsSold || 0) * event.ticketPrice,
+        totalRevenue:
+          acc.totalRevenue + (event.ticketsSold || 0) * event.ticketPrice,
       }),
       {
         totalEvents: 0,
@@ -138,7 +159,9 @@ const createEvent = async (req, res) => {
     const savedEvent = await event.save();
     res.status(201).json(savedEvent);
   } catch (error) {
-    res.status(400).json({ message: "Error creating event", error: error.message });
+    res
+      .status(400)
+      .json({ message: "Error creating event", error: error.message });
   }
 };
 
@@ -155,7 +178,9 @@ const updateEvent = async (req, res) => {
     }
     res.status(200).json(event);
   } catch (error) {
-    res.status(400).json({ message: "Error updating event", error: error.message });
+    res
+      .status(400)
+      .json({ message: "Error updating event", error: error.message });
   }
 };
 
@@ -171,7 +196,9 @@ const deleteEvent = async (req, res) => {
     }
     res.status(200).json({ message: "Event deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Error deleting event", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error deleting event", error: error.message });
   }
 };
 
