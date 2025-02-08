@@ -28,7 +28,7 @@ const OrgDashboard = () => {
         const user = JSON.parse(userString);
 
         if (!user || user.role !== 'organizer') {
-          navigate('/');
+          navigate('/orgdashboard');
           return;
         }
 
