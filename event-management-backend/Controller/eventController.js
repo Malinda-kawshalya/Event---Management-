@@ -64,6 +64,33 @@ const getevent= async (req, res) => {
       res.status(500).json({ message: 'Server error', error: err.message });
     }
   };
-  
 
-module.exports = { createEvent, getAllEvents, upload , getevent };
+  
+const searchEvents = async (req, res) => {
+    try {
+        const query = req.query.query; // Get the search term from the query string
+
+        // Search for events matching the query in title, description, location, or category
+        const events = await Event.find({
+            $or: [
+                { title: { $regex: query, $options: 'i' } }, // Case-insensitive search
+                { description: { $regex: query, $options: 'i' } },
+                { location: { $regex: query, $options: 'i' } },
+                { category: { $regex: query, $options: 'i' } },
+            ],
+        });
+
+        // If no events are found, return a 404 response
+        if (events.length === 0) {
+            return res.status(404).json({ message: 'No events found matching your search' });
+        }
+
+        // Return the matching events
+        res.status(200).json({ message: 'Events found', events });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
+module.exports = { createEvent, getAllEvents, upload , getevent, searchEvents };
