@@ -78,7 +78,7 @@ const AllEvents = () => {
                 <Card className="h-100 shadow-sm">
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:5000/uploads/${event.banner}`}
+                    src={`http://localhost:5000/${event.banner}`}
                     alt={event.title}
                     onError={(e) => {
                       e.target.onerror = null;
