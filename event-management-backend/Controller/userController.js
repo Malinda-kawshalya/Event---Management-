@@ -78,3 +78,18 @@ exports.deleteUser = async (req, res) => {
       .json({ message: "Error deleting user", error: error.message });
   }
 };
+
+// userController.js
+exports.getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id); // req.params.id is the user ID
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
+
