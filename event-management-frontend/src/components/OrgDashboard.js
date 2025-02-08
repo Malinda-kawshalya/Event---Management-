@@ -5,6 +5,7 @@ import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
 
 const OrgDashboard = () => {
   const [events, setEvents] = useState([]);
+  const [organizerName, setOrganizerName] = useState('');
   const [stats, setStats] = useState({
     totalEvents: 0,
     ticketsSold: 0,
@@ -15,7 +16,7 @@ const OrgDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchOrganizerEvents = async () => {
+    const fetchOrganizerData = async () => {
       try {
         const userString = localStorage.getItem('user');
         const token = localStorage.getItem('jwt');
@@ -26,6 +27,7 @@ const OrgDashboard = () => {
         }
 
         const user = JSON.parse(userString);
+        setOrganizerName(user.name);
 
         if (!user || user.role !== 'organizer') {
           navigate('/');
@@ -45,7 +47,6 @@ const OrgDashboard = () => {
           setEvents(response.data);
           calculateStats(response.data);
         }
-
       } catch (err) {
         console.error('Error fetching events:', err);
         setError(err.response?.data?.message || 'Failed to load events. Please try again.');
@@ -70,7 +71,7 @@ const OrgDashboard = () => {
       setStats(stats);
     };
 
-    fetchOrganizerEvents();
+    fetchOrganizerData();
   }, [navigate]);
 
   if (loading) {
@@ -95,7 +96,7 @@ const OrgDashboard = () => {
     <Container className="dashboard my-5">
       <Row className="mb-4 align-items-center">
         <Col>
-          <h1 className="text-primary">Organizer Dashboard</h1>
+          <h1 className="text-primary">Hello, {organizerName}</h1>
         </Col>
         <Col xs="auto">
           <Link to="/eventcreation" className="btn btn-success">
@@ -173,15 +174,6 @@ const OrgDashboard = () => {
           </Col>
         )}
       </Row>
-
-      <div className="mt-4 text-center">
-        <Link to="/eventcreation" className="btn btn-success me-3">
-          Create New Event
-        </Link>
-        <Link to="/manageevents" className="btn btn-secondary">
-          Manage Events
-        </Link>
-      </div>
     </Container>
   );
 };
