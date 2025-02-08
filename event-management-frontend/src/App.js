@@ -21,8 +21,8 @@ import AllEvents from "./components/AllEvents";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import FAQSection from "./components/FaqSection";
 import CategoryEvents from "./components/CategoryEvents";
-import authService from "./components/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
+
 const App = () => {
   return (
     <Router>
@@ -37,25 +37,20 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route path="/eventdetails" element={<EventDetails />} />
-          <Route path="/eventcreation" element={<EventCreation />} />
-          <Route path="/admindashboard" element={<AdminDashboard />} />
-          <Route path="/myevents" element={<Myevents />} />
-          <Route path="/manageevents" element={<ManageEventsPage />} />
-          <Route path="/orgdashboard" element={<OrgDashboard />} />
-          <Route path="/organalytics" element={<Analytics />} />
-          <Route path="/useraccount" element={<UserAccount />} />
-          <Route path="/orgregister" element={<OrganizerRegister />} />
+          <Route path="/eventdetails" element={<ProtectedRoute component={ EventDetails} />} />
+          <Route path="/eventcreation" element={<ProtectedRoute component={EventCreation} />} />
+          <Route path="/admindashboard" element={<ProtectedRoute component={AdminDashboard} />} />
+          <Route path="/myevents" element={<ProtectedRoute component={Myevents} />} />
+          <Route path="/manageevents" element={<ProtectedRoute component={ManageEventsPage} />} />
+          <Route path="/orgdashboard" element={<ProtectedRoute component={OrgDashboard} />} />
+          <Route path="/organalytics" element={<ProtectedRoute component={Analytics} />} />
+          <Route path="/useraccount" element={<ProtectedRoute component={UserAccount} />} />
+          <Route path="/orgregister" element={<ProtectedRoute component={OrganizerRegister} />} />
           <Route path="/allevents" element={<AllEvents />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/faq" element={<FAQSection />} />
           <Route path="/category" element={<CategoryEvents />} />
-          <Route path="/eventdetails/:eventId" element={<EventDetails />} />
-          <Route path="/authservice" element={<authService />} />
-          <Route path="/protected" element={<ProtectedRoute />} />
-          
-
-
+          <Route path="/eventdetails/:eventId" element={<ProtectedRoute component = { EventDetails} />} />
         </Routes>
         <Footer />
       </div>

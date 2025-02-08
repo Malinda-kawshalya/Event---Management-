@@ -4,7 +4,7 @@ import { authService } from '../components/authService';
 
 const ProtectedRoute = ({ children, roles }) => {
   if (!authService.isAuthenticated()) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/signin" />;
   }
 
   const user = JSON.parse(localStorage.getItem('user'));

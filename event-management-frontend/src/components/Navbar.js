@@ -1,30 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/Navbar.css';
+//import '../css/Navbar.css';
+import { UserContext } from './contexts/UserContext';
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    try {
-      const userString = localStorage.getItem('user');
-      if (userString) {
-        const userData = JSON.parse(userString);
-        setUser(userData);
-      }
-    } catch (error) {
-      console.error('Error parsing user data:', error);
-      localStorage.removeItem('user'); // Clear invalid data
-    }
-  }, []);
 
   const handleLogout = () => {
     try {
-      localStorage.removeItem('user');
-      localStorage.removeItem('jwt');
-      setUser(null);
+      logout();
       navigate('/');
     } catch (error) {
       console.error('Error during logout:', error);
