@@ -1,5 +1,6 @@
 const Organizer = require("../Model/organizerModel");
 const bcrypt = require("bcryptjs");
+const Event = require("../Model/eventModel"); // Ensure the correct path
 
 // Get all organizers
 const getOrganizers = async (req, res) => {

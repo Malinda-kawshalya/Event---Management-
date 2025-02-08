@@ -28,12 +28,12 @@ const OrgDashboard = () => {
         const user = JSON.parse(userString);
 
         if (!user || user.role !== 'organizer') {
-          navigate('/orgdashboard');
+          navigate('/');
           return;
         }
 
         const response = await axios.get(
-          `http://localhost:5000/api/organizers/${user.id}/events`,
+          `http://localhost:5000/api/organizers/${user._id}/events`,
           {
             headers: { 
               Authorization: `Bearer ${token}`
