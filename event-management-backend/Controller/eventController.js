@@ -1,4 +1,3 @@
-// filepath: /C:/Users/PATHAYAA/Desktop/Event Managment/Event---Management-/event-management-backend/controllers/eventController.js
 const Event = require('../Model/eventModel');
 const multer = require('multer');
 const path = require('path');
@@ -53,19 +52,22 @@ const getAllEvents = async (req, res) => {
     }
 };
 
-const getevent= async (req, res) => {
+const getevent = async (req, res) => {
     try {
-      const event = await Event.findById(req.params.eventId);
-      if (!event) {
-        return res.status(404).json({ message: 'Event not found' });
-      }
-      res.json(event);
+        console.log(`Fetching event with ID: ${req.params.eventId}`);
+        const event = await Event.findById(req.params.eventId);
+        if (!event) {
+            console.log('Event not found');
+            return res.status(404).json({ message: 'Event not found' });
+        }
+        console.log('Event found:', event);
+        res.json(event);
     } catch (err) {
-      res.status(500).json({ message: 'Server error', error: err.message });
+        console.error('Error fetching event:', err);
+        res.status(500).json({ message: 'Server error', error: err.message });
     }
-  };
+};
 
-  
 const searchEvents = async (req, res) => {
     try {
         const query = req.query.query; // Get the search term from the query string
@@ -93,4 +95,4 @@ const searchEvents = async (req, res) => {
     }
 };
 
-module.exports = { createEvent, getAllEvents, upload , getevent, searchEvents };
+module.exports = { createEvent, getAllEvents, upload, getevent, searchEvents };

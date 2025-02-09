@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Button, Form, Modal, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/EventDetails.css";
+//import "../css/EventDetails.css";
 
 const EventDetails = () => {
   const { id } = useParams(); // Get the event ID from the URL
@@ -19,13 +19,17 @@ const EventDetails = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/events/${id}`);
+        console.log(`Fetching event details from: http://localhost:5000/api/events/${event._id}`);
+        const response = await fetch(`http://localhost:5000/api/events/${event._id}`);
+        console.log("Response status:", response.status);
         if (!response.ok) {
           throw new Error("Failed to fetch event details");
         }
         const data = await response.json();
+        console.log("Event details fetched successfully:", data);
         setEvent(data);
       } catch (err) {
+        console.error("Error fetching event details:", err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -97,9 +101,55 @@ const EventDetails = () => {
             }}
           />
         </Col>
-        {/* Rest of the component remains the same */}
-        ...
+        <Col md={6}>
+          <h2>{event.title}</h2>
+          <p>{event.description}</p>
+          <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
+          <p><strong>Time:</strong> {event.time}</p>
+          <p><strong>Location:</strong> {event.location}</p>
+          <p><strong>Price:</strong> ${event.price}</p>
+          <p><strong>Category:</strong> {event.category}</p>
+          <Button variant="primary" onClick={handleRSVP}>
+            {isRSVP ? "Cancel RSVP" : "RSVP"}
+          </Button>
+          <Button variant="secondary" onClick={handleShare} className="ms-2">
+            Share
+          </Button>
+        </Col>
       </Row>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reserve Tickets</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmitReservation}>
+            <Form.Group controlId="formTickets">
+              <Form.Label>Number of Tickets</Form.Label>
+              <Form.Control
+                type="number"
+                name="tickets"
+                value={reservation.tickets}
+                onChange={handleInputChange}
+                min="1"
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formContact" className="mt-3">
+              <Form.Label>Contact Information</Form.Label>
+              <Form.Control
+                type="text"
+                name="contact"
+                value={reservation.contact}
+                onChange={handleInputChange}
+                required
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit" className="mt-3">
+              Reserve
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 };
