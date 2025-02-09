@@ -6,6 +6,7 @@ const Organizer = require("../Model/organizerModel");
 const signIn = async (req, res) => {
   const { email, password } = req.body;
 
+  // Input validation
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required." });
   }
@@ -13,7 +14,7 @@ const signIn = async (req, res) => {
   try {
     const normalizedEmail = email.trim().toLowerCase();
 
-    // First check User collection
+    // Check User collection
     let user = await User.findOne({ email: normalizedEmail });
     let isOrganizer = false;
 
@@ -44,10 +45,11 @@ const signIn = async (req, res) => {
     };
 
     // Generate JWT
+    const tokenExpiry = process.env.JWT_EXPIRY || "24h"; // Configurable expiry
     const token = jwt.sign(
       tokenPayload,
       process.env.JWT_SECRET,
-      { expiresIn: "24h" }
+      { expiresIn: tokenExpiry }
     );
 
     // Prepare user data for response

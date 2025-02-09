@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "./contexts/UserContext"; // Import UserContext
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/SignIn.css";
 
@@ -8,17 +9,14 @@ const SignIn = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // Password visibility toggle
   const navigate = useNavigate();
+  const { login } = useContext(UserContext); // Use UserContext for login
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     if (error) setError("");
-  };
-
-  const storeToken = (token) => {
-    localStorage.setItem("jwt", token);
-    localStorage.setItem("tokenTimestamp", Date.now().toString());
   };
 
   const handleSubmit = async (e) => {
@@ -33,9 +31,8 @@ const SignIn = () => {
       if (response.status === 200) {
         const { token, user } = response.data;
 
-        // Store token and user data
-        storeToken(token);
-        localStorage.setItem("user", JSON.stringify(user));
+        // Use UserContext to handle login
+        login(user, token);
 
         setFormData({ email: "", password: "" });
 
@@ -78,25 +75,38 @@ const SignIn = () => {
               onChange={handleChange}
               placeholder="Enter your email"
               required
+              aria-describedby="emailHelp"
             />
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              required
-            />
+            <div className="input-group">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="form-control"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                required
+                aria-describedby="passwordHelp"
+              />
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? "👁️‍🗨️" : "👁️"}
+              </button>
+            </div>
           </div>
           <button
             type="submit"
             className="btn btn-primary w-100 rounded-pill"
             disabled={loading}
+            aria-busy={loading}
           >
             {loading ? <span className="spinner-border spinner-border-sm" role="status" /> : "Sign In"}
           </button>
