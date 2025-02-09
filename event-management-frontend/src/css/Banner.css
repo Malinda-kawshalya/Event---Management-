@@ -1,3 +1,4 @@
+
 .search-result-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
@@ -47,4 +48,72 @@
 
 .search-results-container {
   padding: 20px 0;
+}
+
+.hero-section {
+  background-image: url('/src/images/banner.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 1; /* Ensure the banner is below the navbar */
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Override Bootstrap's btn-warning class */
+.btn-warning {
+  background-color: #ef6bc8; /* Change to your desired color */
+  border-color: #e451bf; /* Match border color */
+  color: white; /* Change text color to white */
+}
+
+.btn-warning:hover {
+  background-color: #d643ad; /* Darker shade for hover */
+  border-color: #d238a9; /* Match border color */
+  color: white; /* Keep text color white on hover */
+
 }

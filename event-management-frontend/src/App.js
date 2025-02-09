@@ -23,6 +23,8 @@ import FAQSection from "./components/FaqSection";
 import CategoryEvents from "./components/CategoryEvents";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+
+
 const App = () => {
   return (
     <Router>

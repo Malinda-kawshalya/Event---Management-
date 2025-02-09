@@ -1,60 +1,74 @@
-/* Base styles for special buttons 
-.nav-special-btn {
+/* Navbar.css */
+.navbar {
+  position: absolute; /* Ensure the navbar overlays the banner */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030; /* Ensure it stays above other content */
+  background-color: transparent !important; /* Make the navbar transparent */
+  padding: 20px 0; /* Add some padding for better spacing */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color */
+}
+
+/* Add a solid background when scrolling */
+.navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.9) !important; /* Semi-transparent white */
+  position: fixed; /* Fix the navbar at the top when scrolling */
+}
+
+/* Style for the brand/logo */
+.navbar-brand {
+  font-size: 1.5rem;
   font-weight: bold;
-  padding: 8px 16px;
-  border-radius: 25px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: black !important; /* Change brand text color to black */
 }
 
-/* Customize "Sign In" button 
-.nav-special-btn.btn-outline-primary {
-  border: 2px solid #007bff;
-  color: #007bff;
+/* Style for nav links */
+.nav-link {
+  color: black !important; /* Change nav links color to black */
+  margin: 0 10px;
+  font-weight: 500;
 }
 
-.nav-special-btn.btn-outline-primary:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-/* Customize "Register" button 
-.nav-special-btn.btn-primary {
-  background-color: #28a745;
-  border: none;
-  color: white;
-}
-
-.nav-special-btn.btn-primary:hover {
-  background-color: #218838;
-  color: white;
-}*/
-
-/* Style for Dropdown Button 
-.nav-special-btn {
-  border-radius: 5px;
-}
-
-/* Dropdown Menu Styling 
+/* Style for dropdown items */
 .dropdown-menu {
-  background-color: #F9F7F7;
-  border-radius: 5px;
-  border: 1px solid #DBE2EF;
-  padding: 0.5rem 0;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  border: none;
 }
 
-/* Dropdown Items */
 .dropdown-item {
-  color: #112D4E;
-  padding: 8px 16px;
-  transition: background-color 0.3s ease;
+  color: black !important; /* Change dropdown item text color to black */
 }
 
 .dropdown-item:hover {
-  background-color: #DBE2EF;
-  color: #112D4E;
+  background-color: rgba(0, 0, 0, 0.1); /* Light hover effect */
 }
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1030; /* Ensures it stays above other content */
+
+/* Style for buttons */
+.nav-special-btn {
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-weight: 500;
+}
+
+/* Customize "Sign In" button */
+.nav-special-btn.btn-outline-primary {
+  border: 2px solid black; /* Change border color to black */
+  color: black; /* Change text color to black */
+}
+
+.nav-special-btn.btn-outline-primary:hover {
+  background-color: black; /* Change background color to black on hover */
+  color: white; /* Change text color to white on hover */
+}
+
+/* Customize "Register" button */
+.nav-special-btn.btn-primary {
+  background-color: #a321e9; /* Keep the green color for the register button */
+  border: none;
+  color: white; /* Keep the text color white for the register button */
+}
+
+.nav-special-btn.btn-primary:hover {
+  background-color: #b551eb; /* Darker green on hover */
 }

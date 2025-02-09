@@ -40,3 +40,17 @@
     background-color: #0a1e3a;
     transition: background-color 0.3s ease;
   }
+  .cta-section {
+    margin: 50px 0;
+    padding: 50px 0;
+  }
+  
+  .cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }

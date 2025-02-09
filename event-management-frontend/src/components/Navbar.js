@@ -1,16 +1,44 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import '../css/Navbar.css';
-import { UserContext } from './contexts/UserContext';
+import '../css/Navbar.css';
 
 const Navbar = () => {
-  const { user, logout } = useContext(UserContext);
+  const [user, setUser] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch user data from localStorage
+    try {
+      const userString = localStorage.getItem('user');
+      if (userString) {
+        const userData = JSON.parse(userString);
+        setUser(userData);
+      }
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      localStorage.removeItem('user'); // Clear invalid data
+    }
+
+    // Add scroll event listener
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleLogout = () => {
     try {
-      logout();
+      localStorage.removeItem('user');
+      localStorage.removeItem('jwt');
+      setUser(null);
       navigate('/');
     } catch (error) {
       console.error('Error during logout:', error);
@@ -18,7 +46,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <nav className={`navbar navbar-expand-lg ${scrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <Link className="navbar-brand" to="/">
           Event Guru
@@ -101,15 +129,9 @@ const Navbar = () => {
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="userDropdown">
                   <li>
-                    {user.role === 'organizer' ? (
-                      <Link className="dropdown-item" to="/orgDashboard">
-                        Organizer Dashboard
-                      </Link>
-                    ) : (
-                      <Link className="dropdown-item" to="/useraccount">
-                        My Profile
-                      </Link>
-                    )}
+                    <Link className="dropdown-item" to="/useraccount">
+                      My Profile
+                    </Link>
                   </li>
                   <li>
                     <button className="dropdown-item" onClick={handleLogout}>
