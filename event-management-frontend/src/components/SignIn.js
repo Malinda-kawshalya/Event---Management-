@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./contexts/UserContext"; // Import UserContext
+import { authService } from "./authService"; // Import authService
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/SignIn.css";
 
@@ -31,7 +32,8 @@ const SignIn = () => {
       if (response.status === 200) {
         const { token, user } = response.data;
 
-        // Use UserContext to handle login
+        // Use authService to handle login
+        authService.setToken(token, user);
         login(user, token);
 
         setFormData({ email: "", password: "" });

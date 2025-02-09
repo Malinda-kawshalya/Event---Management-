@@ -21,7 +21,7 @@ export const authService = {
       if (!token || !timestamp) return null;
 
       const tokenAge = Date.now() - parseInt(timestamp);
-      const tokenExpiryTime = 3600000; // 1 hour (make this configurable)
+      const tokenExpiryTime = 3600000; // 1 hour
 
       if (tokenAge > tokenExpiryTime) {
         authService.clearToken();

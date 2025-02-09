@@ -5,10 +5,9 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // Initialize user state from localStorage
   useEffect(() => {
     const userString = localStorage.getItem('user');
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('token');
 
     if (userString && token) {
       try {
@@ -16,23 +15,21 @@ export const UserProvider = ({ children }) => {
         setUser(userData);
       } catch (error) {
         console.error('Error parsing user data:', error);
-        logout(); // Clear invalid data
+        logout();
       }
     }
   }, []);
 
-  // Login function
   const login = (userData, token) => {
     localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('jwt', token); // Store the token
+    localStorage.setItem('token', token);
     setUser(userData);
   };
 
-  // Logout function
   const logout = () => {
     localStorage.removeItem('user');
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('tokenTimestamp'); // Clear additional data
+    localStorage.removeItem('token');
+    localStorage.removeItem('tokenTimestamp');
     setUser(null);
   };
 
