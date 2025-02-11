@@ -32,6 +32,7 @@ const App = () => {
         {/* Navbar displayed on all pages */}
         <div className="color-drops">
         
+        
 
         
         <Navbar />

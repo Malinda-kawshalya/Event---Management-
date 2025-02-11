@@ -1,11 +1,12 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import '../css/FaqSection.css'; // Importing custom CSS
 
 const FAQSection = () => {
   return (
-    <div className="container my-5">
-      <h2 className="text-center mb-4">Frequently Asked Questions</h2>
+    <div className="faq-container">
+      <h2 className="faq-title">Frequently Asked Questions</h2>
       <div className="accordion" id="faqAccordion">
         <div className="accordion-item">
           <h2 className="accordion-header" id="headingOne">
@@ -17,6 +18,7 @@ const FAQSection = () => {
               aria-expanded="true"
               aria-controls="collapseOne"
             >
+              <i className="bi bi-question-circle-fill me-2"></i>
               What is the purpose of this event management system?
             </button>
           </h2>
@@ -44,6 +46,7 @@ const FAQSection = () => {
               aria-expanded="false"
               aria-controls="collapseTwo"
             >
+              <i className="bi bi-pencil-square me-2"></i>
               How can I register for an event?
             </button>
           </h2>
@@ -55,7 +58,7 @@ const FAQSection = () => {
           >
             <div className="accordion-body">
               To register for an event, simply navigate to the event page, click
-              on "Register Now," and fill out the required details.
+              on <strong>"Register Now"</strong>, and fill out the required details.
             </div>
           </div>
         </div>
@@ -70,6 +73,7 @@ const FAQSection = () => {
               aria-expanded="false"
               aria-controls="collapseThree"
             >
+              <i className="bi bi-bell-fill me-2"></i>
               Is there a way to get reminders for events I’ve registered for?
             </button>
           </h2>
@@ -80,7 +84,7 @@ const FAQSection = () => {
             data-bs-parent="#faqAccordion"
           >
             <div className="accordion-body">
-              Yes, our system sends reminders via email and notifications to
+              Yes, our system sends <strong>reminders via email and notifications</strong> to
               ensure you don’t miss any events you’ve registered for.
             </div>
           </div>
