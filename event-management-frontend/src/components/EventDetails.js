@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col, Button, Form, Modal, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
 const EventDetails = () => {
   const { id } = useParams(); // Get the event ID from URL
   const [event, setEvent] = useState(null);

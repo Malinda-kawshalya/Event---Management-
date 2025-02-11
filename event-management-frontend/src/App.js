@@ -49,14 +49,7 @@ const App = () => {
           <Route path="/RegOrganizer" element={<OrganizerRegister />} />
 
           {/* Protected Routes */}
-          <Route
-            path="/eventdetails/:eventId"
-            element={
-              <ProtectedRoute roles={["user", "admin"]}>
-                <EventDetails />
-              </ProtectedRoute>
-            }
-          />
+         
           <Route
             path="/eventcreation"
             element={
