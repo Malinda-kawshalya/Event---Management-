@@ -23,8 +23,8 @@ body {
 
 /* CTA Section Styling */
 .cta-section {
-  margin: 50px 0;
-  padding: 50px 0;
+  
+  
   background: linear-gradient(135deg, #f0a7a7, #96cdf5); /* New CTA Background */
   color: white;
   border-radius: 10px;
