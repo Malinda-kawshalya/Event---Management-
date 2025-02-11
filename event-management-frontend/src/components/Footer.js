@@ -1,65 +1,85 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/Footer.css';
+import '../css/Footer.css'; // Import the Footer CSS file
 
 const Footer = () => {
   return (
-    <footer className="footer-section">
-      <div className="container py-5">
-        <div className="row">
-          {/* About Section */}
-          <div className="col-lg-4 col-md-6 mb-4">
-            <h5 className="footer-title">About Us</h5>
-            <p className="footer-text">
-              MyTickets is your go-to platform for booking tickets to concerts, shows, sports, and more. 
-              Experience hassle-free ticketing with us.
-            </p>
-          </div>
+    <div className="footer-container">
+      <footer className="footer text-center text-white">
+        <div className="container">
+          <section className="footer-section mt-5">
+            <div className="row text-center d-flex justify-content-center pt-5">
+              <div className="col-md-2">
+                <h6 className="text-uppercase font-weight-bold">
+                  <a href="#!" className="text-white">About us</a>
+                </h6>
+              </div>
+              <div className="col-md-2">
+                <h6 className="text-uppercase font-weight-bold">
+                  <a href="#!" className="text-white">Products</a>
+                </h6>
+              </div>
+              <div className="col-md-2">
+                <h6 className="text-uppercase font-weight-bold">
+                  <a href="#!" className="text-white">Awards</a>
+                </h6>
+              </div>
+              <div className="col-md-2">
+                <h6 className="text-uppercase font-weight-bold">
+                  <a href="#!" className="text-white">Help</a>
+                </h6>
+              </div>
+              <div className="col-md-2">
+                <h6 className="text-uppercase font-weight-bold">
+                  <a href="#!" className="text-white">Contact</a>
+                </h6>
+              </div>
+            </div>
+          </section>
 
-          {/* Quick Links */}
-          <div className="col-lg-4 col-md-6 mb-4">
-            <h5 className="footer-title">Helpful Links</h5>
-            <ul className="list-unstyled">
-              <li><a href="/" className="footer-link">Home</a></li>
-              <li><a href="/about" className="footer-link">About Us</a></li>
-              <li><a href="/contact" className="footer-link">Contact Us</a></li>
-              <li><a href="/faq" className="footer-link">FAQ</a></li>
-            </ul>
-          </div>
+          <hr className="footer-divider my-5" />
 
-          {/* Contact Info */}
-          <div className="col-lg-4 col-md-12 mb-4">
-            <h5 className="footer-title">Contact Us</h5>
-            <p className="footer-text">
-              <strong>Email:</strong> support@mytickets.com <br />
-              <strong>Phone:</strong> +1 234 567 890 <br />
-              <strong>Address:</strong> 123 Main Street, New York, NY 10001
-            </p>
-          </div>
+          <section className="footer-text mb-5">
+            <div className="row d-flex justify-content-center">
+              <div className="col-lg-8">
+                <p className="p1">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
+                  distinctio earum repellat quaerat voluptatibus placeat nam,
+                  commodi optio pariatur est quia magnam eum harum corrupti
+                  dicta, aliquam sequi voluptate quas.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="footer-social text-center mb-5">
+            <a href="#" className="text-white me-4">
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" className="text-white me-4">
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a href="#" className="text-white me-4">
+              <i className="fab fa-google"></i>
+            </a>
+            <a href="#" className="text-white me-4">
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href="#" className="text-white me-4">
+              <i className="fab fa-linkedin"></i>
+            </a>
+            <a href="#" className="text-white me-4">
+              <i className="fab fa-github"></i>
+            </a>
+          </section>
         </div>
 
-        {/* Social Media & Legal Info */}
-        <div className="footer-bottom d-flex justify-content-between align-items-center">
-          {/* Social Icons */}
-          <div className="social-icons">
-            <a href="https://www.facebook.com" className="social-link"><i className="fab fa-facebook-f"></i></a>
-            <a href="https://www.twitter.com" className="social-link"><i className="fab fa-twitter"></i></a>
-            <a href="https://www.instagram.com" className="social-link"><i className="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com" className="social-link"><i className="fab fa-linkedin"></i></a>
-          </div>
-
-          {/* Legal Info */}
-          <div className="legal-text">
-            <p className="mb-0">Privacy Policy | Cookie Policy | Terms and Conditions</p>
-          </div>
-
-          {/* Copyright */}
-          <div className="copyright-text">
-            <p className="mb-0">Copyright © 2025 MyTickets. All Rights Reserved.</p>
-          </div>
+        <div className="footer-copyright text-center p-3">
+          © 2020 Copyright: EVENTGURU.COM
+          
         </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 };
 

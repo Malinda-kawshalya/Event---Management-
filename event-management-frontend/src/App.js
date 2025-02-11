@@ -22,7 +22,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import FAQSection from "./components/FaqSection";
 import CategoryEvents from "./components/CategoryEvents";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import "./css/Global.css";
 
 
 const App = () => {
@@ -30,6 +30,10 @@ const App = () => {
     <Router>
       <div>
         {/* Navbar displayed on all pages */}
+        <div className="color-drops">
+        
+
+        
         <Navbar />
 
         {/* Routing */}
@@ -116,6 +120,7 @@ const App = () => {
           />
         </Routes>
         <Footer />
+        </div>
       </div>
     </Router>
   );

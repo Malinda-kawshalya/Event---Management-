@@ -39,7 +39,7 @@ const HomePage = () => {
         <FAQSection />
         <div className="cta-section text-center py-5 bg-light">
           <h2>Ready to Explore?</h2>
-          <p>Sign up now to book your tickets and never miss an event!</p>
+          <p className="cta-sec">Sign up now to book your tickets and never miss an event!</p>
           <Link to="/signup" className="btn btn-primary btn-lg">
             Sign Up Now
           </Link>

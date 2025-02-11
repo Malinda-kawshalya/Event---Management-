@@ -65,11 +65,6 @@ body {
   font-weight: bold;
 }
 
-footer {
-  background-color: #222;
-  color: #fff;
-  padding: 1rem 0;
-}
 
 .custom-button {
   background-color: #112d4e;
@@ -89,4 +84,10 @@ footer {
   color: #fff;
   text-align: center;
   padding: 4rem 0;
+}
+
+.cta-sec {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #151515;
 }
