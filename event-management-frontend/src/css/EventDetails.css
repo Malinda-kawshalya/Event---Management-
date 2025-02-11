@@ -1,11 +1,12 @@
 .event-details {
-  padding: 20px;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-.event-photos img {
-  margin-bottom: 15px;
-}
-
-.event-actions .btn {
-  margin-bottom: 10px;
+.event-banner {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

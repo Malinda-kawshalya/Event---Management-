@@ -27,3 +27,7 @@ mongoose.connect(mongoURI)
     .catch(err => {
         console.error('Failed to connect to MongoDB', err);
     });
+    
+const cors = require('cors');
+app.use(cors());
+    

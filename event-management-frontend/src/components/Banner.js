@@ -3,8 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../css/Banner.css';
 
-import { useNavigate } from 'react-router-dom';
 
+
+import { useNavigate } from 'react-router-dom';
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Banner = () => {
       const response = await fetch(
         `http://localhost:5000/api/events/search?query=${encodeURIComponent(searchQuery.trim())}`
       );
-      
+
       if (!response.ok) {
         throw new Error('Search failed. Please try again.');
       }
@@ -60,10 +61,31 @@ const Banner = () => {
             type="text"
             className="form-control"
             placeholder="Search by Artist, Event, or Venue"
+            value={searchQuery}  
+            onChange={(e) => setSearchQuery(e.target.value)}  
+            onKeyPress={handleKeyPress}  
           />
-          <button className="btn btn-warning" aria-label="Search Button">
-            Search
+          <button className="btn btn-warning" aria-label="Search Button" onClick={handleSearch}>  
+            Search  {/*  Calls handleSearch() when clicked */}
           </button>
+        </div>
+
+        {/* Display search results */}
+        <div className="mt-4">
+          {isLoading && <p>Loading...</p>}
+          {error && <p className="text-danger">{error}</p>}
+          {hasSearched && searchResults.length === 0 && !isLoading && (
+            <p>No results found.</p>
+          )}
+          {searchResults.map((event) => (
+            <div key={event.id} className="search-result-item">
+              <h5>{event.title}</h5>
+              <p>{event.location} - {new Date(event.date).toLocaleDateString()}</p>
+              <button className="btn btn-primary" onClick={() => navigate(`/eventdetails/${event._id}`)}>
+                View Event
+              </button>
+            </div>
+          ))}
         </div>
       </div>
     </div>

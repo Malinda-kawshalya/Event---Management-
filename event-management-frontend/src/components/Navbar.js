@@ -31,15 +31,28 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+
+    // If user is logged in, check their role and redirect accordingly
+    if (user) {
+      if (user.role === 'organizer') {
+        // If user is an organizer, redirect to organizer dashboard
+        navigate('/OrgDashboard');
+      } else {
+        // If user is a regular user, stay on the home page or user account page
+        navigate('/');  // Adjust this route as needed for home
+      }
+    }
+
+    // Cleanup scroll event listener
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [user, navigate]); // Only rerun effect when user data or navigate changes
 
   const handleLogout = () => {
     try {
       localStorage.removeItem('user');
       localStorage.removeItem('jwt');
       setUser(null);
-      navigate('/');
+      navigate('/'); // Redirect to home after logout
     } catch (error) {
       console.error('Error during logout:', error);
     }

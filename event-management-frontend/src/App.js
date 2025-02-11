@@ -44,6 +44,9 @@ const App = () => {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/faq" element={<FAQSection />} />
           <Route path="/category" element={<CategoryEvents />} />
+          <Route path="/eventdetails/:eventId" element={<EventDetails />} />
+          <Route path="/eventcreation" element={<EventCreation />} />
+          <Route path="/RegOrganizer" element={<OrganizerRegister />} />
 
           {/* Protected Routes */}
           <Route
