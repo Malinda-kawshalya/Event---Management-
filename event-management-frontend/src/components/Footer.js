@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/Footer.css'; // Import the Footer CSS file
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -11,27 +12,27 @@ const Footer = () => {
             <div className="row text-center d-flex justify-content-center pt-5">
               <div className="col-md-2">
                 <h6 className="text-uppercase font-weight-bold">
-                  <a href="#!" className="text-white">About us</a>
+                  <Link className="text-white" to="/">Home</Link>
                 </h6>
               </div>
               <div className="col-md-2">
                 <h6 className="text-uppercase font-weight-bold">
-                  <a href="#!" className="text-white">Products</a>
+                <Link className="text-white" to="/about">About</Link>
                 </h6>
               </div>
               <div className="col-md-2">
                 <h6 className="text-uppercase font-weight-bold">
-                  <a href="#!" className="text-white">Awards</a>
+                <Link className="text-white" to="/contact">Contact US</Link>
                 </h6>
               </div>
               <div className="col-md-2">
                 <h6 className="text-uppercase font-weight-bold">
-                  <a href="#!" className="text-white">Help</a>
+                <Link className="text-white" to="/allevents">All Events</Link>
                 </h6>
               </div>
               <div className="col-md-2">
                 <h6 className="text-uppercase font-weight-bold">
-                  <a href="#!" className="text-white">Contact</a>
+                <Link className="text-white" to="#">Special Events</Link>
                 </h6>
               </div>
             </div>
@@ -43,10 +44,10 @@ const Footer = () => {
             <div className="row d-flex justify-content-center">
               <div className="col-lg-8">
                 <p className="p1">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-                  distinctio earum repellat quaerat voluptatibus placeat nam,
-                  commodi optio pariatur est quia magnam eum harum corrupti
-                  dicta, aliquam sequi voluptate quas.
+                Eventguru is your trusted online event ticketing platform,
+                offering a seamless way to discover and book tickets for concerts,
+                sports, theater, and more. Secure payments, instant confirmations, and 
+                hassle-free access—experience the best events with ease!
                 </p>
               </div>
             </div>
@@ -75,7 +76,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-copyright text-center p-3">
-          © 2020 Copyright: EVENTGURU.COM
+          © 2020 Copyright: eventguru.com
           
         </div>
       </footer>

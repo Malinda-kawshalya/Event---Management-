@@ -6,26 +6,12 @@ body {
 }
 
 /* Color Drops Effect */
-.homepage-container {
-  position: relative;
-  background-color: #ffffff;
-  min-height: 100vh;
-  
-  overflow: hidden;
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(255, 87, 51, 0.3) 10%, transparent 50%),
-    radial-gradient(circle at 80% 10%, rgba(54, 162, 235, 0.3) 10%, transparent 50%),
-    radial-gradient(circle at 50% 80%, rgba(75, 192, 192, 0.3) 10%, transparent 50%),
-    radial-gradient(circle at 30% 60%, rgba(153, 102, 255, 0.3) 10%, transparent 50%),
-    radial-gradient(circle at 70% 90%, rgba(255, 206, 86, 0.3) 10%, transparent 50%);
-  background-size: cover;
-}
 
 /* CTA Section Styling */
 .cta-section {
   max-width: 1400px;
   margin: 10px auto;
-  background: linear-gradient(135deg, #f0a7a7, #96cdf5); /* New CTA Background */
+  background: linear-gradient(135deg, #AED2FF, #96cdf5); /* New CTA Background */
   color: white;
   border-radius: 10px;
 }
@@ -42,7 +28,7 @@ body {
 
 /* Sign Up Button Styling */
 .cta-section .btn-primary {
-  background-color: #a321e9; /* New Sign Up Button Color */
+  background-color: #2d2d2d; /* New Sign Up Button Color */
   border: none;
   padding: 12px 25px;
   font-size: 1.2rem;
@@ -51,7 +37,7 @@ body {
 }
 
 .cta-section .btn-primary:hover {
-  background-color: #ba68e7; /* Lighter hover effect */
+  background-color: #000000; /* Lighter hover effect */
   transform: scale(1.05);
 }
 
