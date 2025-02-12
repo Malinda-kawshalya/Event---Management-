@@ -106,14 +106,14 @@
 }
 /* Override Bootstrap's btn-warning class */
 .btn-warning {
-  background-color: #ef6bc8; /* Change to your desired color */
-  border-color: #e451bf; /* Match border color */
-  color: white; /* Change text color to white */
+  background-color: #AED2FF; /* Change to your desired color */
+  border-color: #AED2FF; /* Match border color */
+  color: rgb(0, 0, 0); /* Change text color to white */
 }
 
 .btn-warning:hover {
-  background-color: #d643ad; /* Darker shade for hover */
-  border-color: #d238a9; /* Match border color */
-  color: white; /* Keep text color white on hover */
+  background-color: #a2cafa; /* Darker shade for hover */
+  border-color: #a2cafa; /* Match border color */
+  color: rgb(0, 0, 0); /* Keep text color white on hover */
 
 }

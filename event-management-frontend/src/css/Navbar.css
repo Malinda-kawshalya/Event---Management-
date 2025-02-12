@@ -64,11 +64,11 @@
 
 /* Customize "Register" button */
 .nav-special-btn.btn-primary {
-  background-color: #a321e9; /* Keep the green color for the register button */
+  background-color: #27005D; /* Keep the green color for the register button */
   border: none;
   color: white; /* Keep the text color white for the register button */
 }
 
 .nav-special-btn.btn-primary:hover {
-  background-color: #b551eb; /* Darker green on hover */
+  background-color: #9400FF; /* Darker green on hover */
 }
