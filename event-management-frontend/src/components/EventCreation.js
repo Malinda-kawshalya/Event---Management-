@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "./contexts/UserContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const EventCreation = () => {
@@ -14,6 +16,8 @@ const EventCreation = () => {
     category: "",
     banner: null, // File input
   });
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -26,6 +30,12 @@ const EventCreation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!user || user.role !== "organizer") {
+      alert("You must be logged in as an organizer to create an event.");
+      navigate("/signin");
+      return;
+    }
+
     // Create a FormData object to handle file and other fields
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
@@ -37,10 +47,14 @@ const EventCreation = () => {
     formDataToSend.append("maxAttendees", formData.maxAttendees);
     formDataToSend.append("category", formData.category);
     formDataToSend.append("banner", formData.banner); // Append the file
+    formDataToSend.append("organizerId", user._id); // Include organizer ID
 
     try {
       const response = await fetch("http://localhost:5000/api/events", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         body: formDataToSend,
       });
 
@@ -48,6 +62,7 @@ const EventCreation = () => {
         const data = await response.json();
         alert("Event created successfully!");
         console.log("Backend Response:", data);
+        navigate(`/orgdashboard/${user._id}`); // Redirect to organizer dashboard
       } else {
         const errorData = await response.json();
         console.error("Error creating event:", errorData);

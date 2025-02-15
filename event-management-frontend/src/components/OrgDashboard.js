@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
+import { UserContext } from './contexts/UserContext';
 
 const OrgDashboard = () => {
   const [events, setEvents] = useState([]);
@@ -14,34 +15,33 @@ const OrgDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+  const { organizerId } = useParams(); // Get the organizer ID from the URL
 
   useEffect(() => {
     const fetchOrganizerData = async () => {
       try {
-        const userString = localStorage.getItem('user');
         const token = localStorage.getItem('token'); // Ensure the correct token key is used
 
-        if (!userString || !token) {
+        if (!user || !token || user._id !== organizerId) {
           navigate('/signin');
           return;
         }
 
-        const user = JSON.parse(userString);
         setOrganizerName(user.name);
 
-        if (!user || user.role !== 'organizer') {
+        if (user.role !== 'organizer') {
           navigate('/');
           return;
         }
 
         const response = await axios.get(
-          `http://localhost:5000/api/organizers/${user._id}/events`,
+          `http://localhost:5000/api/events/organizer/${organizerId}`, // Fetch events created by this organizer
           {
-            headers: { 
-              Authorization: `Bearer ${token}`
-            }
+              headers: { Authorization: `Bearer ${token}` }
           }
-        );
+      );
+      
 
         if (response.data) {
           setEvents(response.data);
@@ -72,7 +72,7 @@ const OrgDashboard = () => {
     };
 
     fetchOrganizerData();
-  }, [navigate]);
+  }, [navigate, organizerId, user]);
 
   if (loading) {
     return (
@@ -99,7 +99,7 @@ const OrgDashboard = () => {
           <h1 className="text-primary">Hello, {organizerName}</h1>
         </Col>
         <Col xs="auto">
-          <Link to="/eventcreation" className="btn btn-success">
+          <Link to={`/eventcreation/${organizerId}`} className="btn btn-success">
             Create New Event
           </Link>
         </Col>

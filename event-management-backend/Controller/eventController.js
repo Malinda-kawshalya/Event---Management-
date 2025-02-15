@@ -17,10 +17,14 @@ const upload = multer({ storage });
 
 // Create a new event
 const createEvent = async (req, res) => {
-    const { title, description, date, time, location, price, maxAttendees, category } = req.body;
+    const { title, description, date, time, location, price, maxAttendees, category, organizerId } = req.body; // Add organizerId
     const banner = req.file ? req.file.path : null;
 
     try {
+        if (!organizerId) {
+            return res.status(400).json({ message: 'Organizer ID is required' });
+        }
+
         const newEvent = new Event({
             title,
             description,
@@ -31,6 +35,7 @@ const createEvent = async (req, res) => {
             maxAttendees,
             category,
             banner,
+            organizer: organizerId, // Associate event with organizer
         });
 
         await newEvent.save();
@@ -40,6 +45,7 @@ const createEvent = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: err.message });
     }
 };
+
 
 // Get all events
 const getAllEvents = async (req, res) => {

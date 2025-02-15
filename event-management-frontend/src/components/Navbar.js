@@ -102,7 +102,7 @@ const Navbar = () => {
                 <ul className="dropdown-menu" aria-labelledby="userDropdown">
                   <li>
                     {user.role === 'organizer' ? (
-                      <Link className="dropdown-item" to="/orgDashboard">
+                      <Link className="dropdown-item" to="/orgdashboard">
                         Organizer Dashboard
                       </Link>
                     ) : (

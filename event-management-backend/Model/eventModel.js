@@ -1,4 +1,3 @@
-// filepath: /C:/Users/PATHAYAA/Desktop/Event Managment/Event---Management-/event-management-backend/models/eventModel.js
 const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema({
@@ -10,8 +9,9 @@ const eventSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     maxAttendees: { type: Number, required: true },
     category: { type: String, required: true },
-    banner: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now }
+    banner: { type: String },
+    organizer: { type: mongoose.Schema.Types.ObjectId, ref: 'Organizer', required: true }, // Link to organizer
 });
 
-module.exports = mongoose.model('Event', eventSchema);
+const Event = mongoose.model('Event', eventSchema);
+module.exports = Event;

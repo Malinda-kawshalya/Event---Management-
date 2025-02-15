@@ -39,10 +39,10 @@ const SignIn = () => {
         setFormData({ email: '', password: '' });
 
         // Redirect based on role
-        if (user.role === 'user') {
-          navigate('/');
+        if (user.role === 'organizer') {
+          navigate(`/orgdashboard/${user._id}`);
         } else {
-          navigate('/orgdashboard');
+          navigate('/');
         }
       }
     } catch (err) {
