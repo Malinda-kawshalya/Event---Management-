@@ -23,6 +23,7 @@ import CategoryEvents from "./components/CategoryEvents";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Global.css";
+import Chat from "./components/ChatPage";
 
 const App = () => {
   return (
@@ -45,6 +46,7 @@ const App = () => {
             <Route path="/faq" element={<FAQSection />} />
             <Route path="/category" element={<CategoryEvents />} />
             <Route path="/orgregister" element={<OrganizerRegister />} />
+            <Route path="/chat" element={<Chat />} />
 
             {/* Protected Routes */}
             <Route

@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import newsimage from '../images/Newsn.jpg';
 import midlaneimage from '../images/midlanem.jpg';
+
 import '../css/HomePage.css';
 
 const HomePage = () => {
@@ -37,6 +38,7 @@ const HomePage = () => {
         <SpecialShows />
         <CategoryEvents />
         <FAQSection />
+       
         <div className="cta-section text-center py-5 bg-light">
           <h2>Ready to Explore?</h2>
           <p className="cta-sec">Sign up now to book your tickets and never miss an event!</p>
