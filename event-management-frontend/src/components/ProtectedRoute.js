@@ -8,14 +8,10 @@ const ProtectedRoute = ({ children, roles }) => {
   }
 
   const user = authService.getUser();
-  if (!user) {
-    return <Navigate to="/signin" />;
-  }
   if (roles && !roles.includes(user.role)) {
     return <Navigate to="/unauthorized" />;
   }
 
-  // Allow access to the page
   return children;
 };
 

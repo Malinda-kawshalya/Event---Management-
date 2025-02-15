@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "./contexts/UserContext"; // Import UserContext
-import { authService } from "./authService"; // Import authService
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/SignIn.css";
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from './contexts/UserContext'; // Import UserContext
+import { authService } from './authService'; // Import authService
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/SignIn.css';
 
 const SignIn = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // Password visibility toggle
   const navigate = useNavigate();
@@ -17,16 +17,16 @@ const SignIn = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    if (error) setError("");
+    if (error) setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError('');
 
     try {
-      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
       const response = await axios.post(`${API_BASE_URL}/api/signin`, formData);
 
       if (response.status === 200) {
@@ -36,20 +36,20 @@ const SignIn = () => {
         authService.setToken(token, user);
         login(user, token);
 
-        setFormData({ email: "", password: "" });
+        setFormData({ email: '', password: '' });
 
         // Redirect based on role
-        if (user.role === "organizer") {
-          navigate("/orgdashboard");
+        if (user.role === 'user') {
+          navigate('/');
         } else {
-          navigate("/");
+          navigate('/orgdashboard');
         }
       }
     } catch (err) {
       if (!err.response) {
-        setError("Network error. Please try again later.");
+        setError('Network error. Please try again later.');
       } else {
-        setError(err.response?.data?.message || "Invalid credentials. Please try again.");
+        setError(err.response?.data?.message || 'Invalid credentials. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -84,7 +84,7 @@ const SignIn = () => {
             <label htmlFor="password" className="form-label">Password</label>
             <div className="input-group">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 className="form-control"
                 id="password"
                 name="password"
@@ -98,9 +98,9 @@ const SignIn = () => {
                 type="button"
                 className="btn btn-outline-secondary"
                 onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
-                {showPassword ? "👁️‍🗨️" : "👁️"}
+                {showPassword ? '👁️‍🗨️' : '👁️'}
               </button>
             </div>
           </div>
@@ -110,7 +110,7 @@ const SignIn = () => {
             disabled={loading}
             aria-busy={loading}
           >
-            {loading ? <span className="spinner-border spinner-border-sm" role="status" /> : "Sign In"}
+            {loading ? <span className="spinner-border spinner-border-sm" role="status" /> : 'Sign In'}
           </button>
           <p className="text-center mt-3">
             New here? <a href="/signup" className="text-primary">Create an account</a>

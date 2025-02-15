@@ -16,7 +16,7 @@ const UserAccount = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("jwt");
+        const token = localStorage.getItem("token");
         const userString = localStorage.getItem("user");
 
         if (!token || !userString) {

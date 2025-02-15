@@ -19,7 +19,7 @@ const OrgDashboard = () => {
     const fetchOrganizerData = async () => {
       try {
         const userString = localStorage.getItem('user');
-        const token = localStorage.getItem('jwt');
+        const token = localStorage.getItem('token'); // Ensure the correct token key is used
 
         if (!userString || !token) {
           navigate('/signin');
