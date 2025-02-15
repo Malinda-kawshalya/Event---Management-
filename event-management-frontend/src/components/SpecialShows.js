@@ -18,7 +18,19 @@ const SpecialShows = () => {
         const response = await fetch("http://localhost:5000/api/events");
         if (!response.ok) throw new Error("Failed to fetch events");
         const data = await response.json();
-        setEvents(data);
+
+        // Get the current month and year
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+
+        // Filter events to include only those in the current month
+        const filteredEvents = data.filter(event => {
+          const eventDate = new Date(event.date);
+          return eventDate.getMonth() === currentMonth && eventDate.getFullYear() === currentYear;
+        });
+
+        setEvents(filteredEvents);
         setLoading(false);
       } catch (err) {
         setError(err.message);
