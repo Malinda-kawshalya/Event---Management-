@@ -1,63 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/Navbar.css';
+import { UserContext } from './contexts/UserContext';
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
-  const [scrolled, setScrolled] = useState(false);
+  const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
-
-  // Fetch user from localStorage once when the component mounts
-  useEffect(() => {
-    try {
-      const userString = localStorage.getItem('user');
-      if (userString) {
-        const userData = JSON.parse(userString);
-        setUser(userData);
-        console.log('User data fetched from localStorage:', userData);
-      }
-    } catch (error) {
-      console.error('Error parsing user data:', error);
-      localStorage.removeItem('user'); // Clear invalid data
-    }
-  }, []);
-
-  // Handle scroll event listener
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Redirect user based on their role when `user` changes
-  useEffect(() => {
-    if (user) {
-      console.log('User state changed, redirecting...', user);
-      if (user.role === 'organizer') {
-        navigate('/OrgDashboard');
-      } else {
-        navigate('/');
-      }
-    }
-  }, [user, navigate]);
 
   const handleLogout = () => {
     try {
-      localStorage.removeItem('user');
-      localStorage.removeItem('jwt');
-      setUser(null);
-      navigate('/'); // Redirect to home after logout
+      logout();
+      navigate('/');
     } catch (error) {
       console.error('Error during logout:', error);
     }
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg ${scrolled ? 'scrolled' : ''}`}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
       <div className="container">
-        <Link className="navbar-brand" to="/">Event Guru</Link>
+        <Link className="navbar-brand" to="/">
+          Event Guru
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -71,10 +36,26 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/allevents">All Events</Link></li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/about">
+                About
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contact">
+                Contact
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/allevents">
+                All Events
+              </Link>
+            </li>
 
             {!user ? (
               <>
@@ -84,23 +65,57 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item dropdown">
-                  <button className="btn btn-primary dropdown-toggle nav-special-btn" type="button" id="registerDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button
+                    className="btn btn-primary dropdown-toggle nav-special-btn"
+                    type="button"
+                    id="registerDropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
                     Register
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="registerDropdown">
-                    <li><Link className="dropdown-item" to="/signup">Register as User</Link></li>
-                    <li><Link className="dropdown-item" to="/orgregister">Register as Organizer</Link></li>
+                    <li>
+                      <Link className="dropdown-item" to="/signup">
+                        Register as User
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/orgregister">
+                        Register as Organizer
+                      </Link>
+                    </li>
                   </ul>
                 </li>
               </>
             ) : (
               <li className="nav-item dropdown">
-                <button className="btn btn-outline-primary dropdown-toggle nav-special-btn" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <button
+                  className="btn btn-outline-primary dropdown-toggle nav-special-btn"
+                  type="button"
+                  id="userDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   {user.name || user.username || "Account"}
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="userDropdown">
-                  <li><Link className="dropdown-item" to="/useraccount">My Profile</Link></li>
-                  <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
+                  <li>
+                    {user.role === 'organizer' ? (
+                      <Link className="dropdown-item" to="/orgDashboard">
+                        Organizer Dashboard
+                      </Link>
+                    ) : (
+                      <Link className="dropdown-item" to="/useraccount">
+                        My Profile
+                      </Link>
+                    )}
+                  </li>
+                  <li>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </li>
                 </ul>
               </li>
             )}

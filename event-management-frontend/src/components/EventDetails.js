@@ -2,27 +2,29 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Button, Form, Modal, Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+//import "../css/EventDetails.css";
 
 const EventDetails = () => {
-  const { id } = useParams(); // Get the event ID from URL
+  const { id } = useParams(); // Get the event ID from the URL
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isRSVP, setIsRSVP] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [reservation, setReservation] = useState({ tickets: 1, contact: "" });
+  const [reservation, setReservation] = useState({
+    tickets: 1,
+    contact: "",
+  });
 
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        console.log(`Fetching event details from: http://localhost:5000/api/events/${id}`);
-        const response = await fetch(`http://localhost:5000/api/events/${id}`);
-
+        console.log(`Fetching event details from: http://localhost:5000/api/events/${event._id}`);
+        const response = await fetch(`http://localhost:5000/api/events/${event._id}`);
+        console.log("Response status:", response.status);
         if (!response.ok) {
           throw new Error("Failed to fetch event details");
         }
-
         const data = await response.json();
         console.log("Event details fetched successfully:", data);
         setEvent(data);
@@ -34,7 +36,9 @@ const EventDetails = () => {
       }
     };
 
-    fetchEventDetails();
+    if (id) {
+      fetchEventDetails();
+    }
   }, [id]);
 
   const handleRSVP = () => {
@@ -88,7 +92,7 @@ const EventDetails = () => {
       <Row>
         <Col md={6} className="mb-4">
           <img 
-            src={`http://localhost:5000/${event.banner.replace("\\", "/")}`} 
+            src={`http://localhost:5000/${event.banner}`} 
             alt={event.title} 
             className="img-fluid rounded"
             onError={(e) => {

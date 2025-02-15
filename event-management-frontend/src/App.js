@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar"; // Import your Navbar component
 import HomePage from "./components/HomePage"; // Home page component
 import About from "./components/AboutUs"; // About page component
 import ContactUs from "./components/ContactUs"; // Contact page component
-import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import EventDetails from "./components/EventDetails";
 import EventCreation from "./components/EventCreation";
@@ -22,6 +21,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import FAQSection from "./components/FaqSection";
 import CategoryEvents from "./components/CategoryEvents";
 import ProtectedRoute from "./components/ProtectedRoute";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Global.css";
 
 
@@ -31,10 +31,6 @@ const App = () => {
       <div>
         {/* Navbar displayed on all pages */}
         <div className="color-drops">
-        
-        
-
-        
         <Navbar />
 
         {/* Routing */}
@@ -49,12 +45,17 @@ const App = () => {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/faq" element={<FAQSection />} />
           <Route path="/category" element={<CategoryEvents />} />
-          <Route path="/eventdetails/:eventId" element={<EventDetails />} />
-          <Route path="/eventcreation" element={<EventCreation />} />
-          <Route path="/RegOrganizer" element={<OrganizerRegister />} />
+          <Route path="/orgregister" element={<OrganizerRegister />} />
 
           {/* Protected Routes */}
-         
+          <Route
+            path="/eventdetails/:eventId"
+            element={
+              <ProtectedRoute roles={["user", "admin"]}>
+                <EventDetails />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/eventcreation"
             element={
@@ -111,14 +112,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/orgregister"
-            element={
-              <ProtectedRoute roles={["admin"]}>
-                <OrganizerRegister />
-              </ProtectedRoute>
-            }
-          />
+          
         </Routes>
         <Footer />
         </div>
