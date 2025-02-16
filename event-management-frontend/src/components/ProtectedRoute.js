@@ -1,14 +1,40 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { authService } from '../components/authService';
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { authService } from "../components/authService";
 
 const ProtectedRoute = ({ children, roles }) => {
-  if (!authService.isAuthenticated()) {
+  const [loading, setLoading] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const isLoggedIn = authService.isAuthenticated();
+        if (isLoggedIn) {
+          const currentUser = authService.getUser();
+          setUser(currentUser);
+          setAuthenticated(true);
+        }
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Show loading spinner or message
+  }
+
+  if (!authenticated) {
     return <Navigate to="/signin" />;
   }
 
-  const user = authService.getUser();
-  if (roles && !roles.includes(user.role)) {
+  if (roles && (!user || !roles.includes(user.role))) {
     return <Navigate to="/unauthorized" />;
   }
 

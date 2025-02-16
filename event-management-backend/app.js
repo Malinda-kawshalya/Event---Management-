@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const adminRoutes = require('./routes/adminRoutes');
 const userRoutes = require('./routes/userRoute'); 
 const contactRoutes = require('./routes/contactRoutes'); 
 const organizerRoutes = require('./routes/organizerRoutes');
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
 
 // Routes
+app.use('/api/admin', adminRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/organizers', organizerRoutes);

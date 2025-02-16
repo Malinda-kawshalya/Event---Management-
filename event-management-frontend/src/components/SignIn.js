@@ -38,23 +38,25 @@ const SignIn = () => {
 
         setFormData({ email: '', password: '' });
 
-        // Redirect based on role
-        if (user.role === 'organizer') {
-          navigate(`/orgdashboard/${user._id}`);
+        // 🔹 Redirect based on role
+        if (user.role === 'admin') {
+            navigate('/admindashboard'); // Redirect to Admin Dashboard
+        } else if (user.role === 'organizer') {
+            navigate(`/orgdashboard/${user._id}`);
         } else {
-          navigate('/');
+            navigate('/');
         }
-      }
-    } catch (err) {
-      if (!err.response) {
-        setError('Network error. Please try again later.');
-      } else {
-        setError(err.response?.data?.message || 'Invalid credentials. Please try again.');
-      }
-    } finally {
-      setLoading(false);
     }
-  };
+} catch (err) {
+    if (!err.response) {
+        setError('Network error. Please try again later.');
+    } else {
+        setError(err.response?.data?.message || 'Invalid credentials. Please try again.');
+    }
+} finally {
+    setLoading(false);
+}
+};
 
   return (
     <div className="signin-container d-flex justify-content-center align-items-center vh-100">

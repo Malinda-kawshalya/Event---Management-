@@ -8,12 +8,12 @@ const EventDetails = () => {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isRSVP, setIsRSVP] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [reservation, setReservation] = useState({
     tickets: 1,
     contact: "",
   });
-  const [totalCost, setTotalCost] = useState(0);
 
   useEffect(() => {
     const fetchEventDetails = async () => {
@@ -35,7 +35,6 @@ const EventDetails = () => {
         const data = await response.json();
         console.log("Event details fetched successfully:", data);
         setEvent(data);
-        setTotalCost(data.price || 0); // Initialize total cost with the event price
       } catch (err) {
         console.error("Error fetching event details:", err);
         setError(err.message);
@@ -47,27 +46,19 @@ const EventDetails = () => {
     fetchEventDetails();
   }, [eventId]);
 
+  const handleRSVP = () => {
+    setIsRSVP(!isRSVP);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const newReservation = { ...reservation, [name]: value };
-    setReservation(newReservation);
-
-    // Calculate total cost when the number of tickets changes
-    if (name === "tickets") {
-      const tickets = parseInt(value, 10);
-      setTotalCost(tickets * (event?.price || 0));
-    }
+    setReservation({ ...reservation, [name]: value });
   };
 
   const handleSubmitReservation = (e) => {
     e.preventDefault();
-    alert(`Reserved ${reservation.tickets} ticket(s). Total Cost: $${totalCost}. Contact: ${reservation.contact}`);
+    alert(`Reserved ${reservation.tickets} ticket(s). Contact: ${reservation.contact}`);
     setShowModal(false);
-  };
-
-  const handleCheckout = () => {
-    alert(`Proceeding to checkout for ${reservation.tickets} ticket(s). Total Cost: $${totalCost}`);
-    // Here you can redirect to a payment gateway or handle the payment process
   };
 
   const handleShare = async () => {
@@ -128,8 +119,8 @@ const EventDetails = () => {
           <p><strong>Price:</strong> ${event.price ?? "Free"}</p>
           <p><strong>Category:</strong> {event.category || "General"}</p>
 
-          <Button variant="primary" onClick={() => setShowModal(true)}>
-            Reserve Tickets
+          <Button variant={isRSVP ? "danger" : "primary"} onClick={handleRSVP}>
+            {isRSVP ? "Cancel RSVP" : "RSVP"}
           </Button>
           <Button variant="secondary" onClick={handleShare} className="ms-2">
             Share
@@ -165,12 +156,8 @@ const EventDetails = () => {
                 required
               />
             </Form.Group>
-            <p className="mt-3"><strong>Total Cost:</strong> ${totalCost}</p>
             <Button variant="primary" type="submit" className="mt-3">
               Reserve
-            </Button>
-            <Button variant="success" onClick={handleCheckout} className="mt-3 ms-2">
-              Checkout
             </Button>
           </Form>
         </Modal.Body>

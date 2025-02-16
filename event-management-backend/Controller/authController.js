@@ -2,11 +2,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../Model/userModel");
 const Organizer = require("../Model/organizerModel");
+const Admin = require("../Model/adminModel");
 
 const signIn = async (req, res) => {
   const { email, password } = req.body;
 
-  // Input validation
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required." });
   }
@@ -14,67 +14,55 @@ const signIn = async (req, res) => {
   try {
     const normalizedEmail = email.trim().toLowerCase();
 
-    // Check User collection
-    let user = await User.findOne({ email: normalizedEmail });
-    let isOrganizer = false;
+    // Query all three collections in parallel
+    const [user, organizer, admin] = await Promise.all([
+      User.findOne({ email: normalizedEmail }),
+      Organizer.findOne({ email: normalizedEmail }),
+      Admin.findOne({ email: normalizedEmail }),
+    ]);
 
-    // If not found in User, check Organizer collection
-    if (!user) {
-      user = await Organizer.findOne({ email: normalizedEmail });
-      isOrganizer = true;
+    let foundUser = user || organizer || admin;
+    let role = user ? "user" : organizer ? "organizer" : "admin";
+    let modelType = user ? "User" : organizer ? "Organizer" : "Admin";
+
+    if (!foundUser) {
+      return res.status(400).json({ message: "Invali credentials." });
     }
 
-    // If user not found in either collection
-    if (!user) {
-      return res.status(400).json({ message: "Invalid credentials." });
-    }
-
-    // Verify password
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, foundUser.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials." });
+      return res.status(400).json({ message: "Invali credentials." });
     }
 
-    // Create token payload
     const tokenPayload = {
-      userId: user._id,
-      email: user.email,
-      name: user.name,
-      role: isOrganizer ? 'organizer' : 'user',
-      modelType: isOrganizer ? 'Organizer' : 'User'
+      userId: foundUser._id,
+      email: foundUser.email,
+      name: foundUser.name,
+      role,
+      modelType,
     };
 
-    // Generate JWT
-    const tokenExpiry = process.env.JWT_EXPIRY || "24h"; // Configurable expiry
-    const token = jwt.sign(
-      tokenPayload,
-      process.env.JWT_SECRET,
-      { expiresIn: tokenExpiry }
-    );
+    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRY || "24h",
+    });
 
-    // Prepare user data for response
-    const userData = {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      role: isOrganizer ? 'organizer' : 'user',
-      ...(isOrganizer && { companyName: user.companyName })
-    };
-
-    // Send response
     return res.status(200).json({
       success: true,
       token,
-      user: userData,
-      message: "Login successful"
+      user: {
+        _id: foundUser._id,
+        name: foundUser.name,
+        email: foundUser.email,
+        role,
+        ...(role === "organizer" && { companyName: foundUser.companyName }),
+      },
+      message: "Login successful",
     });
-
   } catch (error) {
     console.error("SignIn Error:", error);
     return res.status(500).json({
       success: false,
       message: "An error occurred during sign in.",
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };
