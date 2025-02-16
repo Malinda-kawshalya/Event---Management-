@@ -1,12 +1,15 @@
-// routes/chatRoutes.js
 const express = require("express");
+const { getChatResponse, addChatMessage, getAllMessages } = require("../Controller/chatController");
+
 const router = express.Router();
-const chatController = require("../Controller/chatController");
 
-// Handle user messages
-router.post("/message", chatController.handleMessage);
+// Route to get chatbot response
+router.post("/response", getChatResponse);
 
-// Get chat history for a user
-router.get("/history/:userId", chatController.getChatHistory);
+// Route to add predefined messages
+router.post("/messages", addChatMessage);
+
+// Route to get all predefined messages
+router.get("/messages", getAllMessages);
 
 module.exports = router;

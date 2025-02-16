@@ -24,7 +24,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import SpecialShows from "./components/SpecialShows";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Global.css";
-import Chat from "./components/ChatPage";
+import Chat from "./components/ChatBot";
 
 const App = () => {
   return (

@@ -1,60 +1,50 @@
-// controllers/chatController.js
-const Chat = require("../Model/chatModel");
+const ChatMessage = require("../Model/chatModel");
 
-// Predefined questions and answers
-const predefinedMessages = {
-  "Hello": "Hi there! How can I help you today?",
-  "What is the event about?": "The event is about [Event Details]. Would you like to know more?",
-  "How do I register?": "You can register by clicking the 'RSVP' button on the event page.",
-  "What is the event location?": "The event will be held at [Event Location].",
-  "Thank you": "You're welcome! Let us know if you need further assistance.",
-};
-
-// Handle user messages
-const handleMessage = async (req, res) => {
-  const { userId, message } = req.body;
-
+// Handle user message and return bot response
+exports.getChatResponse = async (req, res) => {
   try {
-    // Find or create a chat session for the user
-    let chat = await Chat.findOne({ userId });
-    if (!chat) {
-      chat = new Chat({ userId, messages: [] });
+    const { userMessage } = req.body;
+
+    // Find a matching response in the database
+    const response = await ChatMessage.findOne({ userMessage });
+
+    if (response) {
+      return res.json({ botResponse: response.botResponse });
+    } else {
+      return res.json({ botResponse: "I'm not sure how to respond to that." });
     }
-
-    // Add the user's message to the chat
-    chat.messages.push({ sender: "user", text: message });
-
-    // Get the predefined response (if available)
-    const response = predefinedMessages[message] || "Sorry, I didn't understand that. Can you please clarify?";
-
-    // Add the system's response to the chat
-    chat.messages.push({ sender: "system", text: response });
-
-    // Save the chat to the database
-    await chat.save();
-
-    // Return the updated chat
-    res.status(200).json(chat);
-  } catch (err) {
-    console.error("Error handling message:", err);
-    res.status(500).json({ message: "Failed to process message" });
+  } catch (error) {
+    console.error("Error fetching chatbot response:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-// Get chat history for a user
-const getChatHistory = async (req, res) => {
-  const { userId } = req.params;
-
+// Add new predefined chat messages (Admin use)
+exports.addChatMessage = async (req, res) => {
   try {
-    const chat = await Chat.findOne({ userId });
-    if (!chat) {
-      return res.status(404).json({ message: "No chat history found" });
+    const { userMessage, botResponse } = req.body;
+
+    if (!userMessage || !botResponse) {
+      return res.status(400).json({ error: "Both userMessage and botResponse are required." });
     }
-    res.status(200).json(chat);
-  } catch (err) {
-    console.error("Error fetching chat history:", err);
-    res.status(500).json({ message: "Failed to fetch chat history" });
+
+    const newMessage = new ChatMessage({ userMessage, botResponse });
+    await newMessage.save();
+
+    return res.json({ message: "Chat message added successfully!" });
+  } catch (error) {
+    console.error("Error adding chat message:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-module.exports = { handleMessage, getChatHistory };
+// Get all predefined chat messages
+exports.getAllMessages = async (req, res) => {
+  try {
+    const messages = await ChatMessage.find();
+    return res.json(messages);
+  } catch (error) {
+    console.error("Error fetching chat messages:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};

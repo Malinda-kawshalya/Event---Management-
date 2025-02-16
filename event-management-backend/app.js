@@ -23,7 +23,7 @@ app.use('/api/organizers', organizerRoutes);
 app.use('/api/signin', authRoutes);
 app.use('/api/events',eventRoutes);
 app.use("/api/reservations", reservationRoutes);
-app.use("/api/chat", chatRoutes);
+app.use("/api/chat", chatRoutes); 
 
 
 

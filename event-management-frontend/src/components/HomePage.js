@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import newsimage from '../images/Newsn.jpg';
 import midlaneimage from '../images/midlanem.jpg';
+import Chat from './ChatBot';
 
 import '../css/HomePage.css';
 
@@ -37,6 +38,7 @@ const HomePage = () => {
         </div>
         <SpecialShows />
         <CategoryEvents />
+        <Chat />
         <FAQSection />
        
         <div className="cta-section text-center py-5 bg-light">
