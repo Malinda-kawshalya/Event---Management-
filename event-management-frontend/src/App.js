@@ -21,6 +21,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import FAQSection from "./components/FaqSection";
 import CategoryEvents from "./components/CategoryEvents";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SpecialShows from "./components/SpecialShows";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Global.css";
 import Chat from "./components/ChatPage";
@@ -47,6 +48,7 @@ const App = () => {
             <Route path="/category" element={<CategoryEvents />} />
             <Route path="/orgregister" element={<OrganizerRegister />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/specialshows" element={<SpecialShows />} />
 
             {/* Protected Routes */}
             <Route

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Row, Col, Button, Form, Modal, Spinner } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-//import "../css/EventDetails.css";
+import { Container, Row, Col, Button, Form, Modal, Spinner, Alert } from "react-bootstrap";
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 const EventDetails = () => {
-  const { id } = useParams(); // Get the event ID from the URL
+  const { eventId } = useParams(); // Get the event ID from the URL
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,13 +17,21 @@ const EventDetails = () => {
 
   useEffect(() => {
     const fetchEventDetails = async () => {
+      if (!eventId) {
+        setError("Invalid Event ID");
+        setLoading(false);
+        return;
+      }
+
       try {
-        console.log(`Fetching event details from: http://localhost:5000/api/events/${event._id}`);
-        const response = await fetch(`http://localhost:5000/api/events/${event._id}`);
+        console.log(`Fetching event details from: http://localhost:5000/api/events/${eventId}`);
+        const response = await fetch(`http://localhost:5000/api/events/${eventId}`);
         console.log("Response status:", response.status);
+
         if (!response.ok) {
           throw new Error("Failed to fetch event details");
         }
+
         const data = await response.json();
         console.log("Event details fetched successfully:", data);
         setEvent(data);
@@ -36,10 +43,8 @@ const EventDetails = () => {
       }
     };
 
-    if (id) {
-      fetchEventDetails();
-    }
-  }, [id]);
+    fetchEventDetails();
+  }, [eventId]);
 
   const handleRSVP = () => {
     setIsRSVP(!isRSVP);
@@ -56,9 +61,13 @@ const EventDetails = () => {
     setShowModal(false);
   };
 
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    alert("Event link copied to clipboard!");
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert("Event link copied to clipboard!");
+    } catch (err) {
+      alert("Failed to copy link");
+    }
   };
 
   if (loading) {
@@ -74,7 +83,7 @@ const EventDetails = () => {
   if (error) {
     return (
       <Container className="text-center my-5">
-        <p className="text-danger">Error: {error}</p>
+        <Alert variant="danger">Error: {error}</Alert>
       </Container>
     );
   }
@@ -82,7 +91,7 @@ const EventDetails = () => {
   if (!event) {
     return (
       <Container className="text-center my-5">
-        <p>Event not found</p>
+        <Alert variant="warning">Event not found</Alert>
       </Container>
     );
   }
@@ -104,12 +113,13 @@ const EventDetails = () => {
         <Col md={6}>
           <h2>{event.title}</h2>
           <p>{event.description}</p>
-          <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
-          <p><strong>Time:</strong> {event.time}</p>
-          <p><strong>Location:</strong> {event.location}</p>
-          <p><strong>Price:</strong> ${event.price}</p>
-          <p><strong>Category:</strong> {event.category}</p>
-          <Button variant="primary" onClick={handleRSVP}>
+          <p><strong>Date:</strong> {event.date ? new Date(event.date).toLocaleDateString() : "N/A"}</p>
+          <p><strong>Time:</strong> {event.time || "TBA"}</p>
+          <p><strong>Location:</strong> {event.location || "TBA"}</p>
+          <p><strong>Price:</strong> ${event.price ?? "Free"}</p>
+          <p><strong>Category:</strong> {event.category || "General"}</p>
+
+          <Button variant={isRSVP ? "danger" : "primary"} onClick={handleRSVP}>
             {isRSVP ? "Cancel RSVP" : "RSVP"}
           </Button>
           <Button variant="secondary" onClick={handleShare} className="ms-2">
@@ -117,6 +127,8 @@ const EventDetails = () => {
           </Button>
         </Col>
       </Row>
+
+      {/* Reservation Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Reserve Tickets</Modal.Title>
