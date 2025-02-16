@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import "../css/CategoryEvents.css";
 
 const categories = [
-  { name: "Concerts", key: "concert", image: "concert.png" },
-  { name: "Workshops", key: "workshop", image: "workshop.jpg" },
-  { name: "Seminars", key: "seminar", image: "seminar.jpg" },
-  { name: "Sports", key: "sports", image: "sports.jpg" },
+  { name: "Concert", key: "concert", image: "concert.png", bgColor: "#AED2FF" },
+  { name: "Workshop", key: "workshop", image: "workshop.png", bgColor: "#FFFFFF" },
+  { name: "Seminar", key: "seminar", image: "seminar.png", bgColor: "#D8C0FF" },
+  { name: "Sports", key: "sports", image: "sports.png", bgColor: "#C5E3FF" },
 ];
 
 const CategorySection = () => {
@@ -24,14 +24,15 @@ const CategorySection = () => {
           <div
             key={category.key}
             className="category-card"
+            style={{ backgroundColor: category.bgColor }}
             onClick={() => handleCategoryClick(category.key)}
           >
+            <div className="category-label">{category.name}</div>
             <img
               src={`/images/${category.image}`}
               alt={category.name}
               className="category-image"
             />
-            <div className="category-name">{category.name}</div>
           </div>
         ))}
       </div>

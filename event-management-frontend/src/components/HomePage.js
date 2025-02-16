@@ -1,7 +1,7 @@
 import React from 'react';
 import SpecialShows from './SpecialShows';
 import Banner from './Banner';
-import FAQSection from './FaqSection';
+// import FAQSection from './FaqSection';
 import CategoryEvents from './CategoryEvents';
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -39,7 +39,7 @@ const HomePage = () => {
         <SpecialShows />
         <CategoryEvents />
         <Chat />
-        <FAQSection />
+        {/* <FAQSection /> */}
        
         <div className="cta-section text-center py-5 bg-light">
           <h2>Ready to Explore?</h2>

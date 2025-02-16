@@ -1,122 +1,92 @@
-/* Category Events CSS */
-
-/* Overall container */
+/* Category Section */
 .category-section {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e4f1ff; /* Dark blue background */
+  color: #ffffff;
   text-align: center;
-  padding: 30px 15px;
-  background: linear-gradient(135deg, #f9f9f9, #e3e3e3);
 }
 
-/* Category Title */
+/* Title */
 .category-title {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #222;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-/* Category container to display the cards */
+/* Grid Layout */
 .category-container {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive */
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
 }
 
-/* Individual category card */
+/* Category Card */
 .category-card {
-  width: 200px; 
-  height: 250px;
-  cursor: pointer;
+  position: relative;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: #fff;
-  position: relative;
+  padding: 20px;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  align-items: center;
+  height: 250px;
 }
 
-/* Hover effect for the card */
+/* Hover Effect */
 .category-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px #e4f1ff; /* Purple glow */
 }
 
-/* Category image styling */
+/* Category Label */
+.category-label {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #27005d;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Category Image */
 .category-image {
   width: 100%;
-  height: 180px; /* Standardized height for UI balance */
-  object-fit: cover;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  transition: transform 0.3s ease;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
-/* Hover effect for the image */
-.category-card:hover .category-image {
-  transform: scale(1.1);
-}
-
-/* Category name at the bottom of the card */
-.category-name {
-  font-size: 16px;
-  font-weight: bold;
-  padding: 10px 0;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  transition: background 0.3s ease;
-}
-
-/* Hover effect for the category name */
-.category-card:hover .category-name {
-  background: linear-gradient(135deg, #ff7eb3, #ff758c);
-}
-
-/* Responsive adjustments */
-
-/* Medium screens (tablets) */
-@media (max-width: 992px) {
-  .category-card {
-    width: 180px;
-    height: 230px;
-  }
-  .category-image {
-    height: 160px;
-  }
-}
-
-/* Smaller screens (small tablets and large phones) */
+/* Responsive Design */
 @media (max-width: 768px) {
+  .category-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .category-card {
-    width: 160px;
-    height: 210px;
+    height: 200px;
   }
-  .category-image {
-    height: 140px;
-  }
-  .category-name {
-    font-size: 14px;
-    padding: 8px 0;
+
+  .category-label {
+    font-size: 16px;
   }
 }
 
-/* Smallest screens (phones) */
-@media (max-width: 576px) {
-  .category-card {
-    width: 140px;
-    height: 190px;
-  }
-  .category-image {
-    height: 120px;
-  }
-  .category-name {
-    font-size: 12px;
-    padding: 6px 0;
+@media (max-width: 480px) {
+  .category-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

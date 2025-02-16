@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop"; // Import ScrollToTop component
 import Navbar from "./components/Navbar"; // Import your Navbar component
 import HomePage from "./components/HomePage"; // Home page component
 import About from "./components/AboutUs"; // About page component
@@ -42,6 +43,7 @@ const App = () => {
   return (
     <Router>
       <div>
+      <ScrollToTop /> {/* Add this here */}
         {/* Navbar displayed on all pages */}
         <div className="color-drops">
           <Navbar />
