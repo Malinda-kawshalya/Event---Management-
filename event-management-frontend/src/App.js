@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar"; // Import your Navbar component
 import HomePage from "./components/HomePage"; // Home page component
 import About from "./components/AboutUs"; // About page component
@@ -26,6 +26,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Global.css";
 import Chat from "./components/ChatBot";
 
+// Content wrapper component that adds spacing except on homepage
+const ContentWrapper = ({ children }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  
+  return (
+    <div className={isHomePage ? "" : "content-wrapper"}>
+      {children}
+    </div>
+  );
+};
+
 const App = () => {
   return (
     <Router>
@@ -34,88 +46,90 @@ const App = () => {
         <div className="color-drops">
           <Navbar />
 
-          {/* Routing */}
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<HomePage />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/allevents" element={<AllEvents />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/faq" element={<FAQSection />} />
-            <Route path="/category" element={<CategoryEvents />} />
-            <Route path="/orgregister" element={<OrganizerRegister />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/specialshows" element={<SpecialShows />} />
+          {/* Routing with ContentWrapper */}
+          <ContentWrapper>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<HomePage />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/allevents" element={<AllEvents />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/faq" element={<FAQSection />} />
+              <Route path="/category" element={<CategoryEvents />} />
+              <Route path="/orgregister" element={<OrganizerRegister />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/specialshows" element={<SpecialShows />} />
 
-            {/* Protected Routes */}
-            <Route
-              path="/eventdetails/:eventId"
-              element={
-                <ProtectedRoute roles={["user", "admin"]}>
-                  <EventDetails />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/eventcreation/:organizerId"
-              element={
-                <ProtectedRoute roles={["organizer", "admin"]}>
-                  <EventCreation />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admindashboard"
-              element={
-                <ProtectedRoute roles={["admin"]}>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/myevents"
-              element={
-                <ProtectedRoute roles={["user", "organizer"]}>
-                  <Myevents />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/manageevents"
-              element={
-                <ProtectedRoute roles={["organizer", "admin"]}>
-                  <ManageEventsPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/orgdashboard/:organizerId"
-              element={
-                <ProtectedRoute roles={["organizer"]}>
-                  <OrgDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/organalytics"
-              element={
-                <ProtectedRoute roles={["organizer"]}>
-                  <Analytics />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/useraccount"
-              element={
-                <ProtectedRoute roles={["user", "organizer", "admin"]}>
-                  <UserAccount />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
+              {/* Protected Routes */}
+              <Route
+                path="/eventdetails/:eventId"
+                element={
+                  <ProtectedRoute roles={["user", "admin"]}>
+                    <EventDetails />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/eventcreation/:organizerId"
+                element={
+                  <ProtectedRoute roles={["organizer", "admin"]}>
+                    <EventCreation />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admindashboard"
+                element={
+                  <ProtectedRoute roles={["admin"]}>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/myevents"
+                element={
+                  <ProtectedRoute roles={["user", "organizer"]}>
+                    <Myevents />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/manageevents"
+                element={
+                  <ProtectedRoute roles={["organizer", "admin"]}>
+                    <ManageEventsPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/orgdashboard/:organizerId"
+                element={
+                  <ProtectedRoute roles={["organizer"]}>
+                    <OrgDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/organalytics"
+                element={
+                  <ProtectedRoute roles={["organizer"]}>
+                    <Analytics />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/useraccount"
+                element={
+                  <ProtectedRoute roles={["user", "organizer", "admin"]}>
+                    <UserAccount />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </ContentWrapper>
           <Footer />
         </div>
       </div>

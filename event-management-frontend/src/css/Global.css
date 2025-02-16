@@ -12,3 +12,9 @@
       radial-gradient(circle at 70% 90%, rgb(255, 255, 255) 10%, transparent 50%);
     background-size: cover;
   }
+
+  /* Add this to your Global.css file */
+.content-wrapper {
+  margin-top: 3rem; /* Adjust this value to control the amount of space */
+  padding-top: 1rem;
+}
