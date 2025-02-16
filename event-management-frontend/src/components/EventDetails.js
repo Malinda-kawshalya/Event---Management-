@@ -59,10 +59,35 @@ const EventDetails = () => {
     }
   };
 
-  const handleSubmitReservation = (e) => {
+  const handleSubmitReservation = async (e) => {
     e.preventDefault();
-    alert(`Reserved ${reservation.tickets} ticket(s). Total Cost: $${totalCost}. Contact: ${reservation.contact}`);
-    setShowModal(false);
+
+    try {
+      // Send reservation data to the backend
+      const response = await fetch("http://localhost:5000/api/reservations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          eventId: event._id,
+          tickets: reservation.tickets,
+          contact: reservation.contact,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`Reservation successful! Total Cost: $${totalCost}`);
+        setShowModal(false);
+      } else {
+        alert(data.message || "Failed to create reservation");
+      }
+    } catch (error) {
+      console.error("Error creating reservation:", error);
+      alert("Failed to create reservation");
+    }
   };
 
   const handleCheckout = () => {

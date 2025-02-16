@@ -1,4 +1,3 @@
-// models/Reservation.js
 const mongoose = require("mongoose");
 
 const reservationSchema = new mongoose.Schema({
@@ -7,27 +6,22 @@ const reservationSchema = new mongoose.Schema({
     ref: "Event", // Reference to the Event model
     required: true,
   },
-  contact: {
-    type: String,
-    required: true,
-  },
   tickets: {
     type: Number,
     required: true,
     min: 1,
   },
-  reservationDate: {
+  contact: {
+    type: String,
+    required: true,
+  },
+  totalCost: {
+    type: Number,
+    required: true,
+  },
+  createdAt: {
     type: Date,
     default: Date.now,
-  },
-  status: {
-    type: String,
-    enum: ["Pending", "Confirmed", "Cancelled"],
-    default: "Pending",
-  },
-  notes: {
-    type: String,
-    default: "",
   },
 });
 
