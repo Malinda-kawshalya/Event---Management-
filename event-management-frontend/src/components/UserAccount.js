@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Row, Col, Spinner, Form, Button, Card } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Spinner,
+  Form,
+  Button,
+  Card,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/UserAccount.css";
 
 const UserAccount = () => {
   const [user, setUser] = useState(null);
+  const [reservations, setReservations] = useState([]); // Add this line
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
@@ -23,26 +32,33 @@ const UserAccount = () => {
           throw new Error("Authentication required");
         }
 
-        const userData = JSON.parse(userString); // FIXED ERROR
+        const userData = JSON.parse(userString);
 
         if (!userData || !userData._id) {
           throw new Error("Invalid user data");
         }
 
-        const response = await axios.get(
-          `http://localhost:5000/api/users/${userData._id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        // Fetch both user data and reservations
+        const [userResponse, reservationsResponse] = await Promise.all([
+          axios.get(`http://localhost:5000/api/users/${userData._id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          axios.get(
+            `http://localhost:5000/api/reservations/user/${userData._id}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          ),
+        ]);
 
-        if (response.data) {
-          setUser(response.data);
-          setPreviewImage(response.data.profilePicture || "https://via.placeholder.com/150");
-        } else {
-          throw new Error("No user data received");
+        // Set user data
+        if (userResponse.data) {
+          setUser(userResponse.data);
+        }
+
+        // Set reservations data
+        if (reservationsResponse.data) {
+          setReservations(reservationsResponse.data);
         }
       } catch (err) {
         console.error("Error fetching user data:", err);
@@ -97,7 +113,10 @@ const UserAccount = () => {
 
   if (loading) {
     return (
-      <Container className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+      <Container
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh" }}
+      >
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>
@@ -118,13 +137,25 @@ const UserAccount = () => {
   return (
     <Container className="my-5">
       <Row>
+        {/* User Profile Card */}
         <Col md={4}>
           <Card className="shadow-sm mb-4">
             <Card.Body className="text-center">
               <div className="profile-picture-container">
-                <img src={previewImage} alt="Profile" className="profile-picture rounded-circle" />
+                <img
+                  src={
+                    previewImage ||
+                    user?.profilePicture ||
+                    "default-profile.jpg"
+                  }
+                  alt="Profile"
+                  className="profile-picture rounded-circle"
+                />
                 <div className="profile-picture-overlay">
-                  <label htmlFor="profilePictureUpload" className="btn btn-light btn-sm">
+                  <label
+                    htmlFor="profilePictureUpload"
+                    className="btn btn-light btn-sm"
+                  >
                     <i className="bi bi-camera"></i>
                   </label>
                   <input
@@ -146,44 +177,125 @@ const UserAccount = () => {
               </p>
               <p>
                 <strong>Member Since:</strong>{" "}
-                {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : "N/A"}
+                {user?.createdAt
+                  ? new Date(user.createdAt).toLocaleDateString()
+                  : "N/A"}
               </p>
             </Card.Body>
           </Card>
         </Col>
+
+        {/* Reservations Card */}
         <Col md={8}>
           <Card className="shadow-sm">
             <Card.Body>
               <h3 className="card-title">My Bookings</h3>
-              {user?.bookings?.length > 0 ? (
+
+              {reservations.length > 0 ? (
                 <ul className="list-unstyled">
-                  {user.bookings.map((booking) => (
-                    <li key={booking._id} className="mb-3 card p-3">
-                      <h5>{booking.eventTitle}</h5>
-                      <p>
-                        <strong>Date:</strong> {new Date(booking.date).toLocaleDateString()}
-                      </p>
-                      <p>
-                        <strong>Time:</strong> {booking.time}
-                      </p>
-                      <p>
-                        <strong>Tickets:</strong> {booking.tickets}
-                      </p>
-                      <p>
-                        <strong>Status:</strong>{" "}
-                        <span className={`badge bg-${booking.status === "confirmed" ? "success" : "warning"}`}>
-                          {booking.status}
-                        </span>
-                      </p>
-                    </li>
-                  ))}
+                  {reservations.map((reservation) => {
+                    const event = reservation.eventId; // Access event through eventId field
+
+                    return (
+                      <li key={reservation._id} className="mb-3 card p-3">
+                        <div className="d-flex gap-3">
+                          {/* Event Banner */}
+                          <div style={{ width: "200px", minWidth: "200px" }}>
+                            <img
+                              src={
+                                event?.banner
+                                  ? `http://localhost:5000/${event.banner}`
+                                  : "https://via.placeholder.com/200x150?text=No+Image"
+                              }
+                              alt={event?.title || "Event banner"}
+                              className="img-fluid rounded"
+                              style={{
+                                width: "100%",
+                                height: "150px",
+                                objectFit: "cover",
+                              }}
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src =
+                                  "https://via.placeholder.com/200x150?text=No+Image";
+                              }}
+                            />
+                          </div>
+
+                          {/* Event Details */}
+                          <div className="flex-grow-1">
+                            <div className="d-flex justify-content-between align-items-start">
+                              <div>
+                                <h5>{event?.title || "Event Unavailable"}</h5>
+                                <p className="mb-1">
+                                  <strong>Date:</strong>{" "}
+                                  {event?.date
+                                    ? new Date(event.date).toLocaleDateString()
+                                    : "N/A"}
+                                </p>
+                                <p className="mb-1">
+                                  <strong>Time:</strong> {event?.time || "N/A"}
+                                </p>
+                                <p className="mb-1">
+                                  <strong>Location:</strong>{" "}
+                                  {event?.location || "N/A"}
+                                </p>
+                                <p className="mb-1">
+                                  <strong>Tickets Booked:</strong>{" "}
+                                  {reservation.tickets}
+                                </p>
+                                <p className="mb-1">
+                                  <strong>Total Cost:</strong> $
+                                  {reservation.totalCost?.toFixed(2) || "0.00"}
+                                </p>
+                                <p className="mb-1">
+                                  <strong>Booking Date:</strong>{" "}
+                                  {reservation.createdAt
+                                    ? new Date(
+                                        reservation.createdAt
+                                      ).toLocaleDateString()
+                                    : "N/A"}
+                                </p>
+                                <p className="mb-0">
+                                  <strong>Status:</strong>{" "}
+                                  <span
+                                    className={`badge bg-${
+                                      reservation.status === "confirmed"
+                                        ? "success"
+                                        : "warning"
+                                    }`}
+                                  >
+                                    {reservation.status || "pending"}
+                                  </span>
+                                </p>
+                              </div>
+                              {event?._id && (
+                                <Button
+                                  variant="outline-primary"
+                                  size="sm"
+                                  onClick={() =>
+                                    navigate(`/eventdetails/${event._id}`)
+                                  }
+                                >
+                                  View Event
+                                </Button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })}
                 </ul>
               ) : (
                 <div className="text-center p-4">
                   <p>No bookings found</p>
-                  <a href="/allevents" className="btn btn-primary">
+                  <Button
+                    variant="primary"
+                    onClick={() => navigate("/allevents")}
+                  >
                     Browse Events
-                  </a>
+                  </Button>
                 </div>
               )}
             </Card.Body>

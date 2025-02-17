@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const reservationSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // Reference to the User model
+    required: true,
+  },
   eventId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Event", // Reference to the Event model

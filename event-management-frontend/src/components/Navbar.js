@@ -169,7 +169,7 @@ const Navbar = () => {
                     ) : (
                       <Link
                         className="dropdown-item"
-                        to="/useraccount"
+                        to={`/useraccount/${user._id}`} // Navigates to user profile
                         onClick={() => setNavbarOpen(false)}
                       >
                         My Profile

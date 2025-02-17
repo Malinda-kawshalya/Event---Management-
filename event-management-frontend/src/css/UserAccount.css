@@ -29,3 +29,26 @@
   .profile-picture-overlay:hover {
     background: rgba(0, 0, 0, 0.7);
   }
+
+  .card {
+    transition: transform 0.2s ease-in-out;
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .img-fluid.rounded {
+    transition: transform 0.3s ease;
+  }
+  
+  .img-fluid.rounded:hover {
+    transform: scale(1.05);
+  }
+  
+  .badge {
+    font-size: 0.85em;
+    padding: 0.35em 0.65em;
+  }

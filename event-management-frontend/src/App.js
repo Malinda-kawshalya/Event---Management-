@@ -123,7 +123,7 @@ const App = () => {
                 }
               />
               <Route
-                path="/useraccount"
+                path="/useraccount/:userId"
                 element={
                   <ProtectedRoute roles={["user", "organizer", "admin"]}>
                     <UserAccount />

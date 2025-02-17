@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Form, Modal, Spinner, Alert } from "react-bootstrap";
+import { UserContext } from "./contexts/UserContext";
 //import "bootstrap/dist/css/bootstrap.min.css";
 
 const EventDetails = () => {
+  const { user} = useContext(UserContext);
+  const navigate = useNavigate(); // Get the event ID from the URL
   const { eventId } = useParams(); // Get the event ID from the URL
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -62,17 +65,25 @@ const EventDetails = () => {
   const handleSubmitReservation = async (e) => {
     e.preventDefault();
 
+    if (!user) {
+      alert("Please sign in to make a reservation");
+      navigate('/signin');
+      return;
+    }
+
     try {
-      // Send reservation data to the backend
+      const token = localStorage.getItem('token');
       const response = await fetch("http://localhost:5000/api/reservations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` // Add token to headers
         },
         body: JSON.stringify({
           eventId: event._id,
-          tickets: reservation.tickets,
+          tickets: parseInt(reservation.tickets), // Ensure tickets is a number
           contact: reservation.contact,
+          userId: user._id // Add user ID
         }),
       });
 
@@ -86,9 +97,11 @@ const EventDetails = () => {
       }
     } catch (error) {
       console.error("Error creating reservation:", error);
-      alert("Failed to create reservation");
+      alert("Failed to create reservation. Please try again.");
     }
   };
+
+  
 
   const handleCheckout = () => {
     alert(`Proceeding to checkout for ${reservation.tickets} ticket(s). Total Cost: $${totalCost}`);
