@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/Navbar.css';
-import { UserContext } from './contexts/UserContext';
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/Navbar.css";
+import { UserContext } from "./contexts/UserContext";
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);
@@ -14,9 +14,9 @@ const Navbar = () => {
   const handleLogout = () => {
     try {
       logout();
-      navigate('/');
+      navigate("/");
     } catch (error) {
-      console.error('Error during logout:', error);
+      console.error("Error during logout:", error);
     }
   };
 
@@ -30,14 +30,18 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <nav className={`navbar navbar-expand-lg ${scrolled ? 'scrolled' : ''} navbar-light sticky-top`}>
+    <nav
+      className={`navbar navbar-expand-lg ${
+        scrolled ? "scrolled" : ""
+      } navbar-light sticky-top`}
+    >
       <div className="container">
         <Link className="navbar-brand" to="/">
           Event Guru
@@ -53,25 +57,44 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className={`collapse navbar-collapse ${navbarOpen ? 'show' : ''}`} id="navbarNav">
+        <div
+          className={`collapse navbar-collapse ${navbarOpen ? "show" : ""}`}
+          id="navbarNav"
+        >
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/" onClick={() => setNavbarOpen(false)}>
+              <Link
+                className="nav-link"
+                to="/"
+                onClick={() => setNavbarOpen(false)}
+              >
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about" onClick={() => setNavbarOpen(false)}>
+              <Link
+                className="nav-link"
+                to="/about"
+                onClick={() => setNavbarOpen(false)}
+              >
                 About
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact" onClick={() => setNavbarOpen(false)}>
+              <Link
+                className="nav-link"
+                to="/contact"
+                onClick={() => setNavbarOpen(false)}
+              >
                 Contact
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/allevents" onClick={() => setNavbarOpen(false)}>
+              <Link
+                className="nav-link"
+                to="/allevents"
+                onClick={() => setNavbarOpen(false)}
+              >
                 All Events
               </Link>
             </li>
@@ -79,7 +102,11 @@ const Navbar = () => {
             {!user ? (
               <>
                 <li className="nav-item">
-                  <Link className="btn btn-outline-primary me-2 nav-special-btn" to="/signin" onClick={() => setNavbarOpen(false)}>
+                  <Link
+                    className="btn btn-outline-primary me-2 nav-special-btn"
+                    to="/signin"
+                    onClick={() => setNavbarOpen(false)}
+                  >
                     Sign In
                   </Link>
                 </li>
@@ -93,14 +120,25 @@ const Navbar = () => {
                   >
                     Register
                   </button>
-                  <ul className="dropdown-menu" aria-labelledby="registerDropdown">
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="registerDropdown"
+                  >
                     <li>
-                      <Link className="dropdown-item" to="/signup" onClick={() => setNavbarOpen(false)}>
+                      <Link
+                        className="dropdown-item"
+                        to="/signup"
+                        onClick={() => setNavbarOpen(false)}
+                      >
                         Register as User
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/orgregister" onClick={() => setNavbarOpen(false)}>
+                      <Link
+                        className="dropdown-item"
+                        to="/orgregister"
+                        onClick={() => setNavbarOpen(false)}
+                      >
                         Register as Organizer
                       </Link>
                     </li>
@@ -120,18 +158,32 @@ const Navbar = () => {
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="userDropdown">
                   <li>
-                    {user.role === 'organizer' ? (
-                      <Link className="dropdown-item" to="/orgdashboard" onClick={() => setNavbarOpen(false)}>
+                    {user.role === "organizer" ? (
+                      <Link
+                        className="dropdown-item"
+                        to={`/orgdashboard/${user._id}`}
+                        onClick={() => setNavbarOpen(false)}
+                      >
                         Organizer Dashboard
                       </Link>
                     ) : (
-                      <Link className="dropdown-item" to="/useraccount" onClick={() => setNavbarOpen(false)}>
+                      <Link
+                        className="dropdown-item"
+                        to="/useraccount"
+                        onClick={() => setNavbarOpen(false)}
+                      >
                         My Profile
                       </Link>
                     )}
                   </li>
                   <li>
-                    <button className="dropdown-item" onClick={() => { handleLogout(); setNavbarOpen(false); }}>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        handleLogout();
+                        setNavbarOpen(false);
+                      }}
+                    >
                       Logout
                     </button>
                   </li>
