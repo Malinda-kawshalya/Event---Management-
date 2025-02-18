@@ -1,0 +1,75 @@
+.checkout-container {
+    min-height: 80vh;
+    background-color: #f8f9fa;
+  }
+  
+  .checkout-card,
+  .order-summary-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .card-header {
+    padding: 1.5rem;
+    border-bottom: none;
+  }
+  
+  .payment-form {
+    padding: 1rem;
+  }
+  
+  .card-element-container {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: white;
+  }
+  
+  .pay-button {
+    padding: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .price-breakdown {
+    font-size: 0.95rem;
+  }
+  
+  .price-breakdown .total {
+    font-size: 1.2rem;
+    color: #0d6efd;
+  }
+  
+  .event-details {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .success-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+  
+  hr {
+    margin: 1rem 0;
+    opacity: 0.2;
+  }
+  
+  .order-summary-card {
+    position: sticky;
+    top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .order-summary-card {
+      margin-top: 2rem;
+    }
+  }

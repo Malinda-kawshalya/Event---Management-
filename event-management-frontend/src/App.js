@@ -25,6 +25,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import SpecialShows from "./components/SpecialShows";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Global.css";
+import CheckoutPage from "./components/CheckoutPage";
 import Chat from "./components/ChatBot";
 
 // Content wrapper component that adds spacing except on homepage
@@ -64,6 +65,7 @@ const App = () => {
               <Route path="/orgregister" element={<OrganizerRegister />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/specialshows" element={<SpecialShows />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
 
               {/* Protected Routes */}
               <Route
