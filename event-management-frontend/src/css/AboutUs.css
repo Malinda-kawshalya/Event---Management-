@@ -1,12 +1,22 @@
 /* AboutUs.css */
 
+/* About Us Container */
+/* .about-us-container {
+    ; /* White background for the entire page */
+/*} */
+
+/* Common Section Padding */
+.section-padding {
+    padding: 30px 5%;; /* Common left and right padding (15%) */
+}
+
 /* About Hero Section */
 .about-hero-section {
-    background-image: url('../images/banner.jpg'); /* Add your hero image */
+    background-image: url('/src/images/banner.jpg'); /* Add your hero image */
     background-size: cover;
     background-position: center;
     color: white;
-    padding: 150px 0; /* Increase padding for better spacing */
+    padding: 30px 5%; /* Match left and right padding with other sections */
     position: relative;
 }
 
@@ -21,71 +31,117 @@
 }
 
 .about-hero-title {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 20px;
     position: relative;
     z-index: 1; /* Ensure text is above the overlay */
+    text-align: left; /* Align text to the left */
 }
 
 .about-hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     margin-bottom: 30px;
     position: relative;
     z-index: 1; /* Ensure text is above the overlay */
+    text-align: left; /* Align text to the left */
 }
 
 /* Introduction Section */
-.about-us-container .lead {
+/* Introduction Section */
+.about-us-content .lead {
     font-size: 1.25rem;
     color: #333;
     line-height: 1.8;
+    text-align: justify; /* Justify the text */
 }
 
-/* Mission Section */
-.mission-section {
-    background-color: #f8f9fa;
-    padding: 60px 0;
-}
-
-.mission-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #3f51b5;
-}
-
-.mission-section p {
-    font-size: 1.25rem;
+.about-us-content p {
+    font-size: 1.1rem;
     color: #555;
     line-height: 1.8;
+    text-align: justify; /* Justify the text */
+    margin-bottom: 20px; /* Add spacing between paragraphs */
+}
+
+
+
+/* Vision and Mission Section */
+/* Vision and Mission Section */
+/* .vision-mission-section {
+    background-color: #f8f9fa; /* Light background for this section */
+/*} */
+
+.vision-mission-section .row {
+    display: flex; /* Use Flexbox to align heights */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.vision-box, .mission-box {
+    background-color: #aed2ff; /* White background for boxes */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    text-align: left; /* Align text to the left */
+    height: 100%; /* Ensure boxes take full height of their container */
+    display: flex; /* Use Flexbox for inner content alignment */
+    flex-direction: column; /* Stack content vertically */
+}
+
+.vision-box h2, .mission-box h2 {
+    font-size: 1.5rem;
+    color: #3f51b5; /* Primary color for headings */
+    margin-bottom: 20px;
+}
+
+.vision-box p, .mission-box p {
+    font-size: 1.1rem;
+    color: #555; /* Dark gray for text */
+    line-height: 1.8;
+    flex-grow: 1; /* Allow paragraphs to grow and fill remaining space */
 }
 
 /* Features Section */
 .features-section {
-    padding: 60px 0;
+    background-color: #27005d;
+}
+
+.features-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 200px; /* Further increased margin */
+    color: #3f51b5;
+    text-align: center; 
 }
 
 .feature-icon {
     font-size: 3rem;
-    color: #3f51b5;
+    color: #aed2ff;
     margin-bottom: 20px;
 }
 
 .features-section h5 {
     font-size: 1.5rem;
     margin-bottom: 15px;
-    color: #333;
+    color: #ffffff;
+    text-align: center; /* Align text to the left */
 }
 
 .features-section p {
     font-size: 1rem;
-    color: #666;
+    color: #b1b1b1;
+    text-align: center; /* Align text to the left */
 }
 
 /* Team Section */
 .team-section {
     background-color: #f8f9fa;
-    padding: 60px 0;
+}
+
+.team-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #3f51b5;
+    text-align: center; /* Align text to the left */
 }
 
 .team-image {
@@ -98,32 +154,12 @@
     font-size: 1.5rem;
     margin-bottom: 10px;
     color: #333;
+    text-align: center; /* Align text to the left */
 }
 
 .team-section p {
     font-size: 1rem;
     color: #666;
+    text-align: center; /* Align text to the left */
 }
 
-/* Call-to-Action Section */
-.cta-section {
-    background-color: #3f51b5;
-    color: white;
-    padding: 60px 0;
-}
-
-.cta-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-.cta-section p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    color: white;
-}
-
-.cta-section .btn {
-    font-size: 1.2rem;
-    padding: 10px 30px;
-}

@@ -1,0 +1,126 @@
+/* ContactUs.css */
+
+/* Contact Us Container */
+/* .contact-us-container {
+    background-color: #fff; /* White background for the entire page */
+/*} */
+
+/* Common Section Padding */
+.section-padding {
+    padding: 30px 5%; /* Common left and right padding (15%) */
+}
+
+/* Contact Hero Section */
+.contact-hero-section {
+    background-image: url('/src/images/banner.jpg'); /* Add your hero image */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 30px 5%; /* Match left and right padding with other sections */
+    position: relative;
+}
+
+.contact-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+}
+
+.contact-hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1; /* Ensure text is above the overlay */
+    text-align: left; /* Align text to the left */
+}
+
+.contact-hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1; /* Ensure text is above the overlay */
+    text-align: left; /* Align text to the left */
+}
+
+/* Contact Form and Information Section */
+.contact-us-container h2 {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: #3f51b5; /* Primary color for headings */
+    text-align: left; /* Align text to the left */
+}
+
+.contact-us-container p {
+    font-size: 1.1rem;
+    color: #555; /* Dark gray for text */
+    line-height: 1.8;
+    text-align: left; /* Align text to the left */
+}
+
+.contact-us-container .form-label {
+    font-size: 1.1rem;
+    color: #333; /* Dark gray for labels */
+    text-align: left; /* Align labels to the left */
+    margin-bottom: 0; /* Remove default margin */
+    padding-top: 10px; /* Add padding to align with inputs */
+}
+
+.contact-us-container .form-control {
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Light border for inputs */
+}
+
+.contact-us-container .btn {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+/* Social Media Buttons */
+.contact-us-container .btn-outline-primary {
+    border-color: #3f51b5;
+    color: #3f51b5;
+}
+
+.contact-us-container .btn-outline-primary:hover {
+    background-color: #3f51b5;
+    color: white;
+}
+
+.contact-us-container .btn-outline-info {
+    border-color: #17a2b8;
+    color: #17a2b8;
+}
+
+.contact-us-container .btn-outline-info:hover {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.contact-us-container .btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.contact-us-container .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.contact-us-container .btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.contact-us-container .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
