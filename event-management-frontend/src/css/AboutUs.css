@@ -1,0 +1,129 @@
+/* AboutUs.css */
+
+/* About Hero Section */
+.about-hero-section {
+    background-image: url('../images/banner.jpg'); /* Add your hero image */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 150px 0; /* Increase padding for better spacing */
+    position: relative;
+}
+
+.about-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+}
+
+.about-hero-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1; /* Ensure text is above the overlay */
+}
+
+.about-hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1; /* Ensure text is above the overlay */
+}
+
+/* Introduction Section */
+.about-us-container .lead {
+    font-size: 1.25rem;
+    color: #333;
+    line-height: 1.8;
+}
+
+/* Mission Section */
+.mission-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+}
+
+.mission-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #3f51b5;
+}
+
+.mission-section p {
+    font-size: 1.25rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Features Section */
+.features-section {
+    padding: 60px 0;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: #3f51b5;
+    margin-bottom: 20px;
+}
+
+.features-section h5 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.features-section p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Team Section */
+.team-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+}
+
+.team-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.team-section h5 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.team-section p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Call-to-Action Section */
+.cta-section {
+    background-color: #3f51b5;
+    color: white;
+    padding: 60px 0;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.cta-section .btn {
+    font-size: 1.2rem;
+    padding: 10px 30px;
+}
