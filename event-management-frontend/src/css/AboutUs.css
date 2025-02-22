@@ -7,7 +7,7 @@
 
 /* Common Section Padding */
 .section-padding {
-    padding: 30px 5%;; /* Common left and right padding (15%) */
+    padding: 30px 100px 30px 100px;;; /* Common left and right padding (5%) */
 }
 
 /* About Hero Section */
@@ -16,7 +16,7 @@
     background-size: cover;
     background-position: center;
     color: white;
-    padding: 30px 5%; /* Match left and right padding with other sections */
+    padding: 30px 100px 30px 100px;; /* Match left and right padding with other sections */
     position: relative;
 }
 
