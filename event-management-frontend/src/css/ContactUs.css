@@ -1,126 +1,142 @@
-/* ContactUs.css */
+/* Contact Us Page */
 
-/* Contact Us Container */
-/* .contact-us-container {
-    background-color: #fff; /* White background for the entire page */
-/*} */
+/* General Styling */
 
-/* Common Section Padding */
-.section-padding {
-    padding: 30px 5%; /* Common left and right padding (15%) */
-}
 
-/* Contact Hero Section */
-.contact-hero-section {
-    background-image: url('/src/images/banner.jpg'); /* Add your hero image */
+/* Hero Section */
+.contactus-hero {
+    background-image: url('/src/images/banner.jpg');
     background-size: cover;
     background-position: center;
     color: white;
-    padding: 30px 5%; /* Match left and right padding with other sections */
+    padding: 30px 100px 30px 100px;;
     position: relative;
+    text-align: center;
 }
 
-.contact-hero-section::before {
-    content: '';
+.contactus-hero::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.contact-hero-title {
+.contactus-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.contactus-title {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 20px;
     position: relative;
     z-index: 1; /* Ensure text is above the overlay */
-    text-align: left; /* Align text to the left */
+    text-align: left;
 }
 
-.contact-hero-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 1; /* Ensure text is above the overlay */
-    text-align: left; /* Align text to the left */
+/* Section Styling */
+.contactus-section {
+    padding: 30px 100px 30px 100px;
 }
 
-/* Contact Form and Information Section */
-.contact-us-container h2 {
-    font-size: 1.25rem;
+/* Contact Box Styling */
+.contactus-box {
+    background: #aed2ff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    color: #3f51b5; /* Primary color for headings */
-    text-align: left; /* Align text to the left */
 }
 
-.contact-us-container p {
+.contactus-box .btn-primary{
+    background-color: #27005d;
+    border-color: #5702cd;
+    color: white;
+}
+
+.contactus-box .btn-primary:hover {
+    background-color: #9400ff;  /* Darker shade on hover */
+    border-color: #ad3ffc;
+}
+
+/* Form Styling */
+.contactus-heading {
+    font-size: 1.5rem;
+    color: #3f51b5;
+    margin-bottom: 20px;
+}
+
+.contactus-box p {
     font-size: 1.1rem;
-    color: #555; /* Dark gray for text */
-    line-height: 1.8;
-    text-align: left; /* Align text to the left */
+    color: #555;
+    line-height: 1.6;
 }
 
-.contact-us-container .form-label {
-    font-size: 1.1rem;
-    color: #333; /* Dark gray for labels */
-    text-align: left; /* Align labels to the left */
-    margin-bottom: 0; /* Remove default margin */
-    padding-top: 10px; /* Add padding to align with inputs */
+.contactus-box .form-label {
+    font-size: 1rem;
+    color: #333;
 }
 
-.contact-us-container .form-control {
+.contactus-box .form-control {
     font-size: 1rem;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ddd; /* Light border for inputs */
+    border: 1px solid #ddd;
 }
 
-.contact-us-container .btn {
+/* Button Styling */
+.contactus-box .btn {
     font-size: 1.1rem;
     padding: 10px 20px;
     border-radius: 5px;
-    color: #ffffff;
+}
+
+/* Contact Information Box */
+.contactus-info {
+    background: #aed2ff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contactus-details {
+    margin-bottom: 30px;
+}
+
+.contactus-details-1{
+    color:black;
+}
+
+.contactus-follow {
+    margin-bottom: 20px;
 }
 
 /* Social Media Buttons */
-.contact-us-container .btn-outline-primary {
+.contactus-box .btn-outline-primary {
     border-color: #3f51b5;
     color: #3f51b5;
 }
 
-.contact-us-container .btn-outline-primary:hover {
+.contactus-box .btn-outline-primary:hover {
     background-color: #3f51b5;
     color: white;
 }
 
-.contact-us-container .btn-outline-info {
+.contactus-box .btn-outline-info {
     border-color: #17a2b8;
     color: #17a2b8;
 }
 
-.contact-us-container .btn-outline-info:hover {
-    background-color: #17a2b8;
-    color: white;
-}
-
-.contact-us-container .btn-outline-danger {
+.contactus-box .btn-outline-danger {
     border-color: #dc3545;
     color: #dc3545;
 }
 
-.contact-us-container .btn-outline-danger:hover {
-    background-color: #dc3545;
-    color: white;
-}
-
-.contact-us-container .btn-outline-secondary {
+.contactus-box .btn-outline-secondary {
     border-color: #6c757d;
     color: #6c757d;
-}
-
-.contact-us-container .btn-outline-secondary:hover {
-    background-color: #6c757d;
-    color: white;
 }
