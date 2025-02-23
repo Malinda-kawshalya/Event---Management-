@@ -1,0 +1,81 @@
+/* Organizer Register Styles */
+.org-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #aed2ff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding-bottom: 30px; /* Added bottom padding */
+  }
+  
+  .org-title {
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .org-form {
+    padding: 10px;
+  }
+  
+  .org-form-group {
+    margin-bottom: 15px;
+  }
+  
+  .org-form-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .org-form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .org-form-control:focus {
+    border-color: #4a90e2;
+    box-shadow: 0px 0px 8px rgba(74, 144, 226, 0.5);
+  }
+  
+  .org-btn {
+    width: 100%;
+    background: #27005d;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+  }
+  
+  .org-btn:hover {
+    background: #9400ff;
+    transform: scale(1.02);
+  }
+  
+  /* Button popup effect */
+  .org-btn-clicked {
+    animation: pop 0.3s ease-in-out;
+  }
+  
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  

@@ -8,7 +8,10 @@
   }
   
   h2 {
-    color: #007bff;
+    color: #27005d;
     font-weight: bold;
   }
   
+  .mt-5{
+    padding-bottom: 30px;
+  }

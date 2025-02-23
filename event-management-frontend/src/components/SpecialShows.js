@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/SpecialShows.css";
@@ -46,33 +47,34 @@ const SpecialShows = () => {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4" data-aos="fade-down">This Month's Special Shows</h2>
+      <h2 className="text-center mb-4" data-aos="fade-down">What's Happenning This Month</h2>
       <div className="row">
         {events.map((event) => (
-          <div className="col-md-4 mb-4" key={event._id} data-aos="fade-up">
-            <div className="card h-100">
-              <img
+          <div className="col-lg-3 col-md-6 col-sm-12 d-flex align-items-stretch" key={event._id} data-aos="fade-up">
+            <Card className="custom-event-card">
+              <Card.Img
+                variant="top"
                 src={`http://localhost:5000/${event.banner}`}
-                className="card-img-top"
+                className="custom-card-img"
                 alt={event.title}
               />
-              <div className="card-body">
-                <h5 className="card-title">{event.title}</h5>
-                <p className="card-text">
+              <Card.Body className="custom-card-body">
+                <Card.Title className="custom-card-title">{event.title}</Card.Title>
+                <Card.Text className="custom-card-text">{event.description}</Card.Text>
+                <Card.Text className="custom-card-text">
                   <strong>Date:</strong> {new Date(event.date).toLocaleDateString()}
                   <br />
                   <strong>Location:</strong> {event.location}
-                </p>
-              </div>
-              <div className="card-footer text-center">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => navigate(`/eventdetails/${event._id}`)}
-                >
-                  Buy Tickets
-                </button>
-              </div>
-            </div>
+                </Card.Text>
+              
+                <Button
+                          className="custom-buy-button"
+                          onClick={() => navigate(`/eventdetails/${event._id}`)}
+                        >
+                          Buy Tickets
+                        </Button>
+                      </Card.Body>
+            </Card>
           </div>
         ))}
       </div>

@@ -9,8 +9,8 @@ body {
 
 /* CTA Section Styling */
 .cta-section {
-  max-width: 1400px;
-  margin: 10px auto;
+  max-width: 2000px;
+
   background: linear-gradient(135deg, #AED2FF, #96cdf5); /* New CTA Background */
   color: white;
   border-radius: 10px;

@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/RegOrganizer.css"; // Import the CSS file
 
 const OrganizerRegister = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-    companyName: '',
-    companyAddress: '',
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    companyName: "",
+    companyAddress: "",
   });
+
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,36 +31,43 @@ const OrganizerRegister = () => {
     }
 
     try {
+      // Button click animation
+      setIsButtonClicked(true);
+      setTimeout(() => setIsButtonClicked(false), 300);
+
       // Send data to backend
-      const response = await axios.post('http://localhost:5000/api/organizers', formData);
-      alert('Registration successful!');
-      console.log('Response:', response.data);
+      const response = await axios.post(
+        "http://localhost:5000/api/organizers",
+        formData
+      );
+      alert("Registration successful!");
+      console.log("Response:", response.data);
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        password: '',
-        confirmPassword: '',
-        companyName: '',
-        companyAddress: '',
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirmPassword: "",
+        companyName: "",
+        companyAddress: "",
       });
     } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to register. Please try again later.');
+      console.error("Error:", error);
+      alert("Failed to register. Please try again later.");
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center">Register as Organizer</h2>
-      <form onSubmit={handleSubmit} className="mt-4">
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
+    <div className="org-container">
+      <h2 className="text-center org-title">Register as Organizer</h2>
+      <form onSubmit={handleSubmit} className="org-form">
+        <div className="org-form-group">
+          <label htmlFor="name" className="org-form-label">
             Full Name
           </label>
           <input
             type="text"
-            className="form-control"
+            className="org-form-control"
             id="name"
             name="name"
             value={formData.name}
@@ -66,13 +76,14 @@ const OrganizerRegister = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
+
+        <div className="org-form-group">
+          <label htmlFor="email" className="org-form-label">
             Email Address
           </label>
           <input
             type="email"
-            className="form-control"
+            className="org-form-control"
             id="email"
             name="email"
             value={formData.email}
@@ -81,13 +92,14 @@ const OrganizerRegister = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="phone" className="form-label">
+
+        <div className="org-form-group">
+          <label htmlFor="phone" className="org-form-label">
             Phone Number
           </label>
           <input
             type="tel"
-            className="form-control"
+            className="org-form-control"
             id="phone"
             name="phone"
             value={formData.phone}
@@ -96,13 +108,14 @@ const OrganizerRegister = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="companyName" className="form-label">
+
+        <div className="org-form-group">
+          <label htmlFor="companyName" className="org-form-label">
             Company Name
           </label>
           <input
             type="text"
-            className="form-control"
+            className="org-form-control"
             id="companyName"
             name="companyName"
             value={formData.companyName}
@@ -111,12 +124,13 @@ const OrganizerRegister = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="companyAddress" className="form-label">
+
+        <div className="org-form-group">
+          <label htmlFor="companyAddress" className="org-form-label">
             Company Address
           </label>
           <textarea
-            className="form-control"
+            className="org-form-control"
             id="companyAddress"
             name="companyAddress"
             value={formData.companyAddress}
@@ -126,13 +140,14 @@ const OrganizerRegister = () => {
             required
           ></textarea>
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
+
+        <div className="org-form-group">
+          <label htmlFor="password" className="org-form-label">
             Password
           </label>
           <input
             type="password"
-            className="form-control"
+            className="org-form-control"
             id="password"
             name="password"
             value={formData.password}
@@ -141,13 +156,14 @@ const OrganizerRegister = () => {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="confirmPassword" className="form-label">
+
+        <div className="org-form-group">
+          <label htmlFor="confirmPassword" className="org-form-label">
             Confirm Password
           </label>
           <input
             type="password"
-            className="form-control"
+            className="org-form-control"
             id="confirmPassword"
             name="confirmPassword"
             value={formData.confirmPassword}
@@ -156,7 +172,11 @@ const OrganizerRegister = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary w-100">
+
+        <button
+          type="submit"
+          className={`org-btn ${isButtonClicked ? "org-btn-clicked" : ""}`}
+        >
           Register
         </button>
       </form>

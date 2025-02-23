@@ -107,7 +107,7 @@
 
 /* Buy Tickets Button */
 .custom-buy-button {
-    background: linear-gradient(90deg, #9400FF, #27005D);
+    background: linear-gradient(90deg, #27005d, #27005D);
     color: #E4F1FF !important;
     border: none;
     padding: 10px 20px;
@@ -120,6 +120,6 @@
 }
 
 .custom-buy-button:hover {
-    background: linear-gradient(90deg, #27005D, #9400FF);
+    background: linear-gradient(90deg, #9400ff, #9400FF);
     transform: scale(1.05);
 }
