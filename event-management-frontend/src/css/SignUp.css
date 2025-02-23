@@ -1,72 +1,88 @@
-body {
-    background-color: linear-gradient(135deg, #007bff, #6c63ff);
+/* Unique Background Styling */
+.signup-page {
+    
     font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.signup-card {
+/* Unique Card Styling */
+.signup-container {
+    background: #aed2ff;
+    backdrop-filter: blur(10px);
     border-radius: 15px;
     width: 100%;
-    height: auto;
     max-width: 600px;
-    background-color: #aed2ff;
     padding: 30px;
-    
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #000000;
 }
 
-h2 {
-    font-weight: 600;
-    color: #333;
+/* Unique Title Styling */
+.signup-title {
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
 }
 
-.form-label {
+/* Unique Input and Select Styling */
+.signup-label {
     font-size: 0.9rem;
     font-weight: 500;
-    color: #555;
+    color: #8b8b8b;
 }
 
-.form-control, .form-select {
+.signup-input, .signup-select {
     border-radius: 10px;
     padding: 0.8rem;
     font-size: 0.9rem;
     color: #333;
-    box-shadow: none;
+    border: 2px solid transparent;
     transition: border-color 0.3s ease;
+    width: 100%;
 }
 
-.form-control:focus, .form-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+.signup-input:focus, .signup-select:focus {
+    border-color: #00c6ff;
+    box-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
 }
 
-button {
-    background-color: linear-gradient(135deg, #007bff, #6c63ff);
+/* Unique Sign Up Button */
+.signup-btn {
+    background: linear-gradient(90deg, #27005d, #27005d);
     color: #fff;
     font-size: 1rem;
     font-weight: 600;
-    border-radius: 10px;
+    border-radius: 30px;
     padding: 0.8rem;
-    transition: background-color 0.3s ease, transform 0.2s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
+    width: 100%;
 }
 
-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.02);
+.signup-btn:hover {
+    transform: scale(1.05);
+    background: #9400ff;
+    
 }
 
-p {
+/* Unique Sign In Link Styling */
+.signup-text {
     margin-top: 1rem;
     font-size: 0.9rem;
-    color: #b0b0b0;
+    color: #8b8b8b;
+    text-align: center;
 }
 
-p a {
-    color: #007bff;
-    font-weight: 500;
+.signup-text a {
+    color: #27005d;
+    font-weight: 600;
     text-decoration: none;
 }
 
-p a:hover {
+.signup-text a:hover {
     text-decoration: underline;
 }

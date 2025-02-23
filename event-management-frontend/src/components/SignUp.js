@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/SignUp.css';
-
 import axios from 'axios';
 
 const SignUp = () => {
@@ -31,17 +29,17 @@ const SignUp = () => {
     };
 
     return (
-        <div className="container d-flex justify-content-center align-items-center vh-100 mt-4 mb-4">
-            <div className="card p-4 shadow-lg signup-card">
-                <h2 className="text-center mb-4">Create Your Account</h2>
+        <div className="signup-page">
+            <div className="signup-container">
+                <h2 className="signup-title">Create Your Account</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="row g-3">
                         <div className="col-md-6">
-                            <label htmlFor="name" className="form-label">Full Name</label>
+                            <label htmlFor="name" className="signup-label">Full Name</label>
                             <input
                                 type="text"
                                 name="name"
-                                className="form-control"
+                                className="signup-input form-control"
                                 placeholder="Enter your full name"
                                 value={formData.name}
                                 onChange={handleInputChange}
@@ -49,11 +47,11 @@ const SignUp = () => {
                             />
                         </div>
                         <div className="col-md-6">
-                            <label htmlFor="email" className="form-label">Email</label>
+                            <label htmlFor="email" className="signup-label">Email</label>
                             <input
                                 type="email"
                                 name="email"
-                                className="form-control"
+                                className="signup-input form-control"
                                 placeholder="Enter your email"
                                 value={formData.email}
                                 onChange={handleInputChange}
@@ -61,11 +59,11 @@ const SignUp = () => {
                             />
                         </div>
                         <div className="col-md-6">
-                            <label htmlFor="password" className="form-label">Password</label>
+                            <label htmlFor="password" className="signup-label">Password</label>
                             <input
                                 type="password"
                                 name="password"
-                                className="form-control"
+                                className="signup-input form-control"
                                 placeholder="Enter your password"
                                 value={formData.password}
                                 onChange={handleInputChange}
@@ -73,11 +71,11 @@ const SignUp = () => {
                             />
                         </div>
                         <div className="col-md-6">
-                            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                            <label htmlFor="confirmPassword" className="signup-label">Confirm Password</label>
                             <input
                                 type="password"
                                 name="confirmPassword"
-                                className="form-control"
+                                className="signup-input form-control"
                                 placeholder="Re-enter your password"
                                 value={formData.confirmPassword}
                                 onChange={handleInputChange}
@@ -85,11 +83,11 @@ const SignUp = () => {
                             />
                         </div>
                         <div className="col-md-6">
-                            <label htmlFor="age" className="form-label">Age</label>
+                            <label htmlFor="age" className="signup-label">Age</label>
                             <input
                                 type="number"
                                 name="age"
-                                className="form-control"
+                                className="signup-input form-control"
                                 placeholder="Enter your age"
                                 value={formData.age}
                                 onChange={handleInputChange}
@@ -97,10 +95,10 @@ const SignUp = () => {
                             />
                         </div>
                         <div className="col-md-6">
-                            <label htmlFor="gender" className="form-label">Gender</label>
+                            <label htmlFor="gender" className="signup-label">Gender</label>
                             <select
                                 name="gender"
-                                className="form-select"
+                                className="signup-select form-select"
                                 value={formData.gender}
                                 onChange={handleInputChange}
                                 required
@@ -112,9 +110,9 @@ const SignUp = () => {
                             </select>
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary w-100 mt-4">Sign Up</button>
+                    <button type="submit" className="signup-btn mt-4">Sign Up</button>
                 </form>
-                <p className="text-center mt-3">
+                <p className="signup-text mt-3">
                     Already have an account? <a href="/signin">Sign In</a>
                 </p>
             </div>
