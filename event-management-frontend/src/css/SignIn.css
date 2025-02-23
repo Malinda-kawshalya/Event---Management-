@@ -31,14 +31,14 @@
 
 /* Button styling */
 .signin-card .btn-primary {
-  background: linear-gradient(135deg, #007bff, #6c63ff);
+  background: linear-gradient(135deg, #27005d, #27005d);
   border: none;
   font-weight: bold;
   transition: background 0.3s ease;
 }
 
 .signin-card .btn-primary:hover {
-  background: linear-gradient(135deg, #6c63ff, #007bff);
+  background: linear-gradient(135deg, #9400ff, #9400ff);
 }
 
 /* Link styling */
