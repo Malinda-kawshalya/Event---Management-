@@ -1,0 +1,123 @@
+.section-padding {
+    padding: 30px 100px;
+}
+
+.all-events-hero-section {
+    background-image: url('/src/images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 50px;
+    position: relative;
+    text-align: center;
+}
+
+.all-events-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.all-events-hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+/* Category Navigation */
+.custom-nav-pills {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 0;
+}
+
+.custom-nav-pills .nav-link {
+    background-color: #AED2FF;
+    color: #27005D !important;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 12px 25px;
+    transition: 0.3s ease-in-out;
+    border: none;
+    text-transform: uppercase;
+}
+
+.custom-nav-pills .nav-link:hover {
+    background-color: #9400FF;
+    color: #E4F1FF !important;
+}
+
+.custom-nav-pills .nav-link.active {
+    background-color: #27005D !important;
+    color: #E4F1FF !important;
+}
+
+/* Event Card Styling */
+.custom-event-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.custom-event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.custom-card-img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.custom-card-body {
+    padding: 20px;
+    background: linear-gradient(135deg, #e4f1ff, #aed2ff);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.custom-card-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #27005D;
+}
+
+.custom-card-text {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Buy Tickets Button */
+.custom-buy-button {
+    background: linear-gradient(90deg, #9400FF, #27005D);
+    color: #E4F1FF !important;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s ease-in-out;
+    width: 100%;
+}
+
+.custom-buy-button:hover {
+    background: linear-gradient(90deg, #27005D, #9400FF);
+    transform: scale(1.05);
+}
