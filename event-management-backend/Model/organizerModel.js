@@ -57,11 +57,11 @@ const organizerSchema = new mongoose.Schema({
 });
 
 // Hash password before saving
-organizerSchema.pre('save', async function(next) {
+/*organizerSchema.pre('save', async function(next) {
     if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 10);
     next();
-});
+});*/
 
 // Compare password method
 organizerSchema.methods.comparePassword = async function(candidatePassword) {

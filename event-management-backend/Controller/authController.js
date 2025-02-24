@@ -14,7 +14,7 @@ const signIn = async (req, res) => {
   try {
     const normalizedEmail = email.trim().toLowerCase();
 
-    // Query all three collections in parallel
+    // Query all three collections in parallel using normalizedEmail
     const [user, organizer, admin] = await Promise.all([
       User.findOne({ email: normalizedEmail }),
       Organizer.findOne({ email: normalizedEmail }),
@@ -26,12 +26,15 @@ const signIn = async (req, res) => {
     let modelType = user ? "User" : organizer ? "Organizer" : "Admin";
 
     if (!foundUser) {
-      return res.status(400).json({ message: "Invali credentials." });
+      return res.status(400).json({ message: "Invalid credentials." });
     }
+
+    console.log("Found User:"); // Debugging log
 
     const isMatch = await bcrypt.compare(password, foundUser.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invali credentials." });
+      console.log("Password mismatch"); // Debugging log
+      return res.status(400).json({ message: "Invaliddd credentials." });
     }
 
     const tokenPayload = {
@@ -87,4 +90,5 @@ const authenticateToken = (req, res, next) => {
     return res.status(500).json({ message: 'Authentication error' });
   }
 };
-module.exports = { signIn , authenticateToken };
+
+module.exports = { signIn, authenticateToken };

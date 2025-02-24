@@ -45,22 +45,24 @@ const createOrganizer = async (req, res) => {
   try {
     const existingOrganizer = await Organizer.findOne({ email });
     if (existingOrganizer) {
-      return res
-        .status(400)
-        .json({ message: "Organizer already exists with this email." });
+      return res.status(400).json({ message: "Organizer already exists with this email." });
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    // Ensure password is hashed before saving
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    
     const organizer = new Organizer({
       name,
       email,
       phone,
-      password: hashedPassword,
+      password: hashedPassword, // Ensure hashed password is stored
       companyName,
       companyAddress,
     });
-
+    
     await organizer.save();
+    
     res
       .status(201)
       .json({ message: "Organizer registered successfully", organizer });
