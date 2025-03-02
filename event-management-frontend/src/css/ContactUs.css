@@ -1,14 +1,16 @@
 /* Contact Us Page */
-
+.contactus-container {
+    padding-top: 60px;
+}
 /* General Styling */
 
 
 /* Hero Section */
 .contactus-hero {
-    background-image: url('/src/images/banner.jpg');
+    background-image: url('/src/images/bannernew.jpg');
     background-size: cover;
     background-position: center;
-    color: white;
+    color: #e6e606;
     padding: 30px 100px 30px 100px;;
     position: relative;
     text-align: center;
@@ -45,28 +47,32 @@
 
 /* Contact Box Styling */
 .contactus-box {
-    background: #aed2ff;
+    background: #010419;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(7, 121, 178, 0.623);
     margin-bottom: 20px;
+    border: 1px solid #3b09b080;
 }
+
+
 
 .contactus-box .btn-primary{
     background-color: #27005d;
-    border-color: #5702cd;
+    border-color: #27005d;
     color: white;
 }
 
 .contactus-box .btn-primary:hover {
-    background-color: #9400ff;  /* Darker shade on hover */
-    border-color: #ad3ffc;
+    background-color: #e6e606;  /* Darker shade on hover */
+    border-color: #e6e606;
+    color:#010419;
 }
 
 /* Form Styling */
 .contactus-heading {
     font-size: 1.5rem;
-    color: #3f51b5;
+    color: #bcc6f6;
     margin-bottom: 20px;
 }
 
@@ -78,15 +84,20 @@
 
 .contactus-box .form-label {
     font-size: 1rem;
-    color: #333;
+    color: #bcc6f6;
 }
 
 .contactus-box .form-control {
     font-size: 1rem;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #bcc6f6;
+    color: #bcc6f6;
+
+    background-color: #010419
 }
+
+
 
 /* Button Styling */
 .contactus-box .btn {
@@ -97,10 +108,12 @@
 
 /* Contact Information Box */
 .contactus-info {
-    background: #aed2ff;
+    background: #010419;
+    color: #bcc6f6;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(7, 121, 178, 0.623);
+    border: 1px solid #3b09b080;
 }
 
 .contactus-details {
@@ -108,7 +121,7 @@
 }
 
 .contactus-details-1{
-    color:black;
+    color:#bcc6f6;
 }
 
 .contactus-follow {

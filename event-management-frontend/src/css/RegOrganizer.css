@@ -3,15 +3,16 @@
     max-width: 500px;
     margin: 50px auto;
     padding: 20px;
-    background: #aed2ff;
+    background: #010419;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #3b09b080;
+    box-shadow: 0px 4px 10px rgba(7, 121, 178, 0.623);
     padding-bottom: 30px; /* Added bottom padding */
   }
   
   .org-title {
     font-weight: bold;
-    color: #333;
+    color: #bcc6f6;
     text-align: center;
     margin-bottom: 20px;
   }
@@ -28,14 +29,18 @@
     font-weight: 600;
     margin-bottom: 5px;
     display: block;
+    color: #bcc6f6;
   }
   
   .org-form-control {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #bcc6f6;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
+    background-color: #010419;
+    color: #bcc6f6;
+
   }
   
   .org-form-control:focus {
@@ -58,7 +63,8 @@
   }
   
   .org-btn:hover {
-    background: #9400ff;
+    background: #e6e606;
+    color: #010419;
     transform: scale(1.02);
   }
   

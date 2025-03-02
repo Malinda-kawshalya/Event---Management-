@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/Navbar.css";
 import { UserContext } from "./contexts/UserContext";
+import logo from "../images/logo.png";
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);
@@ -44,7 +45,7 @@ const Navbar = () => {
     >
       <div className="container">
         <Link className="navbar-brand" to="/">
-          Event Guru
+          <img src={logo} alt="EventGuru" className="navbar-logo"/>
         </Link>
         <button
           className="navbar-toggler"

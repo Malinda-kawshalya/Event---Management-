@@ -1,9 +1,9 @@
 /* AboutUs.css */
 
 /* About Us Container */
-/* .about-us-container {
-    ; /* White background for the entire page */
-/*} */
+.about-us-container {
+    padding-top: 60px; /* Add top padding to separate from the navbar */
+}
 
 /* Common Section Padding */
 .section-padding {
@@ -12,10 +12,10 @@
 
 /* About Hero Section */
 .about-hero-section {
-    background-image: url('/src/images/banner.jpg'); /* Add your hero image */
+    background-image: url('/src/images/bannernew.jpg'); /* Add your hero image */
     background-size: cover;
     background-position: center;
-    color: white;
+    color: #e6e60b;
     padding: 30px 100px 30px 100px;; /* Match left and right padding with other sections */
     position: relative;
 }
@@ -58,7 +58,7 @@
 
 .about-us-content p {
     font-size: 1.1rem;
-    color: #555;
+    color: #6cc6f6;
     line-height: 1.8;
     text-align: justify; /* Justify the text */
     margin-bottom: 20px; /* Add spacing between paragraphs */
@@ -78,7 +78,7 @@
 }
 
 .vision-box, .mission-box {
-    background-color: #aed2ff; /* White background for boxes */
+    background-color: #e6e60b; /* White background for boxes */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
@@ -90,7 +90,7 @@
 
 .vision-box h2, .mission-box h2 {
     font-size: 1.5rem;
-    color: #3f51b5; /* Primary color for headings */
+    color: #010419; /* Primary color for headings */
     margin-bottom: 20px;
 }
 
@@ -109,26 +109,26 @@
 .features-section h2 {
     font-size: 1.5rem;
     margin-bottom: 200px; /* Further increased margin */
-    color: #3f51b5;
+    color: #6cc6f6;
     text-align: center; 
 }
 
 .feature-icon {
     font-size: 3rem;
-    color: #aed2ff;
+    color: #e6e60b;
     margin-bottom: 20px;
 }
 
 .features-section h5 {
     font-size: 1.5rem;
     margin-bottom: 15px;
-    color: #ffffff;
+    color: #e6e60b;
     text-align: center; /* Align text to the left */
 }
 
 .features-section p {
     font-size: 1rem;
-    color: #b1b1b1;
+    color: #e6e60b;
     text-align: center; /* Align text to the left */
 }
 

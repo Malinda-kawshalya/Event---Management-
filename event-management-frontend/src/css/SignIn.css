@@ -8,19 +8,30 @@
 
 /* Card styling */
 .signin-card {
-  background: #aed2ff;
+  background: #010419;
   border-radius: 15px;
   padding: 30px;
   max-width: 400px;
   width: 100%;
   text-align: left;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #3b09b080;
+  box-shadow: 0px 4px 10px rgba(7, 121, 178, 0.623);
+}
+
+.card-title{
+  color:#bcc6f6;
+}
+
+.form-label{
+  color:#bcc6f6;
 }
 
 /* Input field styling */
 .signin-card .form-control {
   border-radius: 10px;
-  border: 1px solid #ced4da;
+  border: 1px solid #bcc6f6;
+  background-color: #010419;
+  color: #bcc6f6;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -35,12 +46,17 @@
   border: none;
   font-weight: bold;
   transition: background 0.3s ease;
+  border-radius: 15px;
 }
 
 .signin-card .btn-primary:hover {
-  background: linear-gradient(135deg, #9400ff, #9400ff);
+  background: linear-gradient(135deg, #e6e606, #e6e606);
+  color:#010419;
 }
 
+.mt-3{
+  color:#bcc6f6
+}
 /* Link styling */
 .signin-card a {
 
@@ -76,7 +92,7 @@ body {
 }
 
 .signin-title {
-  color: #112D4E;
+  color: #bcc6f6;
   font-size: 2rem;
   margin-bottom: 1.5rem;
   border-bottom: 2px solid #3F72AF;

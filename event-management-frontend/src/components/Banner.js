@@ -51,10 +51,11 @@ const Banner = () => {
   return (
     <div className="hero-section">
       <div className="hero-content text-center text-white">
-        <h1 className="hero-title">Discover Your Next Adventure</h1>
+        <h1 className="hero-title-1">Lights, Music, Action</h1>
+        <h1 className="hero-title-2">Your Next Event Awaits!</h1>
         <p className="hero-subtitle">Book tickets for concerts, workshops, and more!</p>
         <div className="search-bar input-group mt-4">
-          <span className="input-group-text bg-white text-dark">
+          <span className="input-group-text-1 text-dark">
             <i className="bi bi-search"></i>
           </span>
           <input
@@ -65,7 +66,7 @@ const Banner = () => {
             onChange={(e) => setSearchQuery(e.target.value)}  
             onKeyPress={handleKeyPress}  
           />
-          <button className="btn btn-warning" aria-label="Search Button" onClick={handleSearch}>  
+          <button className="btn btn-warning-1" aria-label="Search Button" onClick={handleSearch}>  
             Search  {/*  Calls handleSearch() when clicked */}
           </button>
         </div>

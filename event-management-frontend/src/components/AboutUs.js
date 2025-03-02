@@ -69,7 +69,7 @@ const AboutUs = () => {
                 {/* Key Features Section */}
                 <div className="features-section section-padding">
                     <div className="container">
-                        <h2 className="mb-4">Why Choose Us?</h2>
+                        {/* <h2 className="mb-4">Why Choose Us?</h2> */}
                         <div className="row">
                             <div className="col-md-4">
                                 <i className="fas fa-ticket-alt feature-icon"></i>
@@ -91,7 +91,7 @@ const AboutUs = () => {
                 </div>
 
                 {/* Team Section */}
-                <div className="team-section section-padding">
+                {/* <div className="team-section section-padding">
                     <div className="container">
                         <h2 className="mb-4">Meet Our Team</h2>
                         <div className="row">
@@ -112,7 +112,7 @@ const AboutUs = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 
             </div>

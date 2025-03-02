@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
 import { UserContext } from './contexts/UserContext';
+import "../css/OrgDashboard.css"; // Import the CSS file
 
 const OrgDashboard = () => {
   const [events, setEvents] = useState([]);
@@ -96,7 +97,7 @@ const OrgDashboard = () => {
     <Container className="dashboard my-5">
       <Row className="mb-4 align-items-center">
         <Col>
-          <h1 className="text-primary">Hello, {organizerName}</h1>
+          <h1 className="text-primary-1">Hello, {organizerName}</h1>
         </Col>
         <Col xs="auto">
           <Link to={`/eventcreation/${organizerId}`} className="btn btn-success">

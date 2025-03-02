@@ -10,21 +10,21 @@
 
 /* Unique Card Styling */
 .signup-container {
-    background: #aed2ff;
+    background: #010419;
     backdrop-filter: blur(10px);
     border-radius: 15px;
     width: 100%;
     max-width: 600px;
     padding: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 4px 10px rgba(7, 121, 178, 0.623);
+    border: 1px solid #3b09b080;
     color: #000000;
 }
 
 /* Unique Title Styling */
 .signup-title {
     font-weight: 700;
-    color: #000000;
+    color: #bcc6f6;
     text-align: center;
 }
 
@@ -32,15 +32,16 @@
 .signup-label {
     font-size: 0.9rem;
     font-weight: 500;
-    color: #8b8b8b;
+    color: #bcc6f6;
 }
 
 .signup-input, .signup-select {
     border-radius: 10px;
     padding: 0.8rem;
     font-size: 0.9rem;
-    color: #333;
-    border: 2px solid transparent;
+    background-color: #010419;
+    color: #bcc6f6;
+    border: 2px solid #bcc6f6;
     transition: border-color 0.3s ease;
     width: 100%;
 }
@@ -49,6 +50,8 @@
     border-color: #00c6ff;
     box-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
 }
+
+
 
 /* Unique Sign Up Button */
 .signup-btn {
@@ -65,8 +68,13 @@
 
 .signup-btn:hover {
     transform: scale(1.05);
-    background: #9400ff;
+    background: #e6e606;
+    color:#010419;
     
+}
+
+.mt-3{
+    color:#bcc6f6;
 }
 
 /* Unique Sign In Link Styling */
@@ -78,7 +86,7 @@
 }
 
 .signup-text a {
-    color: #27005d;
+    color: #bcc6f6;
     font-weight: 600;
     text-decoration: none;
 }

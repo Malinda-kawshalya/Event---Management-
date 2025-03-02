@@ -1,12 +1,15 @@
+.all-events-container{
+    padding-top: 60px;
+}
 .section-padding {
     padding: 30px 100px;
 }
 
 .all-events-hero-section {
-    background-image: url('/src/images/banner.jpg');
+    background-image: url('/src/images/bannernew.jpg');
     background-size: cover;
     background-position: center;
-    color: white;
+    color: #e6e60b;
     padding: 30px 100px;
     position: relative;
     
@@ -40,24 +43,25 @@
 }
 
 .custom-nav-pills .nav-link {
-    background-color: #AED2FF;
-    color: #27005D !important;
+    background-color: #010419;
+    color: #e6e606 !important;
     font-weight: bold;
     border-radius: 30px;
     padding: 12px 25px;
     transition: 0.3s ease-in-out;
     border: none;
     text-transform: uppercase;
+    border: 2px solid #e6e60b;
 }
 
 .custom-nav-pills .nav-link:hover {
-    background-color: #9400FF;
-    color: #E4F1FF !important;
+    background-color: #e6e606;
+    color: #010419 !important;
 }
 
 .custom-nav-pills .nav-link.active {
-    background-color: #27005D !important;
-    color: #E4F1FF !important;
+    background-color: #e6e606 !important;
+    color: #010419 !important;
 }
 
 /* Event Card Styling */
@@ -65,17 +69,24 @@
     border: none;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(7, 121, 178, 0.623);
     transition: 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
+    border: 1px solid #3b09b080;
+    margin-bottom: 20px;
+    
+}
+
+.row {
+    row-gap: 30px;
 }
 
 .custom-event-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 8px 20px #eeee69bd;
 }
 
 .custom-card-img {
@@ -86,22 +97,23 @@
 
 .custom-card-body {
     padding: 20px;
-    background: linear-gradient(135deg, #e4f1ff, #aed2ff);
+    background: #010419;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
 }
 
 .custom-card-title {
     font-size: 1.4rem;
     font-weight: bold;
-    color: #27005D;
+    color: #ffffff;
 }
 
 .custom-card-text {
     font-size: 0.95rem;
-    color: #333;
+    color: #bcc6f6;
     margin-bottom: 10px;
 }
 
@@ -120,6 +132,8 @@
 }
 
 .custom-buy-button:hover {
-    background: linear-gradient(90deg, #9400ff, #9400FF);
+    background: linear-gradient(90deg, #e6e606, #e6e606);
+    color:#010419 !important;
     transform: scale(1.05);
+    
 }

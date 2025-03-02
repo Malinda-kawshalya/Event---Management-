@@ -11,9 +11,10 @@ body {
 .cta-section {
   max-width: 2000px;
 
-  background: linear-gradient(135deg, #AED2FF, #96cdf5); /* New CTA Background */
+  background: linear-gradient(135deg, #10316B, #10316B); /* New CTA Background */
   color: white;
   border-radius: 10px;
+  align-items: center;
 }
 
 .cta-section h2 {
@@ -28,16 +29,17 @@ body {
 
 /* Sign Up Button Styling */
 .cta-section .btn-primary {
-  background-color: #2d2d2d; /* New Sign Up Button Color */
+  background-color: #e6e606; /* New Sign Up Button Color */
   border: none;
   padding: 12px 25px;
   font-size: 1.2rem;
   border-radius: 30px;
   transition: background 0.3s ease, transform 0.2s;
+  color: #010419
 }
 
 .cta-section .btn-primary:hover {
-  background-color: #000000; /* Lighter hover effect */
+  background-color: #F2F7FF; /* Lighter hover effect */
   transform: scale(1.05);
 }
 
