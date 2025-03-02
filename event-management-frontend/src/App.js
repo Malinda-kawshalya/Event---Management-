@@ -27,6 +27,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Global.css";
 import CheckoutPage from "./components/CheckoutPage";
 import Chat from "./components/ChatBot";
+import { ToastContainer } from 'react-toastify';
 
 // Content wrapper component that adds spacing except on homepage
 const ContentWrapper = ({ children }) => {
@@ -135,6 +136,17 @@ const App = () => {
             </Routes>
           </ContentWrapper>
           <Footer />
+          <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
       </div>
     </Router>

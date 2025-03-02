@@ -101,4 +101,69 @@ const searchEvents = async (req, res) => {
     }
 };
 
-module.exports = { createEvent, getAllEvents, upload, getevent, searchEvents };
+// Update an event
+const updateEvent = async (req, res) => {
+    const { eventId } = req.params;
+    const updates = req.body;
+    const banner = req.file ? req.file.path : undefined;
+
+    try {
+        // If there's a new banner, add it to the updates
+        if (banner) {
+            updates.banner = banner;
+        }
+
+        const event = await Event.findById(eventId);
+        if (!event) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+
+        // Check if the user is the organizer of the event
+        if (event.organizer.toString() !== req.body.organizerId) {
+            return res.status(403).json({ message: 'Not authorized to edit this event' });
+        }
+
+        // Update the event
+        const updatedEvent = await Event.findByIdAndUpdate(
+            eventId,
+            { ...updates },
+            { new: true } // Return the updated event
+        );
+
+        res.status(200).json({
+            message: 'Event updated successfully',
+            event: updatedEvent
+        });
+    } catch (err) {
+        console.error('Error updating event:', err);
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
+// Delete an event
+const deleteEvent = async (req, res) => {
+    const { eventId } = req.params;
+
+    try {
+        const event = await Event.findById(eventId);
+        if (!event) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+
+        // Check if the user is the organizer of the event
+        if (event.organizer.toString() !== req.body.organizerId) {
+            return res.status(403).json({ message: 'Not authorized to delete this event' });
+        }
+
+        await Event.findByIdAndDelete(eventId);
+        res.status(200).json({ message: 'Event deleted successfully' });
+    } catch (err) {
+        console.error('Error deleting event:', err);
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+};
+
+
+
+
+module.exports = { createEvent, getAllEvents, upload, getevent, searchEvents, updateEvent, deleteEvent };
