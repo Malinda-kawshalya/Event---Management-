@@ -1,16 +1,27 @@
 const express = require('express');
-const { createEvent, getAllEvents, upload, getevent, searchEvents } = require('../Controller/eventController');
-const Event = require('../Model/eventModel'); //  Import Event model
+const { 
+    createEvent, 
+    getAllEvents, 
+    upload, 
+    getevent, 
+    searchEvents,
+    updateEvent, 
+    deleteEvent 
+} = require('../Controller/eventController');
+const Event = require('../Model/eventModel');
 const router = express.Router();
-
-router.post('/', upload.single('banner'), createEvent);
-router.get('/', getAllEvents);
-router.get('/search', searchEvents);
-router.get('/:eventId', getevent);
-
-// Fetch events by organizer ID
 const mongoose = require('mongoose');
 
+// Create new event
+router.post('/', upload.single('banner'), createEvent);
+
+// Get all events
+router.get('/', getAllEvents);
+
+// Search events
+router.get('/search', searchEvents);
+
+// Get events by organizer
 router.get('/organizer/:organizerId', async (req, res) => {
     try {
         const { organizerId } = req.params;
@@ -20,9 +31,7 @@ router.get('/organizer/:organizerId', async (req, res) => {
         }
 
         console.log(`Fetching events for organizer: ${organizerId}`);
-
         const events = await Event.find({ organizer: organizerId });
-
         res.json(events);
     } catch (err) {
         console.error('Error fetching organizer events:', err);
@@ -30,5 +39,13 @@ router.get('/organizer/:organizerId', async (req, res) => {
     }
 });
 
+// Get single event
+router.get('/:eventId', getevent);
+
+// Update event
+router.put('/:eventId', upload.single('banner'), updateEvent);
+
+// Delete event
+router.delete('/:eventId', deleteEvent);
 
 module.exports = router;

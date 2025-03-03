@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/AdminDashboard.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Modal, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const AdminDashboard = () => {
     const [users, setUsers] = useState([]); // Initialize as an array
@@ -26,6 +29,18 @@ const AdminDashboard = () => {
     const [loading, setLoading] = useState(true); // To manage loading state
     const [activeTab, setActiveTab] = useState('users'); // To manage active tab
     const [showModal, setShowModal] = useState(false); // To manage modal visibility
+
+    const [showEventModal, setShowEventModal] = useState(false);
+    const [eventFormData, setEventFormData] = useState({
+    title: '',
+    description: '',
+    date: '',
+    time: '',
+    location: '',
+    price: '',
+    category: '',
+    banner: null
+});
 
     // Fetch users from the database
     const fetchUsers = async () => {
@@ -74,22 +89,144 @@ const AdminDashboard = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.get('http://localhost:5000/api/events');
-            console.log('Fetched events:', response.data); 
+            const token = localStorage.getItem('token');
+            const response = await axios.get('http://localhost:5000/api/events', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+    
             if (response.data && Array.isArray(response.data)) {
-                setEvents(response.data); // Access the events array within the response
+                setEvents(response.data);
             } else {
                 setEvents([]);
                 console.error('Invalid data format from API:', response.data);
             }
         } catch (error) {
-            setError('Failed to fetch events.');
+            const errorMessage = error.response?.data?.message || 'Failed to fetch events';
+            setError(errorMessage);
             console.error('Error fetching events:', error);
         } finally {
             setLoading(false);
         }
     };
 
+    // Handle edit action for event
+    const handleEditEvent = (event) => {
+        setFormData({
+            title: event.title,
+            description: event.description,
+            date: event.date,
+            time: event.time,
+            location: event.location,
+            price: event.price,
+            maxAttendees: event.maxAttendees,
+            category: event.category,
+            banner: event.banner
+        });
+        setEditUserId(event._id);
+        setShowEventModal(true); // Open the modal
+    };
+
+    // Handle delete action for event
+    const handleDeleteEvent = async (id) => {
+        if (!window.confirm('Are you sure you want to delete this event?')) {
+            return;
+        }
+    
+        try {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user')); // Get user data from localStorage
+    
+            if (!token) {
+                setError('Authentication required. Please login again.');
+                return;
+            }
+    
+            const response = await axios.delete(`http://localhost:5000/api/events/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                data: { // Include the organizerId and role in the request body
+                    organizerId: user._id,
+                    role: user.role
+                }
+            });
+    
+            if (response.status === 200) {
+                toast.success('Event deleted successfully');
+                fetchEvents(); // Refresh the events list
+            }
+        } catch (error) {
+            console.error('Delete error:', error.response);
+            const errorMessage = error.response?.data?.message || 'Error deleting event';
+            toast.error(errorMessage);
+            setError(errorMessage);
+        }
+    
+    };
+    // Add this with your other handlers
+    const handleEventSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user')); // Get user data from localStorage
+            const formData = new FormData();
+            
+            // Append event data
+            formData.append('title', eventFormData.title);
+            formData.append('description', eventFormData.description);
+            formData.append('date', eventFormData.date);
+            formData.append('time', eventFormData.time);
+            formData.append('location', eventFormData.location);
+            formData.append('price', eventFormData.price);
+            formData.append('category', eventFormData.category);
+            if (eventFormData.banner) {
+                formData.append('banner', eventFormData.banner);
+            }
+            
+            // Append user role and organizerId to FormData
+            formData.append('role', user.role);
+            formData.append('organizerId', user._id);
+    
+            if (editUserId) {
+                await axios.put(`http://localhost:5000/api/events/${editUserId}`, formData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                toast.success('Event updated successfully');
+            } else {
+                await axios.post('http://localhost:5000/api/events', formData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                toast.success('Event created successfully');
+            }
+    
+            setEventFormData({
+                title: '',
+                description: '',
+                date: '',
+                time: '',
+                location: '',
+                price: '',
+                category: '',
+                banner: null
+            });
+            setEditUserId(null);
+            setShowEventModal(false);
+            fetchEvents();
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || 'Error saving event';
+            toast.error(errorMessage);
+            console.error('Error saving event:', error);
+        }
+    };
     // Fetch organizers from the database
     const fetchOrganizers = async () => {
         setLoading(true);
@@ -267,48 +404,74 @@ const AdminDashboard = () => {
                         </table>
                     </>
                 );
-            case 'events':
-                return (
-                    <>
-                        <h2 className="text-center mb-4">Events</h2>
-                        <table className="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Location</th>
-                                    <th>Price</th>
-                                    <th>Max Attendees</th>
-                                    <th>Category</th>
-                                    <th>Banner</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {events.length > 0 ? (
-                                    events.map((event) => (
-                                        <tr key={event._id}>
-                                            <td>{event.title}</td>
-                                            <td>{event.description}</td>
-                                            <td>{new Date(event.date).toLocaleDateString()}</td>
-                                            <td>{event.time}</td>
-                                            <td>{event.location}</td>
-                                            <td>{event.price}</td>
-                                            <td>{event.maxAttendees}</td>
-                                            <td>{event.category}</td>
-                                            <td><img src={event.banner} alt={event.title} style={{ width: '100px' }} /></td>
-                                        </tr>
-                                    ))
-                                ) : (
+                case 'events':
+                    return (
+                        <>
+                            <h2 className="text-center mb-4">Events</h2>
+                            <table className="table table-striped">
+                                <thead>
                                     <tr>
-                                        <td colSpan="9">No events found.</td>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Location</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Banner</th>
+                                        <th>Actions</th>
                                     </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </>
-                );
+                                </thead>
+                                <tbody>
+                                    {events.length > 0 ? (
+                                        events.map((event) => (
+                                            <tr key={event._id}>
+                                                <td>{event.title}</td>
+                                                <td>{event.description}</td>
+                                                <td>{new Date(event.date).toLocaleDateString()}</td>
+                                                <td>{event.time}</td>
+                                                <td>{event.location}</td>
+                                                <td>${event.price}</td>
+                                                <td>{event.category}</td>
+                                                <td>
+                                                    <img 
+                                                        src={`http://localhost:5000/${event.banner}`}
+                                                        alt={event.title} 
+                                                        style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <Button 
+                                                        variant="warning" 
+                                                        size="sm" 
+                                                        className="me-2"
+                                                        onClick={() => handleEditEvent(event)}
+                                                    >
+                                                        <i className="bi bi-pencil"></i>
+                                                    </Button>
+                                                    <Button 
+                                                        variant="danger" 
+                                                        size="sm"
+                                                        onClick={() => {
+                                                             {
+                                                                handleDeleteEvent(event._id)
+                                                            }
+                                                        }}
+                                                    >
+                                                        <i className="bi bi-trash"></i>
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="9">No events found.</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </>
+                    );
             case 'organizers':
                 return (
                     <>
@@ -501,6 +664,107 @@ const AdminDashboard = () => {
                     </form>
                 </Modal.Body>
             </Modal>
+            // Add this before the closing div of your return statement
+{/* Event Form Modal */}
+<Modal show={showEventModal} onHide={() => setShowEventModal(false)}>
+    <Modal.Header closeButton>
+        <Modal.Title>{editUserId ? 'Edit Event' : 'Add Event'}</Modal.Title>
+    </Modal.Header>
+    
+    <Modal.Body>
+        <form onSubmit={handleEventSubmit}>
+            <div className="mb-3">
+                <input
+                    type="text"
+                    name="title"
+                    className="form-control"
+                    placeholder="Event Title"
+                    value={eventFormData.title}
+                    onChange={(e) => setEventFormData({...eventFormData, title: e.target.value})}
+                    required
+                />
+            </div>
+            <div className="mb-3">
+                <textarea
+                    name="description"
+                    className="form-control"
+                    placeholder="Event Description"
+                    value={eventFormData.description}
+                    onChange={(e) => setEventFormData({...eventFormData, description: e.target.value})}
+                    required
+                />
+            </div>
+            <div className="mb-3">
+                <input
+                    type="date"
+                    name="date"
+                    className="form-control"
+                    value={eventFormData.date}
+                    onChange={(e) => setEventFormData({...eventFormData, date: e.target.value})}
+                    required
+                />
+            </div>
+            <div className="mb-3">
+                <input
+                    type="time"
+                    name="time"
+                    className="form-control"
+                    value={eventFormData.time}
+                    onChange={(e) => setEventFormData({...eventFormData, time: e.target.value})}
+                    required
+                />
+            </div>
+            <div className="mb-3">
+                <input
+                    type="text"
+                    name="location"
+                    className="form-control"
+                    placeholder="Event Location"
+                    value={eventFormData.location}
+                    onChange={(e) => setEventFormData({...eventFormData, location: e.target.value})}
+                    required
+                />
+            </div>
+            <div className="mb-3">
+                <input
+                    type="number"
+                    name="price"
+                    className="form-control"
+                    placeholder="Event Price"
+                    value={eventFormData.price}
+                    onChange={(e) => setEventFormData({...eventFormData, price: e.target.value})}
+                    required
+                />
+            </div>
+            <div className="mb-3">
+                <select
+                    name="category"
+                    className="form-control"
+                    value={eventFormData.category}
+                    onChange={(e) => setEventFormData({...eventFormData, category: e.target.value})}
+                    required
+                >
+                    <option value="">Select Category</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Seminar">Seminar</option>
+                    <option value="Conference">Conference</option>
+                    <option value="Concert">Concert</option>
+                </select>
+            </div>
+            <div className="mb-3">
+                <input
+                    type="file"
+                    name="banner"
+                    className="form-control"
+                    onChange={(e) => setEventFormData({...eventFormData, banner: e.target.files[0]})}
+                />
+            </div>
+            <button type="submit" className="btn btn-primary w-100">
+                {editUserId ? 'Update Event' : 'Add Event'}
+            </button>
+        </form>
+    </Modal.Body>
+</Modal>
         </div>
     );
 };
