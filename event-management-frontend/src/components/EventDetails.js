@@ -110,6 +110,7 @@ const EventDetails = () => {
   if (!event) return <ErrorAlert message="Event not found" />;
 
   return (
+    <div className="event-details-wrapper">
     <Container className="event-details-container py-5">
       <Row className="g-4">
         <Col lg={7}>
@@ -129,7 +130,7 @@ const EventDetails = () => {
           <div className="event-info-card">
             <div className="event-header">
               <h1>{event.title}</h1>
-              <Badge bg="primary" className="category-badge">
+              <Badge  className="new">
                 {event.category || "General"}
               </Badge>
             </div>
@@ -195,6 +196,7 @@ const EventDetails = () => {
         processing={processing}
       />
     </Container>
+    </div>
   );
 };
 
@@ -213,7 +215,8 @@ const ErrorAlert = ({ message }) => (
 );
 
 const BookingModal = ({ show, onHide, event, reservation, totalCost, onInputChange, onCheckout, processing }) => (
-  <Modal show={show} onHide={onHide} centered>
+  <div className="booking-model-1">
+    <Modal show={show} onHide={onHide} centered>
     <Modal.Header closeButton>
       <Modal.Title>Book Tickets</Modal.Title>
     </Modal.Header>
@@ -271,6 +274,7 @@ const BookingModal = ({ show, onHide, event, reservation, totalCost, onInputChan
       </Button>
     </Modal.Footer>
   </Modal>
+  </div>
 );
 
 export default EventDetails;

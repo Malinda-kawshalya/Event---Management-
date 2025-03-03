@@ -129,7 +129,7 @@ const CheckoutPage = () => {
         <Row>
           <Col md={7}>
             <Card className="checkout-card">
-              <Card.Header className="bg-primary text-white">
+              <Card.Header className="card-header-banner">
                 <h4 className="mb-0">Complete Your Purchase</h4>
               </Card.Header>
               <Card.Body>
