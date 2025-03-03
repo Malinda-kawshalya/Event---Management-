@@ -42,7 +42,7 @@
 
 /* Button styling */
 .signin-card .btn-primary {
-  background: linear-gradient(135deg, #27005d, #27005d);
+  background: linear-gradient(135deg, #27005d, #27005d) !important;
   border: none;
   font-weight: bold;
   transition: background 0.3s ease;
@@ -50,8 +50,8 @@
 }
 
 .signin-card .btn-primary:hover {
-  background: linear-gradient(135deg, #e6e606, #e6e606);
-  color:#010419;
+  background: linear-gradient(135deg, #e6e606, #e6e606) !important;
+  color:#010419 !important;
 }
 
 .mt-3{
@@ -117,8 +117,8 @@ input:focus {
 }
 
 .signin-btn {
-  background-color: #3F72AF;
-  color: #F9F7F7;
+  background-color: #3F72AF !important;
+  color: #F9F7F7 !important;
   font-size: 1rem;
   border: none;
   border-radius: 8px;

@@ -6,8 +6,25 @@
 h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: #e6e606; /* Changed color */
 }
 
+/* Custom styles for nav-links */
+.nav-tabs .nav-item .nav-link {
+    color: #bcc6f6 !important; /* Changed color */
+    background-color: #010419 !important; /* Changed color */
+    border: 1px solid #e6e606 !important; /* Changed color */
+    border-radius: 5px !important;
+    margin-right: 5px !important;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+    color: #010419 !important; /* Changed color */
+    background-color: #e6e606 !important; /* Changed color */
+    border: 1px solid #010419 !important; /* Changed color */
+}
+
+/* Custom styles for form */
 form {
     display: flex;
     flex-direction: column;
@@ -25,7 +42,7 @@ form input, form select, form button {
 
 form button {
     background-color: #007BFF;
-    color: white;
+    color: #e6e606 !important; /* Changed color */
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -35,20 +52,31 @@ form button:hover {
     background-color: #0056b3;
 }
 
+/* Custom styles for table */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    table-layout: fixed; /* Ensures equal column distribution */
 }
 
 table th, table td {
-    border: 1px solid #ccc;
+    border: 1px solid #e6e606 !important; /* Changed color */
     padding: 10px;
+    word-wrap: break-word; /* Break long words */
+    overflow-wrap: break-word;
     text-align: center;
+    color: #bcc6f6 !important; /* Changed color */
+    background-color: #010419 !important; /* Changed color */
 }
-
+.actions {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
 table th {
-    background-color: #f4f4f4;
+    background-color: #010419 !important; /* Changed color */
+    color: #e6e606 !important; /* Changed color */
 }
 
 table tr:nth-child(even) {
@@ -60,8 +88,20 @@ table button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    color: #e6e606 !important; /* Changed color */
 }
 
 table button:hover {
     background-color: #ccc;
 }
+
+.btn-warning{
+    color:#010419 !important;
+    background-color: #e6e606 !important;
+}
+
+.btn-primary{
+    color:#bcc6f6 !important;
+    background-color: #010419 !important;
+}
+

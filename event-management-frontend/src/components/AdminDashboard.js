@@ -376,7 +376,7 @@ const AdminDashboard = () => {
                 return (
                     <>
                         <h2 className="text-center mb-4">Contact Us Messages</h2>
-                        <table className="table-1 table-striped">
+                        <table className="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Name</th>

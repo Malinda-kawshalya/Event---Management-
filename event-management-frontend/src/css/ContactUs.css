@@ -58,15 +58,15 @@
 
 
 .contactus-box .btn-primary{
-    background-color: #27005d;
-    border-color: #27005d;
-    color: white;
+    background-color: #27005d !important;
+    border-color: #27005d !important;
+    color: white  !important;
 }
 
 .contactus-box .btn-primary:hover {
-    background-color: #e6e606;  /* Darker shade on hover */
-    border-color: #e6e606;
-    color:#010419;
+    background-color: #e6e606 !important;  /* Darker shade on hover */
+    border-color: #e6e606 !important;
+    color:#010419 !important;
 }
 
 /* Form Styling */

@@ -77,14 +77,14 @@
 }
 
 .nav-special-btn.btn-primary {
-  background-color: #e6e60b;
+  background-color: #e6e60b !important;
   border: none;
-  color: #010419;
+  color: #010419 !important;
 }
 
 .nav-special-btn.btn-primary:hover {
-  background-color: #F2F7FF;
-  color:#010419;
+  background-color: #F2F7FF !important;
+  color:#010419  !important;
 }
 
 /* Responsive Navbar Fix */

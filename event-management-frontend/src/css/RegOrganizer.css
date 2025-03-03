@@ -50,8 +50,8 @@
   
   .org-btn {
     width: 100%;
-    background: #27005d;
-    color: #fff;
+    background: #27005d !important;
+    color: #fff !important;
     padding: 12px;
     border: none;
     border-radius: 20px;
@@ -63,8 +63,8 @@
   }
   
   .org-btn:hover {
-    background: #e6e606;
-    color: #010419;
+    background: #e6e606 !important;
+    color: #010419 !important;
     transform: scale(1.02);
   }
   
