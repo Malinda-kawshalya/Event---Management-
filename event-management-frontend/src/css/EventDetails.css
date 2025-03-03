@@ -39,6 +39,19 @@
   font-weight: 600;
 }
 
+.pay-button{
+  background-color: #27005d;
+  color:#bcc6f6;
+  border-radius: 15px;
+  border-color: #27005d;
+}
+
+.pay-button:hover{
+  background-color: #e6e606;
+  color:#010419;
+  border-color: #010419;
+}
+
 .new {
   font-size: 0.9rem;
   padding: 0.5em 1em;
