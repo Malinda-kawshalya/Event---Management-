@@ -125,7 +125,7 @@ const AdminDashboard = () => {
             banner: event.banner
         });
         setEditUserId(event._id);
-        setShowModal(true); // Open the modal
+        setShowEventModal(true); // Open the modal
     };
 
     // Handle delete action for event
@@ -136,7 +136,8 @@ const AdminDashboard = () => {
     
         try {
             const token = localStorage.getItem('token');
-            
+            const user = JSON.parse(localStorage.getItem('user')); // Get user data from localStorage
+    
             if (!token) {
                 setError('Authentication required. Please login again.');
                 return;
@@ -146,6 +147,10 @@ const AdminDashboard = () => {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
+                },
+                data: { // Include the organizerId and role in the request body
+                    organizerId: user._id,
+                    role: user.role
                 }
             });
     
@@ -159,52 +164,69 @@ const AdminDashboard = () => {
             toast.error(errorMessage);
             setError(errorMessage);
         }
+    
     };
     // Add this with your other handlers
-const handleEventSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        const token = localStorage.getItem('token');
-        const formData = new FormData();
-        
-        Object.keys(eventFormData).forEach(key => {
-            formData.append(key, eventFormData[key]);
-        });
-
-        if (editUserId) {
-            await axios.put(
-                `http://localhost:5000/api/events/${editUserId}`,
-                formData,
-                {
+    const handleEventSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user')); // Get user data from localStorage
+            const formData = new FormData();
+            
+            // Append event data
+            formData.append('title', eventFormData.title);
+            formData.append('description', eventFormData.description);
+            formData.append('date', eventFormData.date);
+            formData.append('time', eventFormData.time);
+            formData.append('location', eventFormData.location);
+            formData.append('price', eventFormData.price);
+            formData.append('category', eventFormData.category);
+            if (eventFormData.banner) {
+                formData.append('banner', eventFormData.banner);
+            }
+            
+            // Append user role and organizerId to FormData
+            formData.append('role', user.role);
+            formData.append('organizerId', user._id);
+    
+            if (editUserId) {
+                await axios.put(`http://localhost:5000/api/events/${editUserId}`, formData, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'multipart/form-data'
                     }
-                }
-            );
-            toast.success('Event updated successfully');
+                });
+                toast.success('Event updated successfully');
+            } else {
+                await axios.post('http://localhost:5000/api/events', formData, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                toast.success('Event created successfully');
+            }
+    
+            setEventFormData({
+                title: '',
+                description: '',
+                date: '',
+                time: '',
+                location: '',
+                price: '',
+                category: '',
+                banner: null
+            });
+            setEditUserId(null);
+            setShowEventModal(false);
+            fetchEvents();
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || 'Error saving event';
+            toast.error(errorMessage);
+            console.error('Error saving event:', error);
         }
-        
-        setEventFormData({
-            title: '',
-            description: '',
-            date: '',
-            time: '',
-            location: '',
-            price: '',
-            category: '',
-            banner: null
-        });
-        setEditUserId(null);
-        setShowEventModal(false);
-        fetchEvents();
-    } catch (error) {
-        const errorMessage = error.response?.data?.message || 'Error saving event';
-        toast.error(errorMessage);
-        console.error('Error saving event:', error);
-    }
-};
-
+    };
     // Fetch organizers from the database
     const fetchOrganizers = async () => {
         setLoading(true);

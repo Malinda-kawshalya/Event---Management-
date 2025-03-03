@@ -106,6 +106,7 @@ const updateEvent = async (req, res) => {
     const { eventId } = req.params;
     const updates = req.body;
     const banner = req.file ? req.file.path : undefined;
+    const { organizerId, role } = req.body; // Get the role from the request body
 
     try {
         // If there's a new banner, add it to the updates
@@ -113,13 +114,15 @@ const updateEvent = async (req, res) => {
             updates.banner = banner;
         }
 
-        const event = await Event.findById(eventId);
+        // Populate the organizer field when fetching the event
+        const event = await Event.findById(eventId).populate('organizer');
+
         if (!event) {
             return res.status(404).json({ message: 'Event not found' });
         }
 
-        // Check if the user is the organizer of the event
-        if (event.organizer.toString() !== req.body.organizerId) {
+        // Check if the user is the organizer of the event or an admin
+        if (role !== 'admin' && (!event.organizer || event.organizer._id.toString() !== organizerId)) {
             return res.status(403).json({ message: 'Not authorized to edit this event' });
         }
 
@@ -139,19 +142,21 @@ const updateEvent = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: err.message });
     }
 };
-
 // Delete an event
 const deleteEvent = async (req, res) => {
     const { eventId } = req.params;
+    const { organizerId, role } = req.body; // Get the role from the request body
 
     try {
-        const event = await Event.findById(eventId);
+        // Populate the organizer field when fetching the event
+        const event = await Event.findById(eventId).populate('organizer');
+
         if (!event) {
             return res.status(404).json({ message: 'Event not found' });
         }
 
-        // Check if the user is the organizer of the event
-        if (event.organizer.toString() !== req.body.organizerId) {
+        // Check if the user is the organizer of the event or an admin
+        if (role !== 'admin' && (!event.organizer || event.organizer._id.toString() !== organizerId)) {
             return res.status(403).json({ message: 'Not authorized to delete this event' });
         }
 
@@ -162,7 +167,6 @@ const deleteEvent = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: err.message });
     }
 };
-
 
 
 
