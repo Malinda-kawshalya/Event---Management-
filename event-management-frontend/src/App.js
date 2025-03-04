@@ -20,6 +20,7 @@ import OrganizerRegister from "./components/RegOrganizer";
 import AllEvents from "./components/AllEvents";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import FAQSection from "./components/FaqSection";
+import Carousel from "./components/Carousel";
 import CategoryEvents from "./components/CategoryEvents";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SpecialShows from "./components/SpecialShows";
@@ -27,6 +28,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/Global.css";
 import CheckoutPage from "./components/CheckoutPage";
 import Chat from "./components/ChatBot";
+import TestimonialsSection from "./components/Testimonials";
 import { ToastContainer } from 'react-toastify';
 
 // Content wrapper component that adds spacing except on homepage
@@ -62,6 +64,8 @@ const App = () => {
               <Route path="/allevents" element={<AllEvents />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/faq" element={<FAQSection />} />
+              <Route path="/carousel" element={<Carousel />} />
+              <Route path="/testimonials" element={<TestimonialsSection />} />
               <Route path="/category" element={<CategoryEvents />} />
               <Route path="/orgregister" element={<OrganizerRegister />} />
               <Route path="/chat" element={<Chat />} />

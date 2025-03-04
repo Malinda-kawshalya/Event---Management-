@@ -1,13 +1,14 @@
 import React from 'react';
 import SpecialShows from './SpecialShows';
+import TestimonialsSection from './Testimonials';
 import Banner from './Banner';
+import Carousel from './Carousel';
 // import FAQSection from './FaqSection';
 import CategoryEvents from './CategoryEvents';
-import { Carousel } from 'react-bootstrap';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import newsimage from '../images/Newsn.jpg';
-import midlaneimage from '../images/midlanem.jpg';
+
 import Chat from './ChatBot';
 
 import '../css/HomePage.css';
@@ -19,35 +20,23 @@ const HomePage = () => {
         <Banner />
         <div className="container my-5">
           <h2 className="text-center mb-4">Featured Events</h2>
-          <Carousel>
-            <Carousel.Item>
-              <img className="d-block w-100" src={newsimage} alt="First slide" />
-              <Carousel.Caption>
-                <h3>NEWS</h3>
-                <p>Description for Event 1.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100" src={midlaneimage} alt="Second slide" />
-              <Carousel.Caption>
-                <h3>MIDLANE</h3>
-                <p>Description for Event 2.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
+          <Carousel/>
         </div>
         <SpecialShows />
         <CategoryEvents />
+        <TestimonialsSection/>
         <Chat />
         {/* <FAQSection /> */}
        
-        <div className="cta-section text-center py-5 bg-light">
-          <h2>Ready to Explore?</h2>
-          <p className="cta-sec">Sign up now to book your tickets and never miss an event!</p>
-          <Link to="/signup" className="btn btn-primary btn-lg">
-            Sign Up Now
-          </Link>
-        </div>
+        <div className="explore-banner text-center py-5 bg-gradient-custom">
+  <div className="content-wrapper-2 mx-auto">
+    <h2 className="banner-headline mb-3">Ready to Explore?</h2>
+    <p className="banner-tagline mb-4">Sign up now to book your tickets and never miss an event!</p>
+    <Link to="/signup" className="action-button px-4 py-2">
+      Sign Up Now
+    </Link>
+  </div>
+</div>
         
       </>
     </div>

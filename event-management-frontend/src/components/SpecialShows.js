@@ -47,7 +47,7 @@ const SpecialShows = () => {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4" data-aos="fade-down">What's Happenning This Month</h2>
+      <h2 className="text-center mb-4" data-aos="fade-down">What's Happenning  <span className="highlight-1">This Month</span></h2>
       <div className="row">
         {events.map((event) => (
           <div className="col-lg-3 col-md-6 col-sm-12 d-flex align-items-stretch" key={event._id} data-aos="fade-up">
@@ -62,9 +62,9 @@ const SpecialShows = () => {
                 <Card.Title className="custom-card-title">{event.title}</Card.Title>
                 <Card.Text className="custom-card-text">{event.description}</Card.Text>
                 <Card.Text className="custom-card-text">
-                  <strong>Date:</strong> {new Date(event.date).toLocaleDateString()}
+                  <span className="special-2">Date:</span> {new Date(event.date).toLocaleDateString()}
                   <br />
-                  <strong>Location:</strong> {event.location}
+                  <span className="special-2">Location:</span> {event.location}
                 </Card.Text>
               
                 <Button

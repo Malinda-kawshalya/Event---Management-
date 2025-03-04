@@ -12,8 +12,13 @@
     font-weight: bold;
   }
 
+  .highlight-1 {
+    color: #e6e606;
+    
+  }
   
   
   .mt-5{
     padding-bottom: 30px;
+    max-width: 1200px;
   }

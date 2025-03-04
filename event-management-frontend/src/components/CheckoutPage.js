@@ -151,12 +151,12 @@ const CheckoutPage = () => {
               </Card.Header>
               <Card.Body>
                 <div className="event-details mb-4">
-                  <h6 className="text-primary">{event.title}</h6>
-                  <p className="text-muted mb-2">
+                  <h6 className="text-primary-1">{event.title}</h6>
+                  <p className="text-muted-1 mb-2">
                     <i className="bi bi-calendar-event me-2"></i>
                     {new Date(event.date).toLocaleDateString()}
                   </p>
-                  <p className="text-muted mb-0">
+                  <p className="text-muted-1 mb-0">
                     <i className="bi bi-geo-alt me-2"></i>
                     {event.location}
                   </p>

@@ -79,3 +79,49 @@ body {
   font-size: 0.9rem;
   color: #151515;
 }
+
+.explore-banner {
+  background: linear-gradient(135deg, #2a2a72 0%, #e6e606 100%);
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  margin: 3rem auto;
+  max-width: 1200px;
+  padding: 3rem 1.5rem;
+}
+
+.content-wrapper-2 {
+  max-width: 700px;
+}
+
+.banner-headline {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.banner-tagline {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.action-button {
+  background-color: #bcc6f6;
+  color: #010419;
+  font-weight: 600;
+  border-radius: 15px;
+  padding: 0.75rem 2rem;
+  border: none;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px #010419;
+}
+
+.action-button:hover {
+  background-color: #010419;
+  color:#e6e606;
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(255, 126, 95, 0.5);
+}

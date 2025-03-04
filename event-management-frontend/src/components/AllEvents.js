@@ -94,9 +94,9 @@ const AllEvents = () => {
                         <Card.Title className="custom-card-title">{event.title}</Card.Title>
                         <Card.Text className="custom-card-text">{event.description}</Card.Text>
                         <Card.Text className="custom-card-text">
-                          <strong>Date:</strong> {event.date} <br />
-                          <strong>Time:</strong> {event.time} <br />
-                          <strong>Location:</strong> {event.location}
+                          <span className="special-2">Date:</span> {event.date} <br />
+                          <span className="special-2">Time:</span> {event.time} <br />
+                          <span className="special-2">Location:</span> {event.location}
                         </Card.Text>
                         <Button
                           className="custom-buy-button"

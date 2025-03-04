@@ -84,16 +84,16 @@
 
 .book-button {
   flex: 2;
-  background-color: #27005d;
-  color:#bcc6f6;
+  background-color: #27005d !important;
+  color:#bcc6f6 !important;
   border-radius: 15px;
-  border-color: #27005d;
+  border-color: 2px solid #27005d !important;
 }
 
 .book-button:hover{
-  background-color: #e6e606;
-  color:#010419;
-  border-color: #010419;
+  background-color: #e6e606 !important;
+  color:#010419 !important;
+  border-color: #010419 !important;
 }
 .share-button {
   flex: 1;

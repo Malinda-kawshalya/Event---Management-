@@ -70,14 +70,13 @@
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0px 4px 10px rgba(7, 121, 178, 0.623);
-    transition: 0.3s ease-in-out;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 100%;
-    border: 1px solid #3b09b080;
+    border: 1px solid #ecec3443;
     margin-bottom: 20px;
-    
 }
 
 .row {
@@ -90,14 +89,14 @@
 }
 
 .custom-card-img {
-    height: 200px;
+    height: 200px !important;
     object-fit: cover;
     width: 100%;
 }
 
 .custom-card-body {
     padding: 20px;
-    background: #010419;
+    background: #010419 !important;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -116,11 +115,15 @@
     color: #bcc6f6;
     margin-bottom: 10px;
 }
+.special-2{
+    color:#e6e606;
+    font-weight: bold;
+}
 
 /* Buy Tickets Button */
 .custom-buy-button {
     background: linear-gradient(90deg, #27005d, #27005D);
-    color: #E4F1FF !important;
+    color: #e6e606 !important;
     border: none;
     padding: 10px 20px;
     border-radius: 25px;

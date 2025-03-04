@@ -1,11 +1,11 @@
 .color-drops{
-    position: relative;
+    position: relative !important;
     background-color: #010419;
     min-height: 100vh;
     
-    overflow: hidden;
+    overflow: hidden !important;
     
-    background-size: cover;
+    background-size: cover !important;
   }
 
   /* Add this to your Global.css file */
