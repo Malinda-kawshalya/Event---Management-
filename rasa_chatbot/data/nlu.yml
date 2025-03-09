@@ -1,0 +1,399 @@
+nlu:
+- intent: greet
+  examples: |
+    - Hello
+    - Hi
+    - Hey
+    - Good morning
+    - Good afternoon
+    - Good evening
+    - Howdy
+    - Hiya
+    - Hello there
+    - Hi there
+    - Greetings
+    - What's up
+    - Yo
+    - Hey there
+    - Hello bot
+    - Hi bot
+    - Hey bot
+    - Morning
+    - Evening
+    - Afternoon
+
+- intent: goodbye
+  examples: |
+    - Goodbye
+    - Bye
+    - See you
+    - See you later
+    - Talk to you later
+    - Catch you later
+    - Have a nice day
+    - Have a good one
+    - Until next time
+    - Take care
+    - Later
+    - Bye bye
+    - Cya
+    - I'm leaving now
+    - Gotta go
+    - I need to go
+
+- intent: thank
+  examples: |
+    - Thank you
+    - Thanks
+    - Thanks a lot
+    - Thank you so much
+    - I appreciate it
+    - Many thanks
+    - Thanks for the help
+    - That was helpful, thanks
+    - Appreciate your assistance
+    - That's great, thank you
+    - Awesome, thanks
+    - Perfect, thank you
+    - Cheers
+    - Thanks buddy
+    - Thank you for the information
+
+- intent: affirm
+  examples: |
+    - Yes
+    - Yeah
+    - Sure
+    - Correct
+    - That's right
+    - Sounds good
+    - Absolutely
+    - Of course
+    - Yep
+    - Right
+    - Indeed
+    - That works
+    - I agree
+    - Confirm
+    - Confirmed
+    - That's correct
+    - Perfect
+    - Okay
+
+- intent: deny
+  examples: |
+    - No
+    - Nope
+    - Not really
+    - I don't think so
+    - Never
+    - I disagree
+    - No way
+    - Not at all
+    - Incorrect
+    - That's wrong
+    - Nah
+    - Negative
+    - I don't want that
+    - Not interested
+    - No thanks
+    - Definitely not
+
+- intent: ask_ticket_price
+  examples: |
+    - How much is the ticket?
+    - What's the ticket price?
+    - Tell me about ticket costs
+    - How much do tickets cost?
+    - What are the prices for tickets?
+    - How much do I need to pay?
+    - Are tickets expensive?
+    - What's the cost of entry?
+    - Ticket pricing please
+    - Can you tell me about ticket costs?
+    - What's the price range for tickets?
+    - How much for a ticket to the event?
+    - What are the admission fees?
+    - How much does it cost to attend?
+    - Price for tickets?
+    - What's the price for a single ticket?
+    - How much for a group of tickets?
+    - What will tickets cost me?
+    - Tell me ticket pricing information
+    - I need to know how much tickets are
+
+- intent: ask_event_details
+  examples: |
+    - What events are available?
+    - Show me upcoming events
+    - Tell me about your events
+    - What events do you have?
+    - Are there any events this weekend?
+    - What's happening soon?
+    - List all events
+    - Tell me what's coming up
+    - What events are scheduled?
+    - Show me the event calendar
+    - What shows are playing?
+    - Any concerts coming up?
+    - What events are happening this month?
+    - Are there any special events?
+    - Can I see all your events?
+    - Tell me about upcoming performances
+    - What festivals are scheduled?
+    - Show me events in my area
+    - What's on the agenda?
+    - Tell me about your event lineup
+
+- intent: create_account
+  examples: |
+    - How do I create an account?
+    - I want to sign up
+    - How to register?
+    - How can I make an account?
+    - Tell me how to sign up
+    - I need to create a new account
+    - Registration process?
+    - How do I become a member?
+    - I want to join your platform
+    - Account creation steps?
+    - Sign up instructions please
+    - Help me create an account
+    - Is registration free?
+    - How do I get started with an account?
+    - What do I need to register?
+    - How can I join?
+    - Tell me about account creation
+    - Steps to make a new account
+    - How to get an account?
+    - Can you help me sign up?
+
+- intent: password_reset
+  examples: |
+    - I forgot my password
+    - How do I reset my password?
+    - Can't remember my password
+    - Need to change my password
+    - Reset password instructions
+    - Help with forgotten password
+    - Password recovery
+    - How to get a new password?
+    - I need to reset my login
+    - Can't access my account
+    - Lost my password
+    - How do I recover my password?
+    - Send me a password reset link
+    - My password isn't working
+    - Need help with login
+    - Can't log in with my password
+    - How to create a new password?
+    - Locked out of my account
+    - Password reset procedure
+    - Help me get back into my account
+
+- intent: ticket_availability
+  examples: |
+    - Are tickets still available?
+    - Is the event sold out?
+    - Can I still get tickets?
+    - Ticket availability for the concert
+    - Are there any tickets left?
+    - Check if tickets are available
+    - Has the event sold out yet?
+    - Do you still have tickets for sale?
+    - Is it too late to buy tickets?
+    - Can I still purchase tickets?
+    - Are seats still available?
+    - Have all tickets been sold?
+    - What's the availability like?
+    - Are there tickets remaining?
+    - How many tickets are left?
+    - Is the show sold out?
+    - Can I still book tickets?
+    - Check ticket availability please
+    - Are tickets for sale now?
+    - Did tickets sell out already?
+
+- intent: refund_policy
+  examples: |
+    - What's your refund policy?
+    - Can I get my money back?
+    - How do refunds work?
+    - Are tickets refundable?
+    - Tell me about your refund policy
+    - Can I cancel and get a refund?
+    - What happens if I want a refund?
+    - Do you offer refunds?
+    - Refund conditions?
+    - Can I get a refund if I can't attend?
+    - What's the process for refunds?
+    - Are there fees for refunds?
+    - How long do refunds take?
+    - What's your cancellation policy?
+    - Can I get a refund after purchase?
+    - Tell me about cancellations and refunds
+    - What if I need to return my tickets?
+    - Is there a deadline for refunds?
+    - Refund eligibility?
+    - What's your money-back guarantee?
+
+- intent: event_location
+  examples: |
+    - Where is the event?
+    - What's the venue address?
+    - Where will it take place?
+    - Location of the event?
+    - Tell me where it's happening
+    - What's the event location?
+    - Where do I need to go?
+    - Venue details please
+    - Where is the venue located?
+    - What's the address for the event?
+    - How do I get to the venue?
+    - Where is it being held?
+    - Tell me the location details
+    - Where exactly is the event happening?
+    - What's the place called?
+    - Where should I go for the event?
+    - Give me directions to the venue
+    - What's the venue name and address?
+    - Where is this taking place?
+    - Tell me where to go for this event
+
+- intent: event_timing
+  examples: |
+    - What time does the event start?
+    - When does it begin?
+    - Starting time?
+    - What time should I arrive?
+    - When does the event end?
+    - How long is the event?
+    - What are the event hours?
+    - Tell me the schedule
+    - What's the timeline for the event?
+    - When does it kick off?
+    - What's the duration of the event?
+    - When should I be there?
+    - What time does it finish?
+    - Tell me about event timing
+    - What are the start and end times?
+    - When does this take place?
+    - Time details for the event?
+    - What's the exact start time?
+    - How long will the event last?
+    - Tell me when to arrive and leave
+
+- intent: payment_methods
+  examples: |
+    - What payment methods do you accept?
+    - How can I pay for tickets?
+    - Do you accept credit cards?
+    - Can I pay with PayPal?
+    - What cards do you take?
+    - Payment options?
+    - Can I pay online?
+    - Do you accept Apple Pay?
+    - Tell me about payment methods
+    - How do I pay for my tickets?
+    - Can I use Google Pay?
+    - Do you take cash?
+    - What are the payment options?
+    - Can I pay using bank transfer?
+    - How can I complete my payment?
+    - Do you accept international cards?
+    - What's the payment process?
+    - Tell me how to pay
+    - Do you take debit cards?
+    - What are all payment methods available?
+
+- intent: ticket_delivery
+  examples: |
+    - How will I get my tickets?
+    - Ticket delivery options?
+    - Do you mail physical tickets?
+    - Are tickets electronic?
+    - Will I get e-tickets?
+    - How are tickets delivered?
+    - Will I receive tickets by email?
+    - Do I need to print my tickets?
+    - Can I get mobile tickets?
+    - How do I access my tickets?
+    - When will I receive my tickets?
+    - Do you offer digital tickets?
+    - Can I show tickets on my phone?
+    - Tell me how ticket delivery works
+    - Will you send tickets by post?
+    - How do I get my e-tickets?
+    - Will I receive a confirmation email?
+    - Can I collect tickets at the venue?
+    - Is there a will-call option?
+    - How do I download my tickets?
+
+- intent: create_event
+  examples: |
+    - How do I create an event?
+    - I want to host an event
+    - Can I set up my own event?
+    - How to organize an event on your platform?
+    - Tell me how to create an event listing
+    - I need to set up an event page
+    - How to become an event organizer?
+    - Steps to create a new event
+    - I want to sell tickets for my show
+    - How can I list my event?
+    - Tell me about event creation
+    - Can I create multiple events?
+    - What's required to set up an event?
+    - How do I start selling tickets?
+    - Event creation process?
+    - How to publish my event?
+    - What info do I need for event setup?
+    - I'm an organizer, how do I add events?
+    - Tell me how to create an event page
+    - Event setup instructions please
+
+- intent: organizer_fees
+  examples: |
+    - What fees do you charge organizers?
+    - How much does it cost to list an event?
+    - What's your commission on ticket sales?
+    - Tell me about organizer fees
+    - What percentage do you take?
+    - How much will I earn per ticket?
+    - Pricing for event organizers?
+    - What's your fee structure?
+    - How are organizer fees calculated?
+    - Do you charge a flat fee or percentage?
+    - What's the cost to use your platform?
+    - Tell me about your pricing model
+    - How much will you charge me as an organizer?
+    - What are the platform fees?
+    - How much of the ticket price do I keep?
+    - Do organizers pay fees?
+    - What's your revenue share model?
+    - How do organizer payments work?
+    - Fee structure for event hosts?
+    - What are all the costs for organizers?
+
+- intent: ticket_types
+  examples: |
+    - What types of tickets are available?
+    - Are there VIP tickets?
+    - Do you have early bird tickets?
+    - Tell me about ticket categories
+    - What ticket options do I have?
+    - Are there different tiers of tickets?
+    - Do you offer group tickets?
+    - What's the difference between ticket types?
+    - Are there premium tickets?
+    - Do you have student discounts?
+    - What ticket packages are available?
+    - Tell me about VIP packages
+    - Are there special tickets?
+    - What ticket tiers exist?
+    - Do you have family tickets?
+    - Tell me about all ticket options
+    - What kinds of tickets can I buy?
+    - Are there discounted tickets?
+    - What are the ticket categories?
+    - Do you offer season passes?

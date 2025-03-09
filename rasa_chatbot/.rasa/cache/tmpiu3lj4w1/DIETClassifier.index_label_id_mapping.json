@@ -1,0 +1,20 @@
+{
+  "0": "affirm",
+  "1": "ask_event_details",
+  "2": "ask_ticket_price",
+  "3": "create_account",
+  "4": "create_event",
+  "5": "deny",
+  "6": "event_location",
+  "7": "event_timing",
+  "8": "goodbye",
+  "9": "greet",
+  "10": "organizer_fees",
+  "11": "password_reset",
+  "12": "payment_methods",
+  "13": "refund_policy",
+  "14": "thank",
+  "15": "ticket_availability",
+  "16": "ticket_delivery",
+  "17": "ticket_types"
+}

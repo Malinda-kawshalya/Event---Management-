@@ -1,0 +1,82 @@
+version: "3.1"
+
+rules:
+  - rule: Greet user
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Say goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Thank you
+    steps:
+      - intent: thank
+      - action: utter_thank
+
+  - rule: Provide ticket price information
+    steps:
+      - intent: ask_ticket_price
+      - action: utter_ask_ticket_price
+
+  - rule: Provide event details
+    steps:
+      - intent: ask_event_details
+      - action: utter_ask_event_details
+
+  - rule: Explain account creation
+    steps:
+      - intent: create_account
+      - action: utter_create_account
+
+  - rule: Provide password reset instructions
+    steps:
+      - intent: password_reset
+      - action: utter_password_reset
+
+  - rule: Check ticket availability
+    steps:
+      - intent: ticket_availability
+      - action: utter_ticket_availability
+
+  - rule: Explain refund policy
+    steps:
+      - intent: refund_policy
+      - action: utter_refund_policy
+
+  - rule: Provide event location information
+    steps:
+      - intent: event_location
+      - action: utter_event_location
+
+  - rule: Share event timing details
+    steps:
+      - intent: event_timing
+      - action: utter_event_timing
+
+  - rule: Explain payment methods
+    steps:
+      - intent: payment_methods
+      - action: utter_payment_methods
+
+  - rule: Explain ticket delivery
+    steps:
+      - intent: ticket_delivery
+      - action: utter_ticket_delivery
+
+  - rule: Provide information about ticket types
+    steps:
+      - intent: ticket_types
+      - action: utter_ticket_types
+
+  - rule: Explain event creation process
+    steps:
+      - intent: create_event
+      - action: utter_create_event
+
+  - rule: Explain organizer fees
+    steps:
+      - intent: organizer_fees
+      - action: utter_organizer_fees

@@ -1,0 +1,78 @@
+version: "3.1"
+
+stories:
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_event_details
+      - action: utter_ask_event_details
+      - intent: affirm
+      - action: utter_happy
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: sad path 1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_ticket_price
+      - action: utter_ask_ticket_price
+      - intent: affirm
+      - action: utter_happy
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: sad path 2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_event_details
+      - action: utter_ask_event_details
+      - intent: deny
+      - action: utter_goodbye
+
+  - story: ticket availability path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ticket_availability
+      - action: utter_ticket_availability
+      - intent: thank
+      - action: utter_thank
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: refund inquiry path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: refund_policy
+      - action: utter_refund_policy
+      - intent: thank
+      - action: utter_thank
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: account creation path
+    steps:
+      - intent: create_account
+      - action: utter_create_account
+      - intent: thank
+      - action: utter_thank
+
+  - story: password reset path
+    steps:
+      - intent: password_reset
+      - action: utter_password_reset
+      - intent: thank
+      - action: utter_thank
+
+  - story: event creation path
+    steps:
+      - intent: create_event
+      - action: utter_create_event
+      - intent: organizer_fees
+      - action: utter_organizer_fees
+      - intent: thank
+      - action: utter_thank

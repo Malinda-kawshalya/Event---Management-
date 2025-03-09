@@ -1,0 +1,132 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - thank
+  - affirm
+  - deny
+  - ask_ticket_price
+  - ask_event_details
+  - create_account
+  - password_reset
+  - ticket_availability
+  - refund_policy
+  - event_location
+  - event_timing
+  - payment_methods
+  - ticket_delivery
+  - ticket_types
+  - create_event
+  - organizer_fees
+
+responses:
+  utter_greet:
+    - text: "Hello! Welcome to EventTix. How can I help you today?"
+    - text: "Hi there! I'm your EventTix assistant. What can I do for you?"
+    - text: "Welcome to EventTix! I'm here to help with all your event and ticketing needs."
+
+  utter_goodbye:
+    - text: "Goodbye! Feel free to come back if you have more questions."
+    - text: "Have a great day! Thanks for using EventTix."
+    - text: "See you later! Enjoy your events!"
+
+  utter_thank:
+    - text: "You're welcome! Is there anything else I can help you with?"
+    - text: "Happy to help! Let me know if you need anything else."
+    - text: "No problem at all! Feel free to ask if you have other questions."
+
+  utter_affirm:
+    - text: "Great! Let's proceed."
+    - text: "Excellent. What would you like to do next?"
+    - text: "Perfect! How else can I assist you?"
+
+  utter_deny:
+    - text: "No problem. Is there something else you'd like to know?"
+    - text: "That's alright. What else can I help you with?"
+    - text: "I understand. What would you like to do instead?"
+
+  # Adding the missing response that's referenced in your stories
+  utter_happy:
+    - text: "I'm glad to hear that! How can I assist you further?"
+    - text: "Great! Is there anything else you'd like to know about our events?"
+    - text: "Wonderful! Let me know if you need any other information."
+
+  utter_ask_ticket_price:
+    - text: "Ticket prices vary depending on the event and seating category. I can check the specific prices for you if you tell me which event you're interested in."
+    - text: "We have different ticket prices based on the event and ticket type. Could you specify which event you're asking about?"
+    - text: "Prices range from $10 for basic admission to $200+ for premium experiences, depending on the event. Which event are you interested in?"
+
+  utter_ask_event_details:
+    - text: "We have several exciting events coming up! Our popular events include music concerts, theater performances, comedy shows, and sports events. Which category interests you the most?"
+    - text: "There are many events scheduled for the upcoming weeks. You can browse all events on our website or app, or I can help you find events by category, date, or location."
+    - text: "We have a diverse range of events available. Would you like to see events for a specific date, location, or category?"
+
+  utter_create_account:
+    - text: "Creating an account is easy! Click the 'Sign Up' button on our homepage, then enter your email, create a password, and fill in your basic information. It only takes a minute!"
+    - text: "To create an account, go to our website or app and click 'Register'. You'll need to provide your email address and create a password. Would you like me to guide you through the steps?"
+    - text: "You can register by clicking 'Sign Up' on our homepage. You'll need an email address and password. Is there anything specific about the registration process you'd like to know?"
+
+  utter_password_reset:
+    - text: "To reset your password, click the 'Forgot Password' link on the login page. You'll receive an email with instructions to create a new password."
+    - text: "If you've forgotten your password, use the 'Forgot Password' option on the login screen. We'll send a reset link to your registered email address."
+    - text: "Password reset is simple. Just click 'Forgot Password' when logging in, and follow the instructions sent to your email. The link expires in 24 hours for security reasons."
+
+  utter_ticket_availability:
+    - text: "Ticket availability varies by event. If you tell me which event you're interested in, I can check the current availability for you."
+    - text: "I'd be happy to check ticket availability for you. Which event are you asking about?"
+    - text: "Some events sell out quickly while others have tickets available until the day of the event. Let me know which event you're interested in, and I'll check for you."
+
+  utter_refund_policy:
+    - text: "Our refund policy allows full refunds up to 7 days before the event. Between 7 days and 24 hours before, you can receive a 50% refund. No refunds are available within 24 hours of the event start time."
+    - text: "Refunds are available in full if requested at least 7 days before the event. Partial refunds are available until 24 hours before. After that, tickets are non-refundable but can be transferred to another person."
+    - text: "Our standard refund policy offers full refunds up to 7 days before the event, and 50% refunds between 7 days and 24 hours before. Some events may have different policies, which are always specified on the event page."
+
+  utter_event_location:
+    - text: "Event locations vary. If you tell me which event you're interested in, I can provide you with the exact venue address and details."
+    - text: "Our events take place at various venues across the city. Which specific event are you asking about?"
+    - text: "I'd be happy to provide venue information. Which event would you like location details for?"
+
+  utter_event_timing:
+    - text: "Event times vary by event. Most evening shows start between 7-8pm, while weekend matinees typically begin at 2pm. Which specific event are you asking about?"
+    - text: "Different events have different schedules. If you tell me which event you're interested in, I can provide the exact start and end times."
+    - text: "Event timing information is available on each event page. Which event would you like the timing details for?"
+
+  utter_payment_methods:
+    - text: "We accept all major credit and debit cards (Visa, Mastercard, American Express), PayPal, Apple Pay, and Google Pay for online purchases."
+    - text: "You can pay using credit/debit cards, PayPal, Apple Pay, or Google Pay. All transactions are secured with industry-standard encryption."
+    - text: "We offer multiple payment options including all major credit cards, PayPal, and mobile payment solutions. Would you like more details about a specific payment method?"
+
+  utter_ticket_delivery:
+    - text: "Tickets are delivered electronically to your email and will also be available in your account. You can either print them or show the QR code on your mobile device at the venue."
+    - text: "We use digital ticket delivery. Your tickets will be emailed to you and accessible in your account. No need to print them - just show the QR code on your phone at entry."
+    - text: "All tickets are delivered digitally. You'll receive an email confirmation with your tickets attached, and they'll also be accessible through your account. You can print them or show them on your mobile device."
+
+  utter_ticket_types:
+    - text: "We offer various ticket types including Standard, Premium, VIP, Early Bird, Group, and Student tickets. The available types depend on the specific event."
+    - text: "Ticket types vary by event, but commonly include General Admission, Reserved Seating, VIP packages, and Discounted tickets for students, seniors, or groups."
+    - text: "Most events offer Standard tickets, VIP options with perks like premium seating or meet-and-greets, and sometimes Early Bird discounts for early purchasers. Which event are you interested in?"
+
+  utter_create_event:
+    - text: "To create an event, log in as an organizer and click 'Create Event'. You'll need to provide event details, upload images, set ticket types and prices, and specify the venue and timing."
+    - text: "Creating an event requires an organizer account. Once logged in, click 'Create Event' and follow the step-by-step process to set up your event page and ticketing options."
+    - text: "Event creation is simple with our platform. Log in as an organizer, click 'Create Event', and you'll be guided through entering all necessary details. You can save as a draft and complete it later if needed."
+
+  utter_organizer_fees:
+    - text: "Our platform charges a 5% commission plus a fixed $0.30 per ticket sold. There are no upfront costs or monthly fees to list your events."
+    - text: "Organizer fees consist of a 5% commission on ticket sales plus a $0.30 per-ticket processing fee. These fees cover payment processing and platform maintenance."
+    - text: "We operate on a simple fee structure: 5% of the ticket price plus $0.30 per ticket. Premium organizers with high volume may qualify for reduced rates."
+
+  utter_fallback:
+    - text: "I'm sorry, I didn't quite understand that. Could you rephrase your question?"
+    - text: "I'm not sure I follow. Could you please ask in a different way?"
+    - text: "I didn't catch that. Can you try asking again?"
+
+  utter_default:
+    - text: "I'm here to help with all your event ticketing needs. What would you like to know about?"
+    - text: "I can help with finding events, buying tickets, account issues, and more. What are you looking for today?"
+    - text: "Feel free to ask me about events, tickets, venues, or account management. How can I assist you?"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
