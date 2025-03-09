@@ -9,8 +9,8 @@ const organizerRoutes = require('./routes/organizerRoutes');
 const authRoutes = require('./routes/authRoutes');
 const eventRoutes = require('./routes/eventRoute');
 const reservationRoutes = require('./routes/reservationRoutes');
-const chatRoutes = require('./routes/chatRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const new_chatbot = require('./routes/new_chatroutes');
 const app = express();
 
 // Middleware
@@ -26,8 +26,8 @@ app.use('/api/organizers', organizerRoutes);
 app.use('/api/signin', authRoutes);
 app.use('/api/events',eventRoutes);
 app.use("/api/reservations", reservationRoutes);
-app.use("/api/chat", chatRoutes); 
 app.use('/api/payment', paymentRoutes);
+app.use('/api/chatbot', new_chatbot);
 
 
 

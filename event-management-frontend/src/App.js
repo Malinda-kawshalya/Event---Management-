@@ -30,6 +30,7 @@ import CheckoutPage from "./components/CheckoutPage";
 import Chat from "./components/ChatBot";
 import TestimonialsSection from "./components/Testimonials";
 import { ToastContainer } from 'react-toastify';
+import ChatBot from "./components/new_chatbot";
 
 // Content wrapper component that adds spacing except on homepage
 const ContentWrapper = ({ children }) => {
@@ -139,6 +140,7 @@ const App = () => {
               />
             </Routes>
           </ContentWrapper>
+          < ChatBot />
           <Footer />
           <ToastContainer
                 position="top-right"
