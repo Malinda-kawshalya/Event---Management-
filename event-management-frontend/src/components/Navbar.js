@@ -111,18 +111,17 @@ const Navbar = () => {
                     Sign In
                   </Link>
                 </li>
-                <li className="nav-item dropdown">
+                <li className="nav-item dropdown" onMouseEnter={() => setNavbarOpen(true)} onMouseLeave={() => setNavbarOpen(false)}>
                   <button
                     className="btn btn-primary dropdown-toggle nav-special-btn"
                     type="button"
                     id="registerDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    aria-expanded={navbarOpen}
                   >
                     Register
                   </button>
                   <ul
-                    className="dropdown-menu"
+                    className={`dropdown-menu ${navbarOpen ? "show" : ""}`}
                     aria-labelledby="registerDropdown"
                   >
                     <li>
@@ -147,17 +146,16 @@ const Navbar = () => {
                 </li>
               </>
             ) : (
-              <li className="nav-item dropdown">
+              <li className="nav-item dropdown" onMouseEnter={() => setNavbarOpen(true)} onMouseLeave={() => setNavbarOpen(false)}>
                 <button
                   className="btn btn-outline-primary dropdown-toggle nav-special-btn"
                   type="button"
                   id="userDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  aria-expanded={navbarOpen}
                 >
                   {user.name || user.username || "Account"}
                 </button>
-                <ul className="dropdown-menu" aria-labelledby="userDropdown">
+                <ul className={`dropdown-menu ${navbarOpen ? "show" : ""}`} aria-labelledby="userDropdown">
                   <li>
                     {user.role === "organizer" ? (
                       <Link
