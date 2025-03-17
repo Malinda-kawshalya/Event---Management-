@@ -315,6 +315,23 @@ const AdminDashboard = () => {
         setShowModal(true); // Open the modal
     };
 
+    // Add this function to handle modal closing properly
+const handleCloseModal = () => {
+    setFormData({
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      age: '',
+      gender: '',
+      phone: '',
+      companyName: '',
+      companyAddress: ''
+    });
+    setEditUserId(null);
+    setShowModal(false);
+  };
+
     // Handle delete action for user/organizer
     const handleDelete = async (id) => {
         try {
@@ -545,11 +562,11 @@ const AdminDashboard = () => {
             {renderContent()}
 
             {/* User/Organizer Form Modal */}
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{editUserId ? 'Edit User/Organizer' : 'Add User/Organizer'}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <Modal show={showModal} onHide={handleCloseModal}>
+  <Modal.Header closeButton>
+    <Modal.Title>{editUserId ? 'Edit User/Organizer' : 'Add User/Organizer'}</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <input
