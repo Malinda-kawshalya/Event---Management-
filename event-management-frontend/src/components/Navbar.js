@@ -45,7 +45,7 @@ const Navbar = () => {
     >
       <div className="container">
         <Link className="navbar-brand" to="/">
-          <img src={logo} alt="EventGuru" className="navbar-logo"/>
+          <img src={logo} alt="EventGuru" className="navbar-logo" />
         </Link>
         <button
           className="navbar-toggler"
@@ -111,7 +111,11 @@ const Navbar = () => {
                     Sign In
                   </Link>
                 </li>
-                <li className="nav-item dropdown" onMouseEnter={() => setNavbarOpen(true)} onMouseLeave={() => setNavbarOpen(false)}>
+                <li
+                  className="nav-item dropdown"
+                  onMouseEnter={() => setNavbarOpen(true)}
+                  onMouseLeave={() => setNavbarOpen(false)}
+                >
                   <button
                     className="btn btn-primary dropdown-toggle nav-special-btn"
                     type="button"
@@ -146,7 +150,11 @@ const Navbar = () => {
                 </li>
               </>
             ) : (
-              <li className="nav-item dropdown" onMouseEnter={() => setNavbarOpen(true)} onMouseLeave={() => setNavbarOpen(false)}>
+              <li
+                className="nav-item dropdown"
+                onMouseEnter={() => setNavbarOpen(true)}
+                onMouseLeave={() => setNavbarOpen(false)}
+              >
                 <button
                   className="btn btn-outline-primary dropdown-toggle nav-special-btn"
                   type="button"
@@ -155,9 +163,20 @@ const Navbar = () => {
                 >
                   {user.name || user.username || "Account"}
                 </button>
-                <ul className={`dropdown-menu ${navbarOpen ? "show" : ""}`} aria-labelledby="userDropdown">
+                <ul
+                  className={`dropdown-menu ${navbarOpen ? "show" : ""}`}
+                  aria-labelledby="userDropdown"
+                >
                   <li>
-                    {user.role === "organizer" ? (
+                    {user.role === "admin" ? (
+                      <Link
+                        className="dropdown-item"
+                        to="/admindashboard"
+                        onClick={() => setNavbarOpen(false)}
+                      >
+                        Admin Dashboard
+                      </Link>
+                    ) : user.role === "organizer" ? (
                       <Link
                         className="dropdown-item"
                         to={`/orgdashboard/${user._id}`}
