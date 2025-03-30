@@ -60,9 +60,8 @@ The application will run at `http://localhost:3000/`
 
 Feel free to open an **issue** or submit a **pull request** if you have any feature suggestions or bug reports.
 
-## 👨‍💻 Author
+## 👨‍💻 Authors
 
-**Your Name**  
 GitHub: [@Malinda Kawshalya](https://github.com/yourusername)  [@Thilina Sandaruwan](https://github.com/tsandaruwan) [@Pahan Wijesinghe](https://github.com/pahan1311)
 
 ## ⭐ Show Your Support
