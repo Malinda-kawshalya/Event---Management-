@@ -63,8 +63,7 @@ Feel free to open an **issue** or submit a **pull request** if you have any feat
 ## 👨‍💻 Author
 
 **Your Name**  
-GitHub: [@Malinda Kawshalya](https://github.com/yourusername)  
-LinkedIn: [Your Profile]([https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/malinda-kawshalya-270872267/))
+GitHub: [@Malinda Kawshalya](https://github.com/yourusername)  [@Thilina Sandaruwan](https://github.com/tsandaruwan) [@Pahan Wijesinghe](https://github.com/pahan1311)
 
 ## ⭐ Show Your Support
 
